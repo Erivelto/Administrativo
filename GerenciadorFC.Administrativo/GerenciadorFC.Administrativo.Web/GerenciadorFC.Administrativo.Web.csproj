@@ -205,7 +205,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\CadastroRepLegal\" />
     <Folder Include="Views\Cadastro\CadastroEmpresa\_partial\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

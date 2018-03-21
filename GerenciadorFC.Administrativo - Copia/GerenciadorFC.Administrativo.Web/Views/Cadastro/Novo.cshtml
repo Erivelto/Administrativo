@@ -1,0 +1,146 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.Cadastro.PessoaViewModels
+
+@{
+	ViewData["Title"] = "Cadastro de Empresa";
+}
+
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<form asp-action="Cadastrar">
+	<div class="row">
+		<div class="col-md-12">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<div class="col-sm-6">
+					@Html.HiddenFor(m => m.Codigo)
+					<label asp-for="Nome" class="control-label">@Html.DisplayNameFor(m => m.Nome)</label>
+					@Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+					<span asp-validation-for="Nome" class="text-danger control-label"></span>
+				</div>
+				<div class="col-sm-6">
+					<label asp-for="Razao" class="control-label">@Html.DisplayNameFor(m => m.Razao)</label>
+					@Html.TextBoxFor(m => m.Razao, new { @class = "form-control" })
+					<span asp-validation-for="Razao" class="text-danger"></span>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label asp-for="Documento" class="control-label">@Html.DisplayNameFor(m => m.Documento)</label>
+					@Html.TextBoxFor(m => m.Documento, new { @class = "form-control" })
+					<span asp-validation-for="Documento" class="text-danger"></span>
+				</div>
+				<div class="col-sm-4">
+					<label asp-for="IncricaoMunicipal" class="control-label">@Html.DisplayNameFor(m => m.IncricaoMunicipal)</label>
+					@Html.TextBoxFor(m => m.IncricaoMunicipal, new { @class = "form-control" })
+					<span asp-validation-for="IncricaoMunicipal" class="text-danger"></span>
+				</div>
+				<div class="col-sm-4">
+					<label asp-for="DataAbertura" class="control-label">@Html.DisplayNameFor(m => m.DataAbertura)</label>
+					@Html.TextBoxFor(m => m.DataAbertura, new { @class = "form-control" })
+					<span asp-validation-for="DataAbertura" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-6">
+					<label asp-for="DescricaoAtividade" class="control-label">@Html.DisplayNameFor(m => m.DescricaoAtividade)</label>
+					@Html.TextBoxFor(m => m.DescricaoAtividade, new { @class = "form-control" })
+					<span asp-validation-for="DescricaoAtividade" class="text-danger"></span>
+				</div>
+				<div class="col-sm-6">
+					<label asp-for="CNAE" class="control-label">@Html.DisplayNameFor(m => m.CNAE)</label>
+					@Html.TextBoxFor(m => m.CNAE, new { @class = "form-control" })
+					<span asp-validation-for="CNAE" class="text-danger"></span>
+				</div>
+			</div>
+			@*<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">
+							@Html.DisplayNameFor(m => m.TipoPessoa)
+						</label>
+						<br />
+						<input type="checkbox" class="" />
+						<br />
+					</div>
+				</div>*@
+			<div class="form-group">
+				<div class="col-sm-1">
+					<label asp-for="TipoEnd" class="control-label">@Html.DisplayNameFor(m => m.TipoEnd)</label>
+					@Html.TextBoxFor(m => m.TipoEnd, new { @class = "form-control" })
+					<span asp-validation-for="TipoEnd" class="text-danger"></span>
+				</div>
+				<div class="col-sm-10">
+					<label asp-for="Logradouro" class="control-label">@Html.DisplayNameFor(m => m.Logradouro)</label>
+					@Html.TextBoxFor(m => m.Logradouro, new { @class = "form-control" })
+					<span asp-validation-for="Logradouro" class="text-danger"></span>
+				</div>
+				<div class="col-sm-1">
+					<label asp-for="Numrero" class="control-label">@Html.DisplayNameFor(m => m.Numrero)</label>
+					@Html.TextBoxFor(m => m.Numrero, new { @class = "form-control" })
+					<span asp-validation-for="Numrero" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label asp-for="Complemento" class="control-label">@Html.DisplayNameFor(m => m.Complemento)</label>
+					@Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
+					<span asp-validation-for="Complemento" class="text-danger"></span>
+				</div>
+				<div class="col-sm-4">
+					<label asp-for="Bairro" class="control-label">@Html.DisplayNameFor(m => m.Bairro)</label>
+					@Html.TextBoxFor(m => m.Bairro, new { @class = "form-control" })
+					<span asp-validation-for="Bairro" class="text-danger"></span>
+				</div>
+				<div class="col-sm-4">
+					<label asp-for="Cidade" class="control-label">@Html.DisplayNameFor(m => m.Cidade)</label>
+					@Html.TextBoxFor(m => m.Cidade, new { @class = "form-control" })
+					<span asp-validation-for="Cidade" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-1">
+					<label asp-for="UF" class="control-label">@Html.DisplayNameFor(m => m.UF)</label>
+					@Html.TextBoxFor(m => m.UF, new { @class = "form-control" })
+					<span asp-validation-for="UF" class="text-danger"></span>
+				</div>
+				<div class="col-sm-3">
+					<label asp-for="CEP" class="control-label">@Html.DisplayNameFor(m => m.CEP)</label>
+					@Html.TextBoxFor(m => m.CEP, new { @class = "form-control" })
+					<span asp-validation-for="CEP" class="text-danger"></span>
+				</div>
+				<div class="col-sm-8">
+					<label class="control-label"></label>
+					<input type="hidden" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label class="control-label"></label>
+					<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
+					@Html.CheckBoxFor(m => m.Contabilidade)
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<div class="rodape-form">
+					<a class="btn btn-info" href="#" title="">Voltar</a>
+					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+	
+
+

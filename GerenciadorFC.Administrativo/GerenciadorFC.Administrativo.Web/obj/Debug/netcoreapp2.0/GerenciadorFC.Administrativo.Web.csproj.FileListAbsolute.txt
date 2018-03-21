@@ -22,3 +22,13 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.pdb
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.csprojResolveAssemblyReference.cache
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.Helpers.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.Mvc.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Deployment.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Razor.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.Helpers.xml
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.Mvc.xml
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.xml
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Deployment.xml
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Razor.xml

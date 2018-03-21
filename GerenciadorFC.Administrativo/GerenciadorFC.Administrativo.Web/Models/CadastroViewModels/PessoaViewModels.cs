@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciadorFC.Administrativo.Web.Helps.Validacao;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,7 +7,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 {
     public class PessoaViewModels
     {
-		public int Codigo { get; set; }
+		
 		[DisplayName("Nome Fantasia")]
 		[Required(ErrorMessage ="Nome Fantansia é obrigatório.")]
 		public string Nome { get; set; }
@@ -14,6 +15,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		[Required(ErrorMessage = "Razão Social é obrigatório.")]
 		public string Razao { get; set; }
 		[DisplayName("CNPJ")]
+		[Cnpj(ErrorMessage = "O valor '{0}' é inválido para CNPJ")]
 		[Required(ErrorMessage = "CNPJ é obrigatório.")]
 		public string Documento { get; set; }
 		[DisplayName("Inscrição municipal")]
@@ -22,6 +24,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		public DateTime DataAtulizacao { get; set; }
 		[DisplayName("Data Abertura")]
 		[Required(ErrorMessage = "Data inclusão é obrigatório.")]
+		[DataType(DataType.DateTime,ErrorMessage = "Data inválida")]
 		public DateTime DataAbertura { get; set; }
 		[DisplayName("Atividade")]
 		[Required(ErrorMessage = "Descrição é obrigatório.")]
