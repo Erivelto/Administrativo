@@ -1,12 +1,10 @@
-﻿
-@model GerenciadorFC.Administrativo.Web.Models.Cadastro.PessoaViewModels
-
+﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.RepresentanteLegalViewModels
 @{
-	ViewData["Title"] = "Edite de Empresa";
+	ViewData["Title"] = "Edite de Representante";
 }
 
-<h4>@ViewData["Title"]</h4>
-<hr />
+<h4>Edite de Representante</h4>
+
 <form asp-action="Alterar">
 	<div class="row">
 		<div class="col-md-12">
@@ -16,47 +14,43 @@
 					<div class="col-sm-6">
 						@Html.HiddenFor(m => m.CodigoEndereco)
 						@Html.HiddenFor(m => m.CodigoPessoa)
+						@Html.HiddenFor(m => m.CodigoRepLegal)
 						<label asp-for="Nome" class="control-label">@Html.DisplayNameFor(m => m.Nome)</label>
 						@Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
 						<span asp-validation-for="Nome" class="text-danger control-label"></span>
 					</div>
-					<label asp-for="Razao" class="control-label">@Html.DisplayNameFor(m => m.Razao)</label>
+					<label asp-for="CPF" class="control-label">@Html.DisplayNameFor(m => m.CPF)</label>
 					<div class="col-sm-6">
-						@Html.TextBoxFor(m => m.Razao, new { @class = "form-control" })
-						<span asp-validation-for="Razao" class="text-danger"></span>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-sm-4">
-						<label asp-for="Documento" class="control-label">@Html.DisplayNameFor(m => m.Documento)</label>
-						@Html.TextBoxFor(m => m.Documento, new { @class = "form-control" })
-						<span asp-validation-for="Documento" class="text-danger"></span>
-					</div>
-					<div class="col-sm-4">
-						<label asp-for="IncricaoMunicipal" class="control-label">@Html.DisplayNameFor(m => m.IncricaoMunicipal)</label>
-						@Html.TextBoxFor(m => m.IncricaoMunicipal, new { @class = "form-control" })
-						<span asp-validation-for="IncricaoMunicipal" class="text-danger"></span>
-					</div>
-					<div class="col-sm-4">
-						<label asp-for="DataAbertura" class="control-label">@Html.DisplayNameFor(m => m.DataAbertura)</label>
-						@Html.TextBoxFor(m => m.DataAbertura, new { @class = "form-control" })
-						<span asp-validation-for="DataAbertura" class="text-danger"></span>
+						@Html.TextBoxFor(m => m.CPF, new { @class = "form-control" })
+						<span asp-validation-for="CPF" class="text-danger"></span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group">
 					<div class="col-sm-6">
-						<label asp-for="DescricaoAtividade" class="control-label">@Html.DisplayNameFor(m => m.DescricaoAtividade)</label>
-						@Html.TextBoxFor(m => m.DescricaoAtividade, new { @class = "form-control" })
-						<span asp-validation-for="DescricaoAtividade" class="text-danger"></span>
+						<label asp-for="RG" class="control-label">@Html.DisplayNameFor(m => m.RG)</label>
+						@Html.TextBoxFor(m => m.RG, new { @class = "form-control" })
+						<span asp-validation-for="RG" class="text-danger"></span>
 					</div>
 					<div class="col-sm-6">
-						<label asp-for="CNAE" class="control-label">@Html.DisplayNameFor(m => m.CNAE)</label>
-						@Html.TextBoxFor(m => m.CNAE, new { @class = "form-control" })
-						<span asp-validation-for="CNAE" class="text-danger"></span>
+						<label asp-for="Passaporte" class="control-label">@Html.DisplayNameFor(m => m.Passaporte)</label>
+						@Html.TextBoxFor(m => m.Passaporte, new { @class = "form-control" })
+						<span asp-validation-for="Passaporte" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label asp-for="DataExpedicaoPassaporte" class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoPassaporte)</label>
+						@Html.TextBoxFor(m => m.DataExpedicaoPassaporte, new { @class = "form-control" })
+						<span asp-validation-for="DataExpedicaoPassaporte" class="text-danger"></span>
+					</div>
+					<div class="col-sm-6">
+						<label asp-for="DataExpedicaoRG" class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoRG)</label>
+						@Html.TextBoxFor(m => m.DataExpedicaoRG, new { @class = "form-control datepicker" })
+						<span asp-validation-for="DataExpedicaoRG" class="text-danger"></span>
 					</div>
 				</div>
 			</div>
@@ -123,24 +117,23 @@
 	<br />
 	<br />
 	@*<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<div class="col-sm-4">
-					<label class="control-label"></label>
-					<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
-					@Html.CheckBoxFor(m => m.Contabilidade)
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label class="control-label"></label>
+						<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
+						@Html.CheckBoxFor(m => m.Contabilidade)
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<br />*@
+		<br />*@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
 				<div class="rodape-form">
-					<a class="btn btn-info" href="@Url.Action("Lista","Cadastro")" title="">Voltar</a>
-					<input type="submit" name="submit" class="btn btn-success" value="Salvar" />
-					<a class="btn btn-info" href="@Url.Action("Novo","CadastroRepLegal",new { pessoa = Model.CodigoPessoa})" title="">Representante Legal</a>
+					<a class="btn btn-info" href="@Url.Action("Lista","CadastroRepLegal")" title="">Voltar</a>
+					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />
 				</div>
 			</div>
 		</div>

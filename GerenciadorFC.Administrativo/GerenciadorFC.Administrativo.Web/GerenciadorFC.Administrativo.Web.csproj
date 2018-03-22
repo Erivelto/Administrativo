@@ -205,11 +205,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\CadastroRepLegal\" />
-    <Folder Include="Views\Cadastro\CadastroEmpresa\_partial\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Web.Helpers">
       <HintPath>..\..\..\..\..\..\Users\fabio\Downloads\mvczin-master\mvczin-master\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>

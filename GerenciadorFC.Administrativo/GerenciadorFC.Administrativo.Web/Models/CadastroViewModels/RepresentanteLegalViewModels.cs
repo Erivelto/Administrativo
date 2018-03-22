@@ -15,6 +15,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("Nome")]
 		[Required(ErrorMessage = "Nome é obrigatório.")]
 		public string Nome { get; set; }
+		[StringLength(10, ErrorMessage = "Digite apenas números")]
 		[DisplayName("CPF")]
 		[Cpf(ErrorMessage = "O valor '{0}' é inválido para CPF")]
 		[Required(ErrorMessage = "CPF é obrigatório.")]
@@ -22,6 +23,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("RG")]
 		[Required(ErrorMessage = "RG é obrigatório.")]
 		public string RG { get; set; }
+		[StringLength(20, ErrorMessage = "Excedeu o numero de caracteres")]
 		[DisplayName("Passaporte")]		
 		public string Passaporte { get; set; }
 		[DisplayName("Data Expedição RG")]

@@ -13,6 +13,7 @@ namespace GerenciadorFC.Administrativo.Web.Mappers
         {
 			Pessoa();
 			Endereco();
+			RepresentanteLegal();
 		}
         public void Pessoa()
         {

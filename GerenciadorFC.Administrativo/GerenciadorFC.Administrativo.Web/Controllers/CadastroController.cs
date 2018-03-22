@@ -95,7 +95,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		}
 		public ActionResult Novo()
 		{
-			return View();
+			var pessoaViewModels = new PessoaViewModels();
+			return View(pessoaViewModels);
 		}
 		public async Task<ActionResult> Cadastrar(PessoaViewModels pessoaVieModels)
 		{
@@ -109,6 +110,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					var _endereco = Mapper.Map<PessoaViewModels, Endereco>(pessoaVieModels);
 					using (var client = new HttpClient())
 					{
+						//client.BaseAddress = new System.Uri("http://localhost:12796/api/Pessoa");
 						client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Pessoa");
 						var resposta_p = await client.PostAsJsonAsync("", _pessoa);
 						string retorno = await resposta_p.Content.ReadAsStringAsync();
@@ -119,11 +121,17 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 							using (var clientEnd = new HttpClient())
 							{
 								_endereco.CodigoPessoa = _pessoa.Codigo;
+								//clientEnd.BaseAddress = new System.Uri("http://localhost:12796/api/Endereco");
 								clientEnd.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Endereco");
 								var reposta_e = await clientEnd.PostAsJsonAsync("", _endereco);
 								string retorno_e = await reposta_e.Content.ReadAsStringAsync();
 								_endereco = JsonConvert.DeserializeObject<Endereco>(retorno_e);
 							}
+							return RedirectToAction("Lista");
+						}
+						else
+						{
+							return View("Novo", pessoaVieModels);
 						}
 					}
 				}

@@ -15,6 +15,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		[Required(ErrorMessage = "Razão Social é obrigatório.")]
 		public string Razao { get; set; }
 		[DisplayName("CNPJ")]
+		[StringLength(15, ErrorMessage = "Digite apenas números")]
 		[Cnpj(ErrorMessage = "O valor '{0}' é inválido para CNPJ")]
 		[Required(ErrorMessage = "CNPJ é obrigatório.")]
 		public string Documento { get; set; }

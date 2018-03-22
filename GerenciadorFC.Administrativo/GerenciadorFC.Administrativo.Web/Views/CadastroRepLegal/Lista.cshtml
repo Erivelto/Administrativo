@@ -1,11 +1,10 @@
-﻿@model List<GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ListaPessoaViewModels>
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ListaRepLegalViewModels>
 
 @{
-	ViewData["Title"] = "Clientes";
+	ViewData["Title"] = "Representantes";
 }
 
-<h4>Clientes</h4>
-
+<h4>Representantes</h4>
 
 <div class="row">
 	<div class="col-sm-12">
@@ -14,9 +13,8 @@
 				<thead>
 					<tr class="headings">
 						<th class="column-title">Codigo </th>
-						<th class="column-title">CNPJ </th>
-						<th class="column-title">Nome Fantasia </th>
-						<th class="column-title">Razão Social</th>
+						<th class="column-title">Nome</th>
+						<th class="column-title">CPF</th>						
 						<th class="column-title">Data Contfy </th>
 						<th class="column-title"></th>
 						<th class="column-title"></th>
@@ -31,19 +29,16 @@
 								<span>@list.Codigo</span>
 							</td>
 							<td>
-								<span>@list.Documento</span>
-							</td>
-							<td>
 								<span>@list.Nome</span>
 							</td>
 							<td>
-								<span>@list.Razao</span>
+								<span>@list.CPF</span>
 							</td>
 							<td>
-								<span>@list.DataInclusao</span>
+								<span>@list.DataInclisao</span>
 							</td>
 							<td>
-								<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})"><i class="fa fa-edit"></i></a>
+								<a href="@Url.Action("Edite","CadastroRepLegal", new { rep = list.Codigo})"><i class="fa fa-edit"></i></a>
 							</td>
 							<td>
 								<a href="@Url.Action("Lista","Cadastro")"><i class="fa fa-remove"></i></a>
@@ -57,12 +52,3 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-12">
-		<div class="form-group">
-			<div class="rodape-form">
-				<a class="btn btn-info" href="@Url.Action("Novo","Cadastro")" title="">Adicionar</a>				
-			</div>
-		</div>
-	</div>
-</div>
