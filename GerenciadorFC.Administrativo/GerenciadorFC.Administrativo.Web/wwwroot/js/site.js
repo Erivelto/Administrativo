@@ -1,5 +1,11 @@
 ﻿// Write your JavaScript code.
 // Write your JavaScript code.
+$(function () {
+	$("#idaccordion").accordion({
+		active: false,
+		collapsible: true
+	});
+});
 (function ($) {
 	var generateCustomerTable = $("#dataGrid")
 		.dataTable({

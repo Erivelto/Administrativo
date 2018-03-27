@@ -116,18 +116,16 @@
 	</div>
 	<br />
 	<br />
-	@*<div class="row">
+	@if (Model.CodigoRepLegal != 0)
+	{
+		<div class="row">
 			<div class="col-md-12">
-				<div class="form-group">
-					<div class="col-sm-4">
-						<label class="control-label"></label>
-						<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
-						@Html.CheckBoxFor(m => m.Contabilidade)
-					</div>
-				</div>
+				<div id="idaccordion" class="accordion">x
+					@Html.Partial("_NovoContato")
+				</div>	
 			</div>
 		</div>
-		<br />*@
+	}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">

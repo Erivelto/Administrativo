@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class CadastroController : Controller
     {
 		public async Task<ActionResult> Lista()

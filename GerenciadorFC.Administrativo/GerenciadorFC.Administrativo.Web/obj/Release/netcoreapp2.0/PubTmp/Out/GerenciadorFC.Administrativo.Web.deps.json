@@ -29,7 +29,12 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Newtonsoft.Json": "11.0.1",
           "RestSharp": "106.2.1",
-          "System.Net.Http.Formatting.Extension": "5.2.3"
+          "System.Net.Http.Formatting.Extension": "5.2.3",
+          "System.Web.Helpers": "3.0.0.0",
+          "System.Web.Mvc": "5.0.0.0",
+          "System.Web.WebPages.Deployment": "3.0.0.0",
+          "System.Web.WebPages": "3.0.0.0",
+          "System.Web.WebPages.Razor": "3.0.0.0"
         },
         "runtime": {
           "GerenciadorFC.Administrativo.Web.dll": {}
@@ -3813,6 +3818,46 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "System.Web.Helpers/3.0.0.0": {
+        "runtime": {
+          "System.Web.Helpers.dll": {}
+        },
+        "compile": {
+          "System.Web.Helpers.dll": {}
+        }
+      },
+      "System.Web.Mvc/5.0.0.0": {
+        "runtime": {
+          "System.Web.Mvc.dll": {}
+        },
+        "compile": {
+          "System.Web.Mvc.dll": {}
+        }
+      },
+      "System.Web.WebPages.Deployment/3.0.0.0": {
+        "runtime": {
+          "System.Web.WebPages.Deployment.dll": {}
+        },
+        "compile": {
+          "System.Web.WebPages.Deployment.dll": {}
+        }
+      },
+      "System.Web.WebPages/3.0.0.0": {
+        "runtime": {
+          "System.Web.WebPages.dll": {}
+        },
+        "compile": {
+          "System.Web.WebPages.dll": {}
+        }
+      },
+      "System.Web.WebPages.Razor/3.0.0.0": {
+        "runtime": {
+          "System.Web.WebPages.Razor.dll": {}
+        },
+        "compile": {
+          "System.Web.WebPages.Razor.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -4724,7 +4769,7 @@
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "sha512-4WFx1kxp+tQ6VFpLK7cFCResNlddxXz1rOGIsTo6nPiH7/PT0QpYch6SoUpUhpUPNVlgwJdhFEgZNiWQgb3Eug==",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hashPath": "microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512"
     },
@@ -6185,6 +6230,31 @@
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512",
       "runtimeStoreManifestName": "aspnetcore-store-2.0.0-linux-x64.xml;aspnetcore-store-2.0.0-osx-x64.xml;aspnetcore-store-2.0.0-win7-x64.xml;aspnetcore-store-2.0.0-win7-x86.xml"
+    },
+    "System.Web.Helpers/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Web.Mvc/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Web.WebPages.Deployment/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Web.WebPages/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Web.WebPages.Razor/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.NETCore.App/2.0.0": {
       "type": "package",

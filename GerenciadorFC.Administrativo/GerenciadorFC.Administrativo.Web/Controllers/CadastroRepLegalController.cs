@@ -28,7 +28,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				using (var clientEnd = new HttpClient())
 				{
 					clientEnd.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
-					var respostaEnd = await clientEnd.GetAsync("api/Endereco/" + rep.ToString());
+					var respostaEnd = await clientEnd.GetAsync("api/Endereco/-" + rep.ToString());
 					string dadosEnd = await respostaEnd.Content.ReadAsStringAsync();
 
 					var _endereco = JsonConvert.DeserializeObject<Endereco>(dadosEnd);
@@ -97,6 +97,11 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var repLegalViewModel = new RepresentanteLegalViewModels() { CodigoPessoa = pessoa };
 			return View(repLegalViewModel);
         }
+		public IActionResult _NovoContato(int rep)
+		{
+			var contatoViewModels = new ContatoViewModels();
+			return View(contatoViewModels);
+		}
 		public async Task<ActionResult> Cadastrar(RepresentanteLegalViewModels repLegalVieModels)
 		{
 			if (ModelState.IsValid)

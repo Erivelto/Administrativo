@@ -25,7 +25,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		public DateTime DataAtulizacao { get; set; }
 		[DisplayName("Data Abertura")]
 		[Required(ErrorMessage = "Data inclusão é obrigatório.")]
-		[DataType(DataType.DateTime,ErrorMessage = "Data inválida")]
+		[DataType(DataType.Date,ErrorMessage = "Data inválida")]
 		public DateTime DataAbertura { get; set; }
 		[DisplayName("Atividade")]
 		[Required(ErrorMessage = "Descrição é obrigatório.")]

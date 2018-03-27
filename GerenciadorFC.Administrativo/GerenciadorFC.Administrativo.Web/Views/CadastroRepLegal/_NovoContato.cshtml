@@ -1,0 +1,66 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ContatoViewModels
+
+<form asp-action="Alterar">
+	<div class="row">
+		<div class="col-md-12">
+			@*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-6">
+						@Html.HiddenFor(m => m.Codigo)
+						@Html.HiddenFor(m => m.CodigoPessoa)
+						@Html.HiddenFor(m => m.CodigoRepLegal)
+						<label asp-for="email" class="control-label">@Html.DisplayNameFor(m => m.email)</label>
+						@Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+						<span asp-validation-for="email" class="text-danger control-label"></span>
+					</div>
+					<label asp-for="Site" class="control-label">@Html.DisplayNameFor(m => m.Site)</label>
+					<div class="col-sm-6">
+						@Html.TextBoxFor(m => m.Site, new { @class = "form-control" })
+						<span asp-validation-for="Site" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label asp-for="DDD" class="control-label">@Html.DisplayNameFor(m => m.DDD)</label>
+						@Html.TextBoxFor(m => m.DDD, new { @class = "form-control" })
+						<span asp-validation-for="DDD" class="text-danger"></span>
+					</div>
+					<div class="col-sm-6">
+						<label asp-for="Telefone" class="control-label">@Html.DisplayNameFor(m => m.Telefone)</label>
+						@Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+						<span asp-validation-for="Telefone" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label asp-for="DDDC" class="control-label">@Html.DisplayNameFor(m => m.DDDC)</label>
+						@Html.TextBoxFor(m => m.DDDC, new { @class = "form-control" })
+						<span asp-validation-for="DDDC" class="text-danger"></span>
+					</div>
+					<div class="col-sm-6">
+						<label asp-for="Celular" class="control-label">@Html.DisplayNameFor(m => m.Celular)</label>
+						@Html.TextBoxFor(m => m.Celular, new { @class = "form-control" })
+						<span asp-validation-for="Celular" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<div class="rodape-form">
+					<a class="btn btn-info" href="@Url.Action("Lista","CadastroRepLegal")" title="">Voltar</a>
+					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
