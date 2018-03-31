@@ -37,6 +37,16 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					repLegalVieModels = Mapper.Map<Endereco, RepresentanteLegalViewModels>(_endereco, repLegalVieModels);
 
 				}
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+					var respostaCont = await clientCont.GetAsync("");
+					string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+					var listContato = JsonConvert.DeserializeObject<List<ListaContatoViewModels>>(dadosCont);
+					if(listContato.Count > 0 ) 
+						repLegalVieModels.listaContato  = listContato;
+				}
 			}
 			return View("Edite", repLegalVieModels);
 		}
@@ -101,6 +111,54 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		{
 			var contatoViewModels = new ContatoViewModels();
 			return View(contatoViewModels);
+		}
+		public async Task<ActionResult> ExcluirContato(ContatoViewModels contatoViewModels)
+		{
+			var model = new ContatoViewModels();
+			if (contatoViewModels.Codigo != 0)
+			{
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+					var reposta = await clientCont.DeleteAsync(contatoViewModels.Codigo.ToString());
+					var retorno = await reposta.Content.ReadAsStringAsync();
+
+					using (var clientContList = new HttpClient())
+					{
+						clientContList.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+						var respostaCont = await clientContList.GetAsync("");
+						string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+						var listContato = JsonConvert.DeserializeObject<List<ListaContatoViewModels>>(dadosCont);
+						model.listaContato = listContato;
+					}
+				}
+			}
+			return PartialView("_ListaContato", model.listaContato);
+		}
+		public async Task<ActionResult> CadastraContato(ContatoViewModels contatoViewModels)
+		{
+			var model = new ContatoViewModels();
+			if (contatoViewModels.CodigoRepLegal != 0)
+			{
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+					var reposta = await clientCont.PostAsJsonAsync("", contatoViewModels);
+					var retorno  = await reposta.Content.ReadAsStringAsync();
+
+					using (var clientContList = new HttpClient())
+					{
+						clientContList.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+						var respostaCont = await clientContList.GetAsync("");
+						string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+						var listContato = JsonConvert.DeserializeObject<List<ListaContatoViewModels>>(dadosCont);
+						model.listaContato = listContato;
+					}
+				}				
+			}
+			return PartialView("_ListaContato", model.listaContato);
 		}
 		public async Task<ActionResult> Cadastrar(RepresentanteLegalViewModels repLegalVieModels)
 		{

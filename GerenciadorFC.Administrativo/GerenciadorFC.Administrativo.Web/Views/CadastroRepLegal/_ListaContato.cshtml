@@ -1,0 +1,64 @@
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ListaContatoViewModels>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table id="datatable" class="table table-striped jambo_table bulk_action">
+				<thead>
+					<tr class="headings">
+						<th class="column-title">Codigo </th>
+						<th class="column-title">Email</th>
+						<th class="column-title">Telefone</th>
+						<th class="column-title">Celular</th>
+						<th class="column-title">Criar login</th>
+						<th class="column-title"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					@foreach (var list in Model)
+					{
+					<tr class="even pointer">
+						<td>
+							<span>@list.Codigo</span>
+						</td>
+						<td>
+							<span>@list.email</span>
+						</td>
+						<td>
+							<span>@list.DDD - @list.Telefone</span>
+						</td>
+						<td>
+							<span>@list.DDDC - @list.Celular</span>
+						</td>
+						<td>
+							<a title="Envio de login" onclick=""><i class="fa fa-envelope"></i></a>
+						</td>
+						<td>
+							<a title="Excluir" onclick="ExcluirContato(@list.Codigo)"><i class="fa fa-remove"></i></a>
+						</td>
+					</tr>
+					}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+		function ExcluirContato(codigo) {
+		 $.ajax({
+			 url: '@Url.Action("CadastraContato", "CadastroRepLegal")',
+			 data: model,
+			cache: false,
+			type: "POST",
+			dataType: "html",
+			success: function (data, textStatus, XMLHttpRequest) {
+				$('#PartialContainer').html(data);
+			}
+		});
+	}
+
+	$(document).ready(function () {
+		setInterval(cadastrarContato, 20000);
+	});
+</script>

@@ -26,8 +26,10 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[MaxLength(4, ErrorMessage = "Maximo de caracteres")]
 		public string DDDC { get; set; }
 		[Display(Name = "Celular")]
-		[MaxLength(9, ErrorMessage = "Maximo de caracteres")]
+		[MaxLength(9, ErrorMessage = "Maximo de caracteres")]	
 		public string Celular { get; set; }
 		public bool Excluido { get; set; }
+		public List<ListaContatoViewModels> listaContato { get; set; }
+
 	}
 }

@@ -58,6 +58,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("CEP")]
 		[Required(ErrorMessage = "CEP é obrigatório.")]
 		public string CEP { get; set; }
-
+		public ContatoViewModels contatoViewModels { get; set; }
+		public List<ListaContatoViewModels> listaContato { get; set; }
 	}
 }

@@ -118,20 +118,65 @@
 	<br />
 	@if (Model.CodigoRepLegal != 0)
 	{
-		<div class="row">
-			<div class="col-md-12">
-				<div id="idaccordion" class="accordion">x
-					@Html.Partial("_NovoContato")
-				</div>	
+		@*<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Contatos</h2>
+							<ul class="nav navbar-right panel_toolbox" style="display:none">
+								<li>
+									<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<br />
+							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								<div id="idaccordion" class="accordion">
+									<div class="row">
+										<div class="col-md-12">
+											@Html.Partial("_NovoContato", Model.contatoViewModels)
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>*@
+	<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel">
+			<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				<h4 class="panel-title">Contatos</h4>
+			</a>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							@Html.Partial("_NovoContato", Model.contatoViewModels)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" id="PartialContainer">
+							@Html.Partial("_ListaContato", Model.listaContato)
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
 	}
+	<br />
+	<br />
+	<br />
+	
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
 				<div class="rodape-form">
 					<a class="btn btn-info" href="@Url.Action("Lista","CadastroRepLegal")" title="">Voltar</a>
-					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />
+					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />					
 				</div>
 			</div>
 		</div>
