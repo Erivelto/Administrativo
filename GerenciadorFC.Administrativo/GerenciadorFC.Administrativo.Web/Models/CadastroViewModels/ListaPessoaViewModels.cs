@@ -20,5 +20,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public int Status { get; set; }
 		public int TipoPessoa { get; set; }
 		public bool Excluido { get; set; }
+		public PessoaEmissaoNFeViewModels pessoaEmissaoNFeViewModels { get; set; }
+		public List<PessoaEmissaoNFeViewModels> listapessoaEmissaoNFeViewModels { get; set; }
 	}
 }

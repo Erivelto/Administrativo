@@ -13,10 +13,18 @@ using Microsoft.Extensions.Options;
 using GerenciadorFC.Administrativo.Web.Models;
 using GerenciadorFC.Administrativo.Web.Models.AccountViewModels;
 using GerenciadorFC.Administrativo.Web.Services;
+using System.Net.Http;
+using AutoMapper;
+using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
+using GerenciadorFC.Administrativo.Web.Models.EnderecoDados;
+using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
+using GerenciadorFC.Administrativo.Web.Models.RepresentanteLegal;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-    [Authorize]
+    
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -208,8 +216,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
+			var registerViewModel = new RegisterViewModel();
+			registerViewModel.CodigoRep = Convert.ToInt32(returnUrl);
+			return View("Register",registerViewModel);
         }
 
         [HttpPost]
@@ -221,7 +230,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, "Q1w2e3r4@");
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -229,10 +238,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+					this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id);
+					await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return View("TermoDeUso");
                 }
                 AddErrors(result);
             }
@@ -240,7 +249,32 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+		public async Task<IActionResult> TermoDeUso()
+		{
 
+			return View();
+		}
+		public async void UpdateUserId(int idcont, string UserId)
+		{
+			using (var clientCont = new HttpClient())
+			{
+				clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato/" + idcont.ToString());
+				var respostaCont = await clientCont.GetAsync("");
+				string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+				var listContato = JsonConvert.DeserializeObject<ContatoViewModels>(dadosCont);
+				if (listContato.email != "")
+				{
+					listContato.UserId = UserId;
+					using (var client = new HttpClient())
+					{
+						client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
+						var resposta = await client.PutAsJsonAsync("", listContato);
+						string retorno = await resposta.Content.ReadAsStringAsync();
+					}
+				}	
+			}
+		}
         [HttpPost]        
         public async Task<IActionResult> Logout()
         {

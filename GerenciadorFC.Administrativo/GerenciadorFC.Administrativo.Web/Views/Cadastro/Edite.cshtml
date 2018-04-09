@@ -122,18 +122,33 @@
 	</div>
 	<br />
 	<br />
-	@*<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<div class="col-sm-4">
-					<label class="control-label"></label>
-					<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
-					@Html.CheckBoxFor(m => m.Contabilidade)
+	@if (Model.CodigoPessoa != 0)
+	{		
+		<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+			<div class="panel">
+				<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					<h4 class="panel-title">Contatos</h4>
+				</a>
+				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								@Html.Partial("_DadosFiscaisNovo", Model.pessoaEmissaoNFeViewModels)
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" id="PartialContainer">
+								@Html.Partial("_ListDadosFiscaisNovo", Model.listapessoaEmissaoNFeViewModels)
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<br />*@
+	}
+	<br />
+	<br />
+	<br />
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">

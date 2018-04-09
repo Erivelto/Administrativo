@@ -1,5 +1,7 @@
 ﻿using GerenciadorFC.Administrativo.Web.Helps.Validacao;
+using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -67,6 +69,8 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		[Required(ErrorMessage = "CEP é obrigatório.")]
 		public string CEP { get; set; }
 		public bool ExcluidoEndereco { get; set; }
+		public PessoaEmissaoNFeViewModels pessoaEmissaoNFeViewModels { get; set; }
+		public List<PessoaEmissaoNFeViewModels> listapessoaEmissaoNFeViewModels { get; set; }
 
 	}
 }

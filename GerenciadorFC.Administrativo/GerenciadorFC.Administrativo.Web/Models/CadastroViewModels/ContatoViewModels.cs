@@ -30,6 +30,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public string Celular { get; set; }
 		public bool Excluido { get; set; }
 		public List<ListaContatoViewModels> listaContato { get; set; }
+		public string UserId { get; set; }
 
 	}
 }

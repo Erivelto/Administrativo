@@ -1,0 +1,35 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.PessoaEmissaoNFeViewModels
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="form-group">
+				<div class="col-sm-6">
+					@Html.HiddenFor(m => m.Codigo)
+					@Html.HiddenFor(m => m.CodigoPessoa)
+					<label class="control-label">Prefeitura</label>
+					@Html.DropDownList("EnumDropDown", ViewBag.EnumList as SelectList)
+				</div>
+				<label asp-for="senha" class="control-label">@Html.DisplayNameFor(m => m.senha)</label>
+				<div class="col-sm-6">
+					@Html.TextBoxFor(m => m.senha, new { @class = "form-control", @type = "password" })
+					<span asp-validation-for="senha" class="text-danger" ></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<div class="rodape-form">
+				<input type="button" id="btnatualiza" class="btn btn-success" value="Cadastrar" onclick="cadastrarContato();" />
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />

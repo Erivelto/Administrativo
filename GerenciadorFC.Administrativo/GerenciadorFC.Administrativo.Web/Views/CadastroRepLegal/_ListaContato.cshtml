@@ -10,7 +10,7 @@
 						<th class="column-title">Telefone</th>
 						<th class="column-title">Celular</th>
 						<th class="column-title">Criar login</th>
-						<th class="column-title"></th>
+						<th></th>
 					</tr>
 				</thead>
 
@@ -31,7 +31,7 @@
 							<span>@list.DDDC - @list.Celular</span>
 						</td>
 						<td>
-							<a title="Envio de login" onclick=""><i class="fa fa-envelope"></i></a>
+							<a title="Envio de login" onclick="EnviarEmailContato('@list.email',@list.Codigo)"><i class="fa fa-envelope"></i></a>
 						</td>
 						<td>
 							<a title="Excluir" onclick="ExcluirContato(@list.Codigo)"><i class="fa fa-remove"></i></a>
@@ -46,18 +46,25 @@
 </div>
 <script>
 		function ExcluirContato(codigo) {
-		 $.ajax({
-			 url: '@Url.Action("CadastraContato", "CadastroRepLegal")',
-			 data: model,
-			cache: false,
-			type: "POST",
-			dataType: "html",
-			success: function (data, textStatus, XMLHttpRequest) {
-				$('#PartialContainer').html(data);
+			$.ajax({
+				url: '@Url.Action("ExcluirContato", "CadastroRepLegal" )',
+				data: { contato: codigo },
+				type: "POST",
+				success: function (data, textStatus, XMLHttpRequest) {
+					$('#PartialContainer').html(data);
 			}
 		});
 	}
-
+	function EnviarEmailContato(email,codigo) {
+			$.ajax({
+				url: '@Url.Action("EnviarEmailContato", "CadastroRepLegal" )',
+				data: { email: email, codigo: codigo },
+				type: "POST",
+				success: function (data, textStatus, XMLHttpRequest) {
+					$('#PartialContainer').html(data);
+			}
+		});
+	}
 	$(document).ready(function () {
 		setInterval(cadastrarContato, 20000);
 	});
