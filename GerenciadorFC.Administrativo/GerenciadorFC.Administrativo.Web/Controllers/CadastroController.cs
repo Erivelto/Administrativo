@@ -98,12 +98,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var pessoaViewModels = new PessoaViewModels();
 			return View(pessoaViewModels);
 		}
-		public async Task<ActionResult> Cadastrar(PessoaViewModels pessoaVieModels)
+		public async Task<ActionResult> Cadastrar(PessoaViewModels pessoaVieModels, int checkboxTC)
 		{
 			if (ModelState.IsValid)
 			{
 				if (pessoaVieModels != null)
 				{
+					pessoaVieModels.TipoPessoa = checkboxTC;
 					pessoaVieModels.DataInclusao = DateTime.Now;
 					pessoaVieModels.DataAtulizacao = DateTime.Now;
 					var _pessoa = Mapper.Map<PessoaViewModels, Pessoa>(pessoaVieModels);

@@ -234,14 +234,20 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-					this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);					
 					await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return View("TermoDeUso");
+					if (await this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id) == false)
+					{
+						return View("TermoDeUso");
+					}
+					else
+					{
+						return View();
+					}
+					
                 }
                 AddErrors(result);
             }
@@ -251,10 +257,49 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
         }
 		public async Task<IActionResult> TermoDeUso()
 		{
-
 			return View();
 		}
-		public async void UpdateUserId(int idcont, string UserId)
+		//public async Task<IActionResult> AceiteTermoUso(int codigoPessoa, string user_Id)
+		//{
+		//	var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
+		//	pessoaTermoDeUsoViewModels.CodigoPessoa = codigoPessoa;
+		//	pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;
+		//	pessoaTermoDeUsoViewModels.UserId = user_Id;
+
+		//	using (var clientCont = new HttpClient())
+		//	{
+		//		clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaTermoDeUso");
+		//		var respostaTermo = await clientCont.PostAsJsonAsync("",pessoaTermoDeUsoViewModels);
+		//		string dadosTermo = await respostaTermo.Content.ReadAsStringAsync();
+
+		//		var termo = JsonConvert.DeserializeObject<PessoaTermoDeUsoViewModels>(dadosTermo);
+
+
+
+		//	}
+		//}
+		public async Task<bool> VerificaTermo(int codigoPessoa)
+		{
+			using (var clientCont = new HttpClient())
+			{
+				clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaTermoDeUso/" + codigoPessoa.ToString());
+				var respostaTermo = await clientCont.GetAsync("");
+				string dadosTermo = await respostaTermo.Content.ReadAsStringAsync();
+
+				var termo = JsonConvert.DeserializeObject<PessoaTermoDeUsoViewModels>(dadosTermo);
+
+				if (termo == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+		}
+		public async Task<bool> UpdateUserId(int idcont, string UserId)
 		{
 			using (var clientCont = new HttpClient())
 			{
@@ -271,8 +316,18 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 						client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato");
 						var resposta = await client.PutAsJsonAsync("", listContato);
 						string retorno = await resposta.Content.ReadAsStringAsync();
+						
 					}
-				}	
+				}
+
+				if (await this.VerificaTermo(listContato.CodigoPessoa) == true)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
         [HttpPost]        

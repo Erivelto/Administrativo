@@ -62,44 +62,43 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-				<div class="col-sm-1">
-					<label asp-for="TipoEnd" class="control-label">@Html.DisplayNameFor(m => m.TipoEnd)</label>
-					@Html.TextBoxFor(m => m.TipoEnd, new { @class = "form-control" })
-					<span asp-validation-for="TipoEnd" class="text-danger"></span>
+					<div class="col-sm-1">
+						<label asp-for="TipoEnd" class="control-label">@Html.DisplayNameFor(m => m.TipoEnd)</label>
+						@Html.TextBoxFor(m => m.TipoEnd, new { @class = "form-control" })
+						<span asp-validation-for="TipoEnd" class="text-danger"></span>
+					</div>
+					<div class="col-sm-10">
+						<label asp-for="Logradouro" class="control-label">@Html.DisplayNameFor(m => m.Logradouro)</label>
+						@Html.TextBoxFor(m => m.Logradouro, new { @class = "form-control" })
+						<span asp-validation-for="Logradouro" class="text-danger"></span>
+					</div>
+					<div class="col-sm-1">
+						<label asp-for="Numrero" class="control-label">@Html.DisplayNameFor(m => m.Numrero)</label>
+						@Html.TextBoxFor(m => m.Numrero, new { @class = "form-control" })
+						<span asp-validation-for="Numrero" class="text-danger"></span>
+					</div>
 				</div>
-				<div class="col-sm-10">
-					<label asp-for="Logradouro" class="control-label">@Html.DisplayNameFor(m => m.Logradouro)</label>
-					@Html.TextBoxFor(m => m.Logradouro, new { @class = "form-control" })
-					<span asp-validation-for="Logradouro" class="text-danger"></span>
-				</div>
-				<div class="col-sm-1">
-					<label asp-for="Numrero" class="control-label">@Html.DisplayNameFor(m => m.Numrero)</label>
-					@Html.TextBoxFor(m => m.Numrero, new { @class = "form-control" })
-					<span asp-validation-for="Numrero" class="text-danger"></span>
-				</div>
-			</div>
 			</div>
 			<div class="row">
 				<div class="form-group">
-				<div class="col-sm-4">
-					<label asp-for="Complemento" class="control-label">@Html.DisplayNameFor(m => m.Complemento)</label>
-					@Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
-					<span asp-validation-for="Complemento" class="text-danger"></span>
+					<div class="col-sm-4">
+						<label asp-for="Complemento" class="control-label">@Html.DisplayNameFor(m => m.Complemento)</label>
+						@Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
+						<span asp-validation-for="Complemento" class="text-danger"></span>
+					</div>
+					<div class="col-sm-4">
+						<label asp-for="Bairro" class="control-label">@Html.DisplayNameFor(m => m.Bairro)</label>
+						@Html.TextBoxFor(m => m.Bairro, new { @class = "form-control" })
+						<span asp-validation-for="Bairro" class="text-danger"></span>
+					</div>
+					<div class="col-sm-4">
+						<label asp-for="Cidade" class="control-label">@Html.DisplayNameFor(m => m.Cidade)</label>
+						@Html.TextBoxFor(m => m.Cidade, new { @class = "form-control" })
+						<span asp-validation-for="Cidade" class="text-danger"></span>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<label asp-for="Bairro" class="control-label">@Html.DisplayNameFor(m => m.Bairro)</label>
-					@Html.TextBoxFor(m => m.Bairro, new { @class = "form-control" })
-					<span asp-validation-for="Bairro" class="text-danger"></span>
-				</div>
-				<div class="col-sm-4">
-					<label asp-for="Cidade" class="control-label">@Html.DisplayNameFor(m => m.Cidade)</label>
-					@Html.TextBoxFor(m => m.Cidade, new { @class = "form-control" })
-					<span asp-validation-for="Cidade" class="text-danger"></span>
-				</div>
-			</div>
 			</div>
 			<div class="row">
-
 				<div class="form-group">
 					<div class="col-sm-1">
 						<label asp-for="UF" class="control-label">@Html.DisplayNameFor(m => m.UF)</label>
@@ -111,29 +110,35 @@
 						@Html.TextBoxFor(m => m.CEP, new { @class = "form-control" })
 						<span asp-validation-for="CEP" class="text-danger"></span>
 					</div>
-					<div class="col-sm-8">
-						<label class="control-label"></label>
-						<input type="hidden" />
+					<div class="col-sm-4">
+						<label class="control-label">Tipo de cliente</label>
+						<br />
+						<label>
+							<input type="checkbox" id="checkboxTC" name="checkboxTC" class="js-switch checkboxServ" value="0" checked /> Servico
+						</label>
+						<label>
+							<input type="checkbox" id="checkboxTC" name="checkboxTC" class="js-switch checkboxCom" value="1"  /> Comércio
+						</label>
 					</div>
 				</div>
-			</div>	
+			</div>
 
 		</div>
 	</div>
 	<br />
 	<br />
 	@*<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<div class="col-sm-4">
-					<label class="control-label"></label>
-					<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
-					@Html.CheckBoxFor(m => m.Contabilidade)
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label class="control-label"></label>
+						<label asp-for="TipoPessoa" class="control-label">@Html.DisplayNameFor(m => m.TipoPessoa)</label>
+						@Html.CheckBoxFor(m => m.Contabilidade)
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<br />*@
+		<br />*@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
@@ -144,7 +149,32 @@
 			</div>
 		</div>
 	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
 </form>
-	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$(".checkboxServ").change(function () {
+			if (this.checked) {
+				$(".checkboxCom").prop("checked", false);
+			}			
+		});
+		$(".checkboxCom").change(function () {
+			if (this.checked) {
+				$(".checkboxServ").prop("checked", false);
+			}
+		});
+	});	
+</script>
 
 
