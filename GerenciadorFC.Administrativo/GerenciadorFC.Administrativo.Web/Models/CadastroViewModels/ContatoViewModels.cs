@@ -31,6 +31,8 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public bool Excluido { get; set; }
 		public List<ListaContatoViewModels> listaContato { get; set; }
 		public string UserId { get; set; }
-
+		public string Tipo { get; set; }
+		[Display(Name = "Data expiração")]
+		public DateTime DataExpiracao { get; set; }
 	}
 }

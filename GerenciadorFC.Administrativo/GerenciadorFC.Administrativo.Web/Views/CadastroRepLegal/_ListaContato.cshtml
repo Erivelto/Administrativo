@@ -9,6 +9,8 @@
 						<th class="column-title">Email</th>
 						<th class="column-title">Telefone</th>
 						<th class="column-title">Celular</th>
+						<th class="column-title">Tipo</th>
+						<th class="column-title">Data expiração</th>
 						<th class="column-title">Criar login</th>
 						<th></th>
 					</tr>
@@ -31,7 +33,13 @@
 							<span>@list.DDDC - @list.Celular</span>
 						</td>
 						<td>
-							<a title="Envio de login" onclick="EnviarEmailContato('@list.email',@list.Codigo)"><i class="fa fa-envelope"></i></a>
+							<span>@list.Tipo</span>
+						</td>
+						<td>
+							<span>@list.DataExpiracao</span>
+						</td>
+						<td>
+							<a title="Envio de login" onclick="EnviarEmailContato('@list.email',@list.Codigo,'@list.Tipo','@list.DataExpiracao')"><i class="fa fa-envelope"></i></a>
 						</td>
 						<td>
 							<a title="Excluir" onclick="ExcluirContato(@list.Codigo)"><i class="fa fa-remove"></i></a>
@@ -52,16 +60,18 @@
 				type: "POST",
 				success: function (data, textStatus, XMLHttpRequest) {
 					$('#PartialContainer').html(data);
+					$("Contato excluido").alert();
 			}
 		});
 	}
-	function EnviarEmailContato(email,codigo) {
+	function EnviarEmailContato(email,codigo,tipo,data) {
 			$.ajax({
 				url: '@Url.Action("EnviarEmailContato", "CadastroRepLegal" )',
-				data: { email: email, codigo: codigo },
+				data: { email: email, codigo: codigo, tipo: tipo, data: data },
 				type: "POST",
 				success: function (data, textStatus, XMLHttpRequest) {
 					$('#PartialContainer').html(data);
+					$("Acesso enviado").alert();
 			}
 		});
 	}

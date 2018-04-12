@@ -22,25 +22,38 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<div class="col-sm-2">
+					<div class="col-sm-1">
 						<label asp-for="DDD" class="control-label">@Html.DisplayNameFor(m => m.DDD)</label>
 						@Html.TextBoxFor(m => m.DDD, new { @class = "form-control" })
 						<span asp-validation-for="DDD" class="text-danger"></span>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<label asp-for="Telefone" class="control-label">@Html.DisplayNameFor(m => m.Telefone)</label>
 						@Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
 						<span asp-validation-for="Telefone" class="text-danger"></span>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-1">
 						<label asp-for="DDDC" class="control-label">@Html.DisplayNameFor(m => m.DDDC)</label>
 						@Html.TextBoxFor(m => m.DDDC, new { @class = "form-control" })
 						<span asp-validation-for="DDDC" class="text-danger"></span>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<label asp-for="Celular" class="control-label">@Html.DisplayNameFor(m => m.Celular)</label>
 						@Html.TextBoxFor(m => m.Celular, new { @class = "form-control" })
 						<span asp-validation-for="Celular" class="text-danger"></span>
+					</div>
+					<div class="col-sm-2">
+						<label asp-for="Tipo" class="control-label">@Html.DisplayNameFor(m => m.Tipo)</label>
+						<select id="TipoContato" class="form-control">
+							<option value="Cobrança">Cobrança</option>
+							<option value="Teste">Teste</option>
+						</select>
+						<span asp-validation-for="Celular" class="text-danger"></span>
+					</div>
+					<div class="col-sm-2">
+						<label asp-for="DataExpiracao" class="control-label">@Html.DisplayNameFor(m => m.DataExpiracao)</label>
+						@Html.TextBoxFor(m => m.DataExpiracao, new { @class = "form-control" })
+						<span asp-validation-for="DataExpiracao" class="text-danger"></span>
 					</div>
 				</div>
 			</div>			
@@ -74,8 +87,10 @@
 		var DDD = $("#DDD").val();
 		var Telefone = $("#Telefone").val();
 		var DDDC = $("#DDDC").val();
-		var Celular = $("#Celular").val();
-		var model = { CodigoRepLegal: CodigoRepLegal, email: email, Site: Site, DDD: DDD, Telefone: Telefone, DDDC: DDDC, Celular: Celular };
+			var Celular = $("#Celular").val();
+			var Tipo = $("#TipoContato").val();
+			var DataExpiracao = $("#DataExpiracao").val();
+			var model = { CodigoRepLegal: CodigoRepLegal, email: email, Site: Site, DDD: DDD, Telefone: Telefone, DDDC: DDDC, Celular: Celular, Tipo: Tipo, DataExpiracao: DataExpiracao };
 
 		 $.ajax({
 			 url: '@Url.Action("CadastraContato", "CadastroRepLegal")',

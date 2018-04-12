@@ -214,7 +214,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        public IActionResult Register(string returnUrl = null,string tipo = null, string data = null)
         {
 			var registerViewModel = new RegisterViewModel();
 			registerViewModel.CodigoRep = Convert.ToInt32(returnUrl);
@@ -241,7 +241,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                     _logger.LogInformation("User created a new account with password.");
 					if (await this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id) == false)
 					{
-						return View("TermoDeUso");
+						ContatoViewModels contato = (ContatoViewModels)TempData["listContato"];
+						return View("TermoDeUso", contato);
 					}
 					else
 					{
@@ -255,29 +256,24 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-		public async Task<IActionResult> TermoDeUso()
+		public async Task<IActionResult> TermoDeUso(ContatoViewModels contato)
 		{
+			return View(contato);
+		}
+		public async Task<IActionResult> AceiteTermoUso(ContatoViewModels contato)
+		{
+			var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
+			pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;
+			using (var clientCont = new HttpClient())
+			{
+				clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaTermoDeUso");
+				var respostaTermo = await clientCont.PostAsJsonAsync("", pessoaTermoDeUsoViewModels);
+				string dadosTermo = await respostaTermo.Content.ReadAsStringAsync();
+
+				var termo = JsonConvert.DeserializeObject<PessoaTermoDeUsoViewModels>(dadosTermo);
+			}
 			return View();
 		}
-		//public async Task<IActionResult> AceiteTermoUso(int codigoPessoa, string user_Id)
-		//{
-		//	var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
-		//	pessoaTermoDeUsoViewModels.CodigoPessoa = codigoPessoa;
-		//	pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;
-		//	pessoaTermoDeUsoViewModels.UserId = user_Id;
-
-		//	using (var clientCont = new HttpClient())
-		//	{
-		//		clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaTermoDeUso");
-		//		var respostaTermo = await clientCont.PostAsJsonAsync("",pessoaTermoDeUsoViewModels);
-		//		string dadosTermo = await respostaTermo.Content.ReadAsStringAsync();
-
-		//		var termo = JsonConvert.DeserializeObject<PessoaTermoDeUsoViewModels>(dadosTermo);
-
-
-
-		//	}
-		//}
 		public async Task<bool> VerificaTermo(int codigoPessoa)
 		{
 			using (var clientCont = new HttpClient())
@@ -326,6 +322,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				}
 				else
 				{
+					TempData["listContato"] = listContato;
 					return false;
 				}
 			}

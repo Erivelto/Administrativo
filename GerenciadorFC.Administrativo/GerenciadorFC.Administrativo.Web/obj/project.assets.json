@@ -13169,7 +13169,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
       "Newtonsoft.Json >= 11.0.1",
       "RestSharp >= 106.2.1",
-      "System.Net.Http.Formatting.Extension >= 5.2.3"
+      "system.net.http.formatting.extension >= 5.2.3"
     ]
   },
   "packageFolders": {
@@ -13251,7 +13251,7 @@
             "target": "Package",
             "version": "[106.2.1, )"
           },
-          "System.Net.Http.Formatting.Extension": {
+          "system.net.http.formatting.extension": {
             "target": "Package",
             "version": "[5.2.3, )"
           }

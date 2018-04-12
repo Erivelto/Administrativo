@@ -17,5 +17,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public string DDDC { get; set; }
 		public string Celular { get; set; }
 		public bool Excluido { get; set; }
+		public string Tipo { get; set; }
+		public DateTime DataExpiracao { get; set; }
 	}
 }

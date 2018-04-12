@@ -1,4 +1,4 @@
-﻿
+﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ContatoViewModels
 @{
     ViewData["Title"] = "TermoDeUso";
 }
@@ -21,6 +21,8 @@
 				<div class="form-group">
 					<div class="rodape-form">
 						<label>
+							@Html.HiddenFor(m => m.CodigoPessoa)
+							@Html.HiddenFor(m => m.UserId)
 							<input type="checkbox" id="checkbox" class="js-switch" checked /> Lie aceito o termo de uso.
 						</label>
 						<input type="submit" name="submit" id="submit" class="btn btn-success" value="Aceitar" />
