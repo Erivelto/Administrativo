@@ -24,5 +24,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 		public int CodigoRep { get; set; }
+		public string tipo { get; set; }
+		public DateTime dataExp { get; set; }
     }
 }

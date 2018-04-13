@@ -157,11 +157,14 @@
 							@Html.Partial("_NovoContato", Model.contatoViewModels)
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12" id="PartialContainer">
-							@Html.Partial("_ListaContato", Model.listaContato)
+					@if (Model.listaContato != null)
+					{
+						<div class="row">
+							<div class="col-md-12" id="PartialContainer">
+								@Html.Partial("_ListaContato", Model.listaContato)
+							</div>
 						</div>
-					</div>
+					}
 				</div>
 			</div>
 		</div>

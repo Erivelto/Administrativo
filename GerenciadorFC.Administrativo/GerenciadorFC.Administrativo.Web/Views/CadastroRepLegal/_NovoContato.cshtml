@@ -47,6 +47,7 @@
 						<select id="TipoContato" class="form-control">
 							<option value="Cobrança">Cobrança</option>
 							<option value="Teste">Teste</option>
+							<option value="Contador">Contador</option>
 						</select>
 						<span asp-validation-for="Celular" class="text-danger"></span>
 					</div>
@@ -80,7 +81,8 @@
 		<script>
 
 
-	function cadastrarContato() {
+   function cadastrarContato() {
+		var CodigoPessoa = $("#CodigoPessoa").val();
 		var CodigoRepLegal = $("#CodigoRepLegal").val();
 		var email = $("#email").val();
 		var Site = $("#Site").val();
@@ -90,7 +92,7 @@
 			var Celular = $("#Celular").val();
 			var Tipo = $("#TipoContato").val();
 			var DataExpiracao = $("#DataExpiracao").val();
-			var model = { CodigoRepLegal: CodigoRepLegal, email: email, Site: Site, DDD: DDD, Telefone: Telefone, DDDC: DDDC, Celular: Celular, Tipo: Tipo, DataExpiracao: DataExpiracao };
+			var model = { CodigoPessoa: CodigoPessoa, CodigoRepLegal: CodigoRepLegal, email: email, Site: Site, DDD: DDD, Telefone: Telefone, DDDC: DDDC, Celular: Celular, Tipo: Tipo, DataExpiracao: DataExpiracao };
 
 		 $.ajax({
 			 url: '@Url.Action("CadastraContato", "CadastroRepLegal")',

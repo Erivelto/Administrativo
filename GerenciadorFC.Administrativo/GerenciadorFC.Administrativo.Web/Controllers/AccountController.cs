@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using GerenciadorFC.Administrativo.Web.Models;
+using GerenciadorFC.Administrativo.Web.Models.AccountViewModels;
+using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
+using GerenciadorFC.Administrativo.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using GerenciadorFC.Administrativo.Web.Models;
-using GerenciadorFC.Administrativo.Web.Models.AccountViewModels;
-using GerenciadorFC.Administrativo.Web.Services;
-using System.Net.Http;
-using AutoMapper;
-using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
-using GerenciadorFC.Administrativo.Web.Models.EnderecoDados;
-using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
-using GerenciadorFC.Administrativo.Web.Models.RepresentanteLegal;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-    
-    [Route("[controller]/[action]")]
+
+	[Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -214,10 +205,15 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null,string tipo = null, string data = null)
+        public IActionResult Register(string returnUrl = null,string tipo = null, string data = null, string email = null)
         {
 			var registerViewModel = new RegisterViewModel();
 			registerViewModel.CodigoRep = Convert.ToInt32(returnUrl);
+			registerViewModel.Email = email == "" ? "" : email;
+			registerViewModel.tipo = tipo == "" ? "" : tipo;
+			if(data != "")
+				registerViewModel.dataExp = Convert.ToDateTime(data);
+			
 			return View("Register",registerViewModel);
         }
 
@@ -227,18 +223,18 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, "Q1w2e3r4@");
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);					
+			if (ModelState.IsValid)
+			{
+				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+				var result = await _userManager.CreateAsync(user, "Q1w2e3r4@");
+				if (result.Succeeded)
+				{
+					_logger.LogInformation("User created a new account with password.");
+					var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+					var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+					await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 					await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
+					_logger.LogInformation("User created a new account with password.");
 					if (await this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id) == false)
 					{
 						ContatoViewModels contato = (ContatoViewModels)TempData["listContato"];
@@ -246,15 +242,23 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					}
 					else
 					{
-						return View();
+						AddErrors(result);
+						return View(model);
 					}
-					
-                }
-                AddErrors(result);
-            }
+				}
+				else
+				{
+					AddErrors(result);
+					return View(model);
+				}
+			}
+			else
+			{
+				return View(model);
+			}
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            
         }
 		public async Task<IActionResult> TermoDeUso(ContatoViewModels contato)
 		{
