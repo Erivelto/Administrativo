@@ -43,6 +43,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					var _endereco = JsonConvert.DeserializeObject<Endereco>(dadosEnd);
 
 					repLegalVieModels = Mapper.Map<RepresentanteLegal, RepresentanteLegalViewModels>(_rep);
+					_endereco.CodigoPessoa = repLegalVieModels.CodigoPessoa;
 					repLegalVieModels = Mapper.Map<Endereco, RepresentanteLegalViewModels>(_endereco, repLegalVieModels);
 
 				}

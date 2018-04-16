@@ -1,6 +1,9 @@
-﻿using GerenciadorFC.Administrativo.Web.Models;
+﻿using AutoMapper;
+using GerenciadorFC.Administrativo.Web.Models;
 using GerenciadorFC.Administrativo.Web.Models.AccountViewModels;
+using GerenciadorFC.Administrativo.Web.Models.Cadastro;
 using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
+using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
 using GerenciadorFC.Administrativo.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -225,7 +228,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+				var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LockoutEnd = model.dataExp };
 				var result = await _userManager.CreateAsync(user, "Q1w2e3r4@");
 				if (result.Succeeded)
 				{
@@ -235,10 +238,18 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 					await _signInManager.SignInAsync(user, isPersistent: false);
 					_logger.LogInformation("User created a new account with password.");
-					if (await this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id) == false)
+					if (model.tipo == "Cobrança")
 					{
-						ContatoViewModels contato = (ContatoViewModels)TempData["listContato"];
-						return View("TermoDeUso", contato);
+						if (await this.UpdateUserId(Convert.ToInt32(model.CodigoRep), user.Id) == false)
+						{
+							ContatoViewModels contato = (ContatoViewModels)TempData["listContato"];
+							return View("TermoDeUso", contato);
+						}
+						else
+						{
+							AddErrors(result);
+							return View(model);
+						}
 					}
 					else
 					{
@@ -267,7 +278,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		public async Task<IActionResult> AceiteTermoUso(ContatoViewModels contato)
 		{
 			var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
+			var pessoaVieModels = new PessoaViewModels();
 			pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;
+			pessoaTermoDeUsoViewModels.CodigoPessoa = contato.CodigoPessoa;
+			pessoaTermoDeUsoViewModels.UserId = contato.UserId;
 			using (var clientCont = new HttpClient())
 			{
 				clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaTermoDeUso");
@@ -276,7 +290,17 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 				var termo = JsonConvert.DeserializeObject<PessoaTermoDeUsoViewModels>(dadosTermo);
 			}
-			return View();
+			using (var clientContP = new HttpClient())
+			{
+				clientContP.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
+				var respostaTermoP = await clientContP.GetAsync("api/Pessoa/" + contato.CodigoPessoa.ToString());
+				string dadosTermoP = await respostaTermoP.Content.ReadAsStringAsync();
+
+				var pessoa = JsonConvert.DeserializeObject<Pessoa>(dadosTermoP);
+				pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
+			}
+			TempData["pessoaVieModels"] = pessoaVieModels;
+			return RedirectToAction("Cobranca", "Cobranca");
 		}
 		public async Task<bool> VerificaTermo(int codigoPessoa)
 		{
@@ -296,7 +320,6 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				{
 					return true;
 				}
-
 			}
 		}
 		public async Task<bool> UpdateUserId(int idcont, string UserId)

@@ -91,6 +91,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 				}
 			}
+			var pessoaEmissao = new PessoaEmissaoNFeViewModels();
+			pessoaVieModels.pessoaEmissaoNFeViewModels = pessoaEmissao;
 			return View("Edite",pessoaVieModels);
 		}
 		public ActionResult Novo()

@@ -3019,13 +3019,13 @@ ul.project_files li a i {
 .pricing {
     background: #fff
 }
-.pricing .title {
-    background: #1ABB9C;
-    height: 110px;
-    color: #fff;
-    padding: 15px 0 0;
-    text-align: center
-}
+	.pricing .title {
+		background: #0277bd;
+		height: 110px;
+		color: #fff;
+		padding: 15px 0 0;
+		text-align: center
+	}
 .pricing .title h2 {
     text-transform: capitalize;
     font-size: 18px;

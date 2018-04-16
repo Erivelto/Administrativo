@@ -1,47 +1,43 @@
-﻿@*@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.PessoaEmissaoNFeViewModels
+﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.PessoaEmissaoNFeViewModels
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
 			<div class="form-group">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
+					<label asp-for="prefeitura" class="control-label">@Html.DisplayNameFor(m => m.prefeitura)</label>
+					<select id="prefeitura" asp-for="prefeitura" class="form-control">
+						<option selected="selected" value="Guarulhos">Guarulhos</option>
+						<option selected="selected" value="Itaquaquecetuba">Itaquaquecetuba</option>
+						<option selected="selected" value="Arujá">Arujá</option>
+						<option selected="selected" value="Guarulhos">São Paulo</option>
+					</select>
+					<span asp-validation-for="prefeitura" class="text-danger"></span>
+				</div>
+				<div class="col-sm-4">
 					@Html.HiddenFor(m => m.Codigo)
 					@Html.HiddenFor(m => m.CodigoPessoa)
-					<label asp-for="email" class="control-label">@Html.DisplayNameFor(m => m.)</label>
-					@Html.TextBoxFor(m => m.email, new { @class = "form-control" })
-					<span asp-validation-for="email" class="text-danger control-label"></span>
+					<label asp-for="senha" class="control-label">@Html.DisplayNameFor(m => m.senha)</label>
+					@Html.TextBoxFor(m => m.senha, new { @class = "form-control", @type = "password" })
+					<span asp-validation-for="senha" class="text-danger control-label"></span>
 				</div>
-				<label asp-for="Site" class="control-label">@Html.DisplayNameFor(m => m.Site)</label>
-				<div class="col-sm-6">
-					@Html.TextBoxFor(m => m.Site, new { @class = "form-control" })
-					<span asp-validation-for="Site" class="text-danger"></span>
+
+				<div class="col-sm-4">
+					<label asp-for="urlPrefeitura" class="control-label">@Html.DisplayNameFor(m => m.urlPrefeitura)</label>
+					@Html.TextBoxFor(m => m.urlPrefeitura, new { @class = "form-control" })
+					<span asp-validation-for="urlPrefeitura" class="text-danger"></span>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="form-group">
-				<div class="col-sm-2">
-					<label asp-for="DDD" class="control-label">@Html.DisplayNameFor(m => m.DDD)</label>
-					@Html.TextBoxFor(m => m.DDD, new { @class = "form-control" })
-					<span asp-validation-for="DDD" class="text-danger"></span>
-				</div>
-				<div class="col-sm-4">
-					<label asp-for="Telefone" class="control-label">@Html.DisplayNameFor(m => m.Telefone)</label>
-					@Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
-					<span asp-validation-for="Telefone" class="text-danger"></span>
-				</div>
-				<div class="col-sm-2">
-					<label asp-for="DDDC" class="control-label">@Html.DisplayNameFor(m => m.DDDC)</label>
-					@Html.TextBoxFor(m => m.DDDC, new { @class = "form-control" })
-					<span asp-validation-for="DDDC" class="text-danger"></span>
-				</div>
+		@*<div class="row">
+			<div class="form-group">				
 				<div class="col-sm-4">
 					<label asp-for="Celular" class="control-label">@Html.DisplayNameFor(m => m.Celular)</label>
 					@Html.TextBoxFor(m => m.Celular, new { @class = "form-control" })
 					<span asp-validation-for="Celular" class="text-danger"></span>
 				</div>
 			</div>
-		</div>
+		</div>*@
 	</div>
 </div>
 <br />
@@ -50,10 +46,10 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<div class="rodape-form">
-				<input type="button" id="btnatualiza" class="btn btn-success" value="Cadastrar" onclick="cadastrarContato();" />
+				<input type="button" id="btnatualiza"  class="btn btn-success" value="Cadastrar" onclick="cadastrarDadosFiscais();" />
 			</div>
 		</div>
 	</div>
 </div>
 <br />
-<br />*@
+<br />

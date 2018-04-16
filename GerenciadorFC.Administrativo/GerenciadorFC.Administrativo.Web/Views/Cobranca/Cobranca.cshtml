@@ -1,0 +1,318 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.Cadastro.PessoaViewModels
+@{
+	ViewData["Title"] = "Cobranca";
+}
+
+<h2>Mensalidade</h2>
+@if (Model.TipoPessoa == 0)
+{
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel" style="height:600px;">
+				<div class="x_title">
+					<h2>Planos disponiveis para serviços</h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li>
+							<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#">Settings 1</a>
+								</li>
+								<li>
+									<a href="#">Settings 2</a>
+								</li>
+							</ul>
+						</li>
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano mensal</h2>
+										<h1>R$ 69,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(0);" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Trimestral</h2>
+										<h1>R$ 203,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(2);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Semestral</h2>
+										<h1>R$ 403,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Anual</h2>
+										<h1>R$ 799,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel" style="height:600px;">
+				<div class="x_title">
+					<h2>Planos disponiveis para comércio</h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li>
+							<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#">Settings 1</a>
+								</li>
+								<li>
+									<a href="#">Settings 2</a>
+								</li>
+							</ul>
+						</li>
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano mensal</h2>
+										<h1>R$ 99,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(0);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Trimestral</h2>
+										<h1>R$ 290,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(2);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Semestral</h2>
+										<h1>R$ 580,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+							<!-- price element -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+								<div class="pricing">
+									<div class="title">
+										<h2>Plano Anual</h2>
+										<h1>R$ 1160,90</h1>
+									</div>
+									<div class="x_content">
+										<div class="">
+											<div class="pricing_features">
+												<ul class="list-unstyled text-left">
+													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+												</ul>
+											</div>
+										</div>
+										<div class="pricing_footer">
+											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- price element -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+
+@*<br />
+	<br />
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-3">
+			<h1>Plano básico para empresa</h1>
+			<br />
+			<ul>
+				<li>A CONTFY tem o plano básico</li>
+				<li>para prestadores de serviços</li>
+			</ul>
+			<br />
+			<br />
+			<h1>Sua mensalidade será:</h1>
+			<h1>R$ 69,90<span>/mês</span></h1>
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+	</div>
+	<br />*@
+@*<br />*@
+@*<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-3">
+			<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
+				<input type="hidden" name="code" value="7331418ED6D61FB664B63F85D9E120AB" />
+				<input type="hidden" name="iot" value="button" />
+				<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="200" height="80" />
+			</form>
+		</div>
+
+		<div class="col-md-3">
+
+		</div>
+	</div>*@
+
