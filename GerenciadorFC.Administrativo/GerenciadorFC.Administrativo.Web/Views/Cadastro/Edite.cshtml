@@ -58,9 +58,15 @@
 						<span asp-validation-for="IncricaoMunicipal" class="text-danger"></span>
 					</div>
 					<div class="col-sm-4">
-						<label asp-for="DataAbertura" class="control-label">@Html.DisplayNameFor(m => m.DataAbertura)</label>
-						@Html.TextBoxFor(m => m.DataAbertura, new { @class = "form-control" })
-						<span asp-validation-for="DataAbertura" class="text-danger"></span>
+						<label class="control-label">@Html.DisplayNameFor(m => m.DataAbertura)</label>
+						<div class="form-group">
+							<div class='input-group date' id='myDatepicker'>
+								<input type='text' asp-for="DataAbertura" class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -170,11 +176,15 @@
 								@Html.Partial("_DadosFiscaisNovo", Model.pessoaEmissaoNFeViewModels)
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12" id="PartialContainer">
-								@Html.Partial("_ListDadosFiscaisNovo", Model.listapessoaEmissaoNFeViewModels)
+						@if (Model.listapessoaEmissaoNFeViewModels != null)
+						{ 
+							<div class="row">
+								<div class="col-md-12" id="PartialContainer">
+									@Html.Partial("_ListDadosFiscaisNovo", Model.listapessoaEmissaoNFeViewModels)
+								</div>
 							</div>
-						</div>
+						}
+						
 					</div>
 				</div>
 			</div>

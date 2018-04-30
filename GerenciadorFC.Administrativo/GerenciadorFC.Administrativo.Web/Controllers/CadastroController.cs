@@ -10,6 +10,9 @@ using GerenciadorFC.Administrativo.Web.Models.EnderecoDados;
 using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -32,6 +35,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		}
 		public async Task<ActionResult> Alterar(PessoaViewModels pessoaVieModels)
 		{
+			pessoaVieModels.Documento = Regex.Replace(pessoaVieModels.Documento, @"[^\d]", "");
+			pessoaVieModels.IncricaoMunicipal = Regex.Replace(pessoaVieModels.IncricaoMunicipal, @"[^\d]", "");
+			pessoaVieModels.CEP = Regex.Replace(pessoaVieModels.CEP, @"[^\d]", "");
 			if (ModelState.IsValid)
 			{
 				if (pessoaVieModels.CodigoPessoa != 0)
@@ -71,6 +77,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		public async Task<ActionResult> Edite(int pessoa)
 		{
 			var pessoaVieModels = new PessoaViewModels();
+			var listPessoaEmassao = new List<ListaDadosEmissaoNotaViewModels>();
 			using (var client = new HttpClient())
 			{
 				client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
@@ -89,19 +96,85 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(_pessoa);
 					pessoaVieModels = Mapper.Map<Endereco, PessoaViewModels>(_endereco,pessoaVieModels);
 
+					if (pessoaVieModels.CodigoPessoa != 0)
+					{
+						using (var clientEmissao = new HttpClient())
+						{
+							clientEmissao.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota/");
+							var respostaEmissao = await clientEmissao.GetAsync("" + pessoaVieModels.CodigoPessoa.ToString());
+							string dadoEmissao = await respostaEmissao.Content.ReadAsStringAsync();
+							if (dadoEmissao != "")
+							{
+								var _listPessoaEmassao = JsonConvert.DeserializeObject<ListaDadosEmissaoNotaViewModels>(dadoEmissao);								
+								ViewData["CodigoEmissaoNota"] = _listPessoaEmassao.Codigo;
+								listPessoaEmassao.Add(_listPessoaEmassao);
+								pessoaVieModels.listapessoaEmissaoNFeViewModels = listPessoaEmassao;
+							}
+						}
+					}
 				}
 			}
-			var pessoaEmissao = new PessoaEmissaoNFeViewModels();
+			var pessoaEmissao = new DadosEmissaoNotaViewModels();			
 			pessoaVieModels.pessoaEmissaoNFeViewModels = pessoaEmissao;
 			return View("Edite",pessoaVieModels);
+		}
+		public async Task<ActionResult> ExcluirDadosEmissao(int codigo)
+		{
+			var model = new ListaDadosEmissaoNotaViewModels();
+			if (codigo != 0)
+			{
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota?codigo=" + codigo.ToString());
+					var reposta = await clientCont.DeleteAsync("");
+					var retorno = await reposta.Content.ReadAsStringAsync();
+    			}
+			}
+			return PartialView("_ListDadosFiscaisNovo", model);
 		}
 		public ActionResult Novo()
 		{
 			var pessoaViewModels = new PessoaViewModels();
 			return View(pessoaViewModels);
 		}
+		public async Task<ActionResult> cadastrarDadosFiscais(DadosEmissaoNotaViewModels dadosEmissaoNotaViewModels)
+		{
+			if (ModelState.IsValid)
+			{
+				if (dadosEmissaoNotaViewModels.CodigoPessoa != 0)
+				{
+					var _dadosEmissao = Mapper.Map<DadosEmissaoNotaViewModels, DadosEmissaoNota>(dadosEmissaoNotaViewModels);
+					using (var clientCont = new HttpClient())
+					{
+						clientCont.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota");
+						var reposta = await clientCont.PostAsJsonAsync("", _dadosEmissao);
+						var retorno = await reposta.Content.ReadAsStringAsync();
+
+						using (var clientContList = new HttpClient())
+						{
+							clientContList.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota");
+							var respostaCont = await clientContList.GetAsync("");
+							string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+							var listDadoEmissao = JsonConvert.DeserializeObject<List<ListaDadosEmissaoNotaViewModels>>(dadosCont);
+
+							return PartialView("_DadosFiscaisNovo", listDadoEmissao);
+						}
+					}
+				}
+			}
+			return PartialView("_ListDadosFiscaisNovo", dadosEmissaoNotaViewModels);
+		}
+		private async Task<List<ListaDadosEmissaoNotaViewModels>> listaDadosEmissaoNota(int codigoPessoa)
+		{
+			var listDadoEmissao = new List<ListaDadosEmissaoNotaViewModels>();
+			
+			return listDadoEmissao;
+		}
 		public async Task<ActionResult> Cadastrar(PessoaViewModels pessoaVieModels, int checkboxTC)
 		{
+			pessoaVieModels.Documento = Regex.Replace(pessoaVieModels.Documento, @"[^\d]", "");
+			pessoaVieModels.IncricaoMunicipal = Regex.Replace(pessoaVieModels.IncricaoMunicipal, @"[^\d]", "");
 			if (ModelState.IsValid)
 			{
 				if (pessoaVieModels != null)

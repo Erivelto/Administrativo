@@ -1,4 +1,4 @@
-﻿@model List<GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.ListaPessoaEmissaoNFeViewModels>
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.ListaDadosEmissaoNotaViewModels>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="table-responsive">
@@ -20,10 +20,10 @@
 								<span>@list.Codigo</span>
 							</td>
 							<td>
-								<span>@list.prefeitura</span>
+								<span>@list.Prefeitura</span>
 							</td>						
 							<td>
-								<a title="Excluir" onclick="ExcluirContato(@list.Codigo)"><i class="fa fa-remove"></i></a>
+								<a title="Excluir" onclick="Excluir(@list.Codigo)"><i class="fa fa-remove"></i></a>
 							</td>
 						</tr>
 					}
@@ -32,3 +32,21 @@
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-sm-12">
+		@Html.Partial("_PessoaCodigoServico", Model[0].PessoaCodigoServico)
+	</div>
+</div>
+	<script>
+	function Excluir(codigo) {
+			$.ajax({
+				url: '@Url.Action("ExcluirDadosEmissao", "Cadastro" )',
+				data: { codigo: codigo },
+				type: "POST",
+				success: function (data, textStatus, XMLHttpRequest) {
+					$('#PartialContainer').html(data);
+					$("Contato excluido").alert();
+			}
+		});
+	}
+	</script>

@@ -43,13 +43,27 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-sm-6">
-						<label asp-for="DataExpedicaoPassaporte" class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoPassaporte)</label>
-						@Html.TextBoxFor(m => m.DataExpedicaoPassaporte, new { @class = "form-control" })
-						<span asp-validation-for="DataExpedicaoPassaporte" class="text-danger"></span>
-					</div>
+						<label  class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoPassaporte)</label>
+						<div class="form-group">							
+							<div class='input-group date' id='myDatepicker'>
+								<input type='text' asp-for="DataExpedicaoPassaporte" class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+							<span asp-validation-for="DataExpedicaoPassaporte" class="text-danger"></span>
+						</div>
 					<div class="col-sm-6">
 						<label asp-for="DataExpedicaoRG" class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoRG)</label>
-						@Html.TextBoxFor(m => m.DataExpedicaoRG, new { @class = "form-control datepicker" })
+						<div class="form-group">
+							<div class='input-group date' id='myDatepicker'>
+								<input type='text' asp-for="DataExpedicaoRG" class="form-control" />								
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>	
 						<span asp-validation-for="DataExpedicaoRG" class="text-danger"></span>
 					</div>
 				</div>

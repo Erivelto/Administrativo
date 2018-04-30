@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
@@ -62,6 +63,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		}
 		public async Task<ActionResult> Alterar(RepresentanteLegalViewModels representanteLegalViewModels)
 		{
+			representanteLegalViewModels.CPF = Regex.Replace(representanteLegalViewModels.CPF, @"[^\d]", "");
+			representanteLegalViewModels.RG = Regex.Replace(representanteLegalViewModels.RG, @"[^\d]", "");
+			representanteLegalViewModels.CEP = Regex.Replace(representanteLegalViewModels.CEP, @"[^\d]", "");
 			if (ModelState.IsValid)
 			{
 				if (representanteLegalViewModels.CodigoPessoa != 0)
@@ -211,6 +215,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		}
 		public async Task<ActionResult> Cadastrar(RepresentanteLegalViewModels repLegalVieModels)
 		{
+			repLegalVieModels.CPF = Regex.Replace(repLegalVieModels.CPF, @"[^\d]", "");
+			repLegalVieModels.RG = Regex.Replace(repLegalVieModels.RG, @"[^\d]", "");
+			repLegalVieModels.CEP = Regex.Replace(repLegalVieModels.CEP, @"[^\d]", "");
 			if (ModelState.IsValid)
 			{
 				if (repLegalVieModels.CodigoPessoa > 0 )

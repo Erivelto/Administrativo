@@ -15,7 +15,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("Nome")]
 		[Required(ErrorMessage = "Nome é obrigatório.")]
 		public string Nome { get; set; }
-		[StringLength(10, ErrorMessage = "Digite apenas números")]
+		[StringLength(12, ErrorMessage = "Digite apenas números")]
 		[DisplayName("CPF")]
 		[Cpf(ErrorMessage = "O valor '{0}' é inválido para CPF")]
 		[Required(ErrorMessage = "CPF é obrigatório.")]

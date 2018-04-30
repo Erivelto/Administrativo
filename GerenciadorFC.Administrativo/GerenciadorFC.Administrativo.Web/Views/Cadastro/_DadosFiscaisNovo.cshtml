@@ -1,43 +1,43 @@
-﻿@model GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.PessoaEmissaoNFeViewModels
+﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.DadosEmissaoNotaViewModels
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
 			<div class="form-group">
 				<div class="col-sm-4">
-					<label asp-for="prefeitura" class="control-label">@Html.DisplayNameFor(m => m.prefeitura)</label>
-					<select id="prefeitura" asp-for="prefeitura" class="form-control">
-						<option selected="selected" value="Guarulhos">Guarulhos</option>
-						<option selected="selected" value="Itaquaquecetuba">Itaquaquecetuba</option>
-						<option selected="selected" value="Arujá">Arujá</option>
-						<option selected="selected" value="Guarulhos">São Paulo</option>
+					<label asp-for="Prefeitura" class="control-label">@Html.DisplayNameFor(m => m.Prefeitura)</label>
+					<select id="prefeitura" asp-for="Prefeitura" class="form-control">
+						<option value="Guarulhos">Guarulhos</option>
+						<option value="Itaquaquecetuba">Itaquaquecetuba</option>
+						<option value="Arujá">Arujá</option>
+						<option value="Sao Paulo">São Paulo</option>
 					</select>
-					<span asp-validation-for="prefeitura" class="text-danger"></span>
+					<span asp-validation-for="Prefeitura" class="text-danger"></span>
 				</div>
 				<div class="col-sm-4">
 					@Html.HiddenFor(m => m.Codigo)
 					@Html.HiddenFor(m => m.CodigoPessoa)
-					<label asp-for="senha" class="control-label">@Html.DisplayNameFor(m => m.senha)</label>
-					@Html.TextBoxFor(m => m.senha, new { @class = "form-control", @type = "password" })
-					<span asp-validation-for="senha" class="text-danger control-label"></span>
+					<label asp-for="Senha" class="control-label">@Html.DisplayNameFor(m => m.Senha)</label>
+					@Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @type = "password" })
+					<span asp-validation-for="Senha" class="text-danger control-label"></span>
 				</div>
 
 				<div class="col-sm-4">
-					<label asp-for="urlPrefeitura" class="control-label">@Html.DisplayNameFor(m => m.urlPrefeitura)</label>
-					@Html.TextBoxFor(m => m.urlPrefeitura, new { @class = "form-control" })
-					<span asp-validation-for="urlPrefeitura" class="text-danger"></span>
+					<label asp-for="UrlPrefeitura" class="control-label">@Html.DisplayNameFor(m => m.UrlPrefeitura)</label>
+					@Html.TextBoxFor(m => m.UrlPrefeitura, new { @class = "form-control" })
+					<span asp-validation-for="UrlPrefeitura" class="text-danger"></span>
 				</div>
 			</div>
 		</div>
 		@*<div class="row">
-			<div class="form-group">				
-				<div class="col-sm-4">
-					<label asp-for="Celular" class="control-label">@Html.DisplayNameFor(m => m.Celular)</label>
-					@Html.TextBoxFor(m => m.Celular, new { @class = "form-control" })
-					<span asp-validation-for="Celular" class="text-danger"></span>
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label asp-for="Celular" class="control-label">@Html.DisplayNameFor(m => m.Celular)</label>
+						@Html.TextBoxFor(m => m.Celular, new { @class = "form-control" })
+						<span asp-validation-for="Celular" class="text-danger"></span>
+					</div>
 				</div>
-			</div>
-		</div>*@
+			</div>*@
 	</div>
 </div>
 <br />
@@ -46,10 +46,57 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<div class="rodape-form">
-				<input type="button" id="btnatualiza"  class="btn btn-success" value="Cadastrar" onclick="cadastrarDadosFiscais();" />
+				<input type="button" id="btnatualiza" class="btn btn-success" value="Cadastrar" onclick="cadastrarDadosFiscais();" />
 			</div>
 		</div>
 	</div>
 </div>
 <br />
 <br />
+
+<script>
+
+
+	function cadastrarDadosFiscais() {
+		var Prefeitura = $("#prefeitura").find(":selected").val();
+		var CodigoPessoa = $("#CodigoPessoa").val();
+		var Codigo = $("#Codigo").val();
+		var Senha = $("#Senha").val();
+		var UrlPrefeitura = $("#UrlPrefeitura").val();
+		var DDD = $("#DDD").val();
+		var Telefone = $("#Telefone").val();
+		var DDDC = $("#DDDC").val();
+		var Celular = $("#Celular").val();
+		var Tipo = $("#TipoContato").val();
+		var DataExpiracao = $("#DataExpiracao").val();
+		var model = { CodigoPessoa: CodigoPessoa, Codigo: Codigo, Senha: Senha, UrlPrefeitura: UrlPrefeitura, Prefeitura: Prefeitura};
+
+			$.ajax({
+			 url: '@Url.Action("cadastrarDadosFiscais", "Cadastro")',
+			 data: model,
+			cache: false,
+			type: "POST",
+			dataType: "html",
+			success: function (data, textStatus, XMLHttpRequest) {
+				$('#PartialContainer').html(data);
+			}
+		});
+			$("#CodigoPessoa").val('');
+			$("#Codigo").val('');
+			$("#Senha").val('');
+			$("#UrlPrefeitura").val('');
+			$("#DDD").val('');
+			$("#DDDC").val('');
+			$("#Celular").val('');
+			$("#TipoContato").val('');
+			$("#DataExpiracao").val('');
+	}
+
+	$(document).ready(function () {
+		setInterval(cadastrarContato, 20000);
+	});
+
+
+
+
+</script>
