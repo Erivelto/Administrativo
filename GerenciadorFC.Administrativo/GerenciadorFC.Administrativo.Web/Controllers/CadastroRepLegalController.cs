@@ -116,6 +116,27 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(listaViewsModels);
 		}
+		public async Task<IActionResult> CadRepLegal(int codigoPessoa)
+		{
+			var repLegalVieModels = new RepresentanteLegalViewModels();
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
+				var resposta = await client.GetAsync("api/RepLegalPessoa/" + codigoPessoa.ToString());
+				string dados = await resposta.Content.ReadAsStringAsync();
+				var _rep = JsonConvert.DeserializeObject<RepresentanteLegal>(dados);
+				if (_rep != null)
+				{
+					RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "CadastroRepLegal", new { @rep = _rep.Codigo.ToString() });
+					return redirectResult;
+				}
+				else
+				{
+					RedirectToActionResult redirectResult = new RedirectToActionResult("Novo", "CadastroRepLegal", new { @pessoa = codigoPessoa.ToString() });
+					return redirectResult;
+				}
+			}			
+		}
 		public IActionResult Novo(int pessoa)
         {
 			var repLegalViewModel = new RepresentanteLegalViewModels() { CodigoPessoa = pessoa };
@@ -213,7 +234,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 
 		}
-		public async Task<ActionResult> Cadastrar(RepresentanteLegalViewModels repLegalVieModels)
+		public async Task<ActionResult> Cadastrar(RepresentanteLegalViewModels repLegalVieModels, string DataExpedicaoRG, string DataExpedicaoPassaporte)
 		{
 			repLegalVieModels.CPF = Regex.Replace(repLegalVieModels.CPF, @"[^\d]", "");
 			repLegalVieModels.RG = Regex.Replace(repLegalVieModels.RG, @"[^\d]", "");
@@ -222,6 +243,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			{
 				if (repLegalVieModels.CodigoPessoa > 0 )
 				{
+					repLegalVieModels.DataExpedicaoRG = Convert.ToDateTime(DataExpedicaoRG);
+					repLegalVieModels.DataExpedicaoPassaporte = Convert.ToDateTime(DataExpedicaoPassaporte);
 					repLegalVieModels.DataInclisao = DateTime.Now;
 					repLegalVieModels.DataAlteracao = DateTime.Now;
 					var _rep = Mapper.Map<RepresentanteLegalViewModels, RepresentanteLegal>(repLegalVieModels);

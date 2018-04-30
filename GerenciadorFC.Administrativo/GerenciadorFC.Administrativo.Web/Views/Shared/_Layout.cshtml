@@ -103,7 +103,7 @@
 										<a><i class="fa fa-edit"></i> Gestão Geral <span class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu">
 											<li><a href="@Url.Action("Lista","Cadastro")">Empresas</a></li>
-											<li><a href="@Url.Action("Lista","CadastroRepLegal")">Represetante Legal</a></li>
+											@*<li><a href="@Url.Action("Lista","CadastroRepLegal")">Represetante Legal</a></li>*@
 											@*<li><a href="@Url.Action("Lista","DadosFiscais")">Dados Fiscais</a></li>
 											<li><a href="index3.html">Cadatro de Login</a></li>*@
 										</ul>
@@ -415,6 +415,10 @@
 		//	$(this).val(currentValue);
 		//});
 		$('#myDatepicker').datetimepicker({
+			format: 'DD/MM/YYYY',
+			date: new Date
+		});
+		$('.myDatepicker').datetimepicker({
 			format: 'DD/MM/YYYY',
 			date: new Date
 		});

@@ -27,14 +27,17 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("Passaporte")]		
 		public string Passaporte { get; set; }
 		[DisplayName("Data Expedição RG")]
+		[Required(ErrorMessage = "Data  é obrigatório.")]
+		[DataType(DataType.Date, ErrorMessage = "Data inválida")]
 		public DateTime DataExpedicaoRG { get; set; }
 		[DisplayName("Data Expedição Passaporte")]
+		[Required(ErrorMessage = "Data  é obrigatório.")]
+		[DataType(DataType.Date, ErrorMessage = "Data inválida")]
 		public DateTime DataExpedicaoPassaporte { get; set; }
 		public DateTime DataInclisao { get; set; }
 		public DateTime DataAlteracao { get; set; }
 		public int Status { get; set; }
 		public bool Excluido { get; set; }
-
 		public int CodigoEndereco { get; set; }
 		[DisplayName("Tipo end.")]
 		[Required(ErrorMessage = "Tipo endereço é obrigatório.")]

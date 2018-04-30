@@ -12,6 +12,8 @@ using GerenciadorFC.Administrativo.Web.Data;
 using GerenciadorFC.Administrativo.Web.Models;
 using GerenciadorFC.Administrativo.Web.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace GerenciadorFC.Administrativo.Web
 {
@@ -40,7 +42,25 @@ namespace GerenciadorFC.Administrativo.Web
 			services.AddAutoMapper();
 
 			services.AddMvc();
-        }
+
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+			services.AddMvc()
+				.AddViewLocalization()
+				.AddDataAnnotationsLocalization();			
+
+			services.Configure<RequestLocalizationOptions>(
+				options =>
+				{
+					var supportedCultures = new List<CultureInfo>
+						{
+							new CultureInfo("pt-BR"),							
+						};
+
+					options.DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR");
+					options.SupportedCultures = supportedCultures;
+					options.SupportedUICultures = supportedCultures;
+				});
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -44,27 +44,25 @@
 				<div class="form-group">
 					<div class="col-sm-6">
 						<label  class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoPassaporte)</label>
-						<div class="form-group">							
-							<div class='input-group date' id='myDatepicker'>
-								<input type='text' asp-for="DataExpedicaoPassaporte" class="form-control" />
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-						</div>
-							<span asp-validation-for="DataExpedicaoPassaporte" class="text-danger"></span>
+							<div class="form-group">							
+								<div class='input-group date myDatepicker' id='myDatepicker' >
+									<input type='text' id="DataExpedicaoPassaporte" name ="DataExpedicaoPassaporte" class="form-control" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>							
 						</div>
 					<div class="col-sm-6">
-						<label asp-for="DataExpedicaoRG" class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoRG)</label>
+						<label class="control-label">@Html.DisplayNameFor(m => m.DataExpedicaoRG)</label>
 						<div class="form-group">
-							<div class='input-group date' id='myDatepicker'>
-								<input type='text' asp-for="DataExpedicaoRG" class="form-control" />								
+							<div class='input-group date myDatepicker' id='myDatepicker'>
+								<input type='text' id="DataExpedicaoRG" name="DataExpedicaoRG" class="form-control" />								
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
-						</div>	
-						<span asp-validation-for="DataExpedicaoRG" class="text-danger"></span>
+						</div>							
 					</div>
 				</div>
 			</div>
