@@ -1,4 +1,4 @@
-﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.ListaDadosEmissaoNotaViewModels>
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.PessoaCodigoServicoViewModels>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="table-responsive">
@@ -6,7 +6,7 @@
 				<thead>
 					<tr class="headings">
 						<th class="column-title">Codigo </th>
-						<th class="column-title">Prefeitura</th>						
+						<th class="column-title">Codigo Serviço</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -20,8 +20,8 @@
 								<span>@list.Codigo</span>
 							</td>
 							<td>
-								<span>@list.Prefeitura</span>
-							</td>						
+								<span>@list.CodigoServico</span>
+							</td>
 							<td>
 								<a title="Excluir" onclick="Excluir(@list.Codigo)"><i class="fa fa-remove"></i></a>
 							</td>
@@ -31,19 +31,6 @@
 			</table>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-		@Html.Partial("_PessoaCodigoServico", Model[0].PessoaCodigoServico)
-	</div>
-</div>
-<div class="row">
-	@if (ViewData["ListaCodigo"] != null)
-	{
-		<div class="col-sm-12">
-			@Html.Partial("_ListaPessoaCodigoServico", (object) ViewData["ListaCodigo"])
-		</div>
-	}
 </div>
 <script>
 	function Excluir(codigo) {
@@ -57,4 +44,4 @@
 			}
 		});
 	}
-	</script>
+</script>

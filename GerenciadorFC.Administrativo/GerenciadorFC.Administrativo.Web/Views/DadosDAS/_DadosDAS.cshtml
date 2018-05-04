@@ -1,0 +1,71 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS.DadosDeDASViewModels
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="form-group">
+				<div class="col-sm-4">
+					@Html.Hidden("CodigoPessoa", (object)ViewData["pessoa"])
+					@Html.Hidden("CodigoEmissaoNota", (object)ViewData["CodigoEmissaoNota"])
+					<label asp-for="CodigoContribuite" class="control-label">Codigo contribuinte</label>
+					@Html.TextBoxFor(m => m.CodigoContribuite, new { @class = "form-control" })
+					<span asp-validation-for="CodigoContribuite" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">					
+					<label asp-for="CPF" class="control-label">CPF contribuinte</label>
+					@Html.TextBoxFor(m => m.CPF, new { @class = "form-control" })
+					<span asp-validation-for="CPF" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<div class="rodape-form">
+				<input type="button" id="btnatualiza" class="btn btn-success" value="Cadastrar" onclick="DadosDas();" />
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<script>
+
+
+	function PessoaCodigoServico() {
+		var CodigoContribuite = $("#CodigoContribuite").val();
+		var CodigoServico = $("#CPF").val();
+		var CodigoPessoa = $("CodigoPessoa#").val();
+		var model = { CodigoContribuite: CodigoContribuite, CPF: CPF, CodigoPessoa: CodigoPessoa};
+
+			$.ajax({
+			 url: '@Url.Action("DadosDas", "Cadastro")',
+			 data: model,
+			cache: false,
+			type: "POST",
+			dataType: "html",
+			success: function (data, textStatus, XMLHttpRequest) {
+				$('#PartialContainer').html(data);
+			}
+		});
+			var pessoa = '@ViewData["pessoa"]';
+			var url = "/Cadastro/Edite?pessoa=" + pessoa;
+			window.location.href = url;
+			$("#CodigoEmissaoNota").val('');
+			$("#CodigoServico").val('');
+	}
+
+	$(document).ready(function () {
+		setInterval(PessoaCodigoServico, 20000);
+	});
+
+
+
+
+</script>

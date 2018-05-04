@@ -81,6 +81,7 @@
 				$('#PartialContainer').html(data);
 			}
 		});
+
 			$("#CodigoPessoa").val('');
 			$("#Codigo").val('');
 			$("#Senha").val('');
@@ -90,10 +91,13 @@
 			$("#Celular").val('');
 			$("#TipoContato").val('');
 			$("#DataExpiracao").val('');
+			var pessoa = '@ViewData["pessoa"]';
+			var url = "/Cadastro/Edite?pessoa=" + pessoa;
+			window.location.href = url;
 	}
 
 	$(document).ready(function () {
-		setInterval(cadastrarContato, 20000);
+		setInterval(cadastrarDadosFiscais, 20000);
 	});
 
 

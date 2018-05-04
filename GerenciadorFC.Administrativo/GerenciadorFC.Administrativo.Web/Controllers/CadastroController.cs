@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Text.RegularExpressions;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -78,6 +79,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		{
 			var pessoaVieModels = new PessoaViewModels();
 			var listPessoaEmassao = new List<ListaDadosEmissaoNotaViewModels>();
+			ViewData["pessoa"] = pessoa;
 			using (var client = new HttpClient())
 			{
 				client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
@@ -109,6 +111,18 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 								ViewData["CodigoEmissaoNota"] = _listPessoaEmassao.Codigo;
 								listPessoaEmassao.Add(_listPessoaEmassao);
 								pessoaVieModels.listapessoaEmissaoNFeViewModels = listPessoaEmassao;
+
+								using (var codigo = new HttpClient())
+								{
+									codigo.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/PessoaCodigoServico");
+									var respostaCodigo = await codigo.GetAsync("");
+									string dadosCodigo = await respostaCodigo.Content.ReadAsStringAsync();
+									if (dadosCodigo != "")
+									{
+										var listCodigo = JsonConvert.DeserializeObject<List<PessoaCodigoServicoViewModels>>(dadosCodigo);
+										ViewData["ListaCodigo"] = listCodigo;
+									}
+								}
 							}
 						}
 					}
@@ -138,33 +152,66 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			return View(pessoaViewModels);
 		}
 		
-	    public async Task<ActionResult> PessoaCodigoServico(DadosEmissaoNotaViewModels dadosEmissaoNotaViewModels)
+	    public async Task<ActionResult> PessoaCodigoServico(PessoaCodigoServicoViewModels pessoaCodigoServico)
 		{
 			if (ModelState.IsValid)
 			{
-				if (dadosEmissaoNotaViewModels.CodigoPessoa != 0)
+				if (pessoaCodigoServico.CodigoEmissaoNota != 0)
 				{
-					var _dadosEmissao = Mapper.Map<DadosEmissaoNotaViewModels, DadosEmissaoNota>(dadosEmissaoNotaViewModels);
+					var _pessoaCodigo = Mapper.Map<PessoaCodigoServicoViewModels, PessoaCodigoServico>(pessoaCodigoServico);
 					using (var clientCont = new HttpClient())
 					{
-						clientCont.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota");
-						var reposta = await clientCont.PostAsJsonAsync("", _dadosEmissao);
+						clientCont.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/PessoaCodigoServico");
+						var reposta = await clientCont.PostAsJsonAsync("", _pessoaCodigo);
 						var retorno = await reposta.Content.ReadAsStringAsync();
 
 						using (var clientContList = new HttpClient())
 						{
-							clientContList.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosEmissaoNota");
+							clientContList.BaseAddress = new System.Uri("http://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/PessoaCodigoServico/" + pessoaCodigoServico.CodigoEmissaoNota.ToString());
 							var respostaCont = await clientContList.GetAsync("");
 							string dadosCont = await respostaCont.Content.ReadAsStringAsync();
 
-							var listDadoEmissao = JsonConvert.DeserializeObject<List<ListaDadosEmissaoNotaViewModels>>(dadosCont);
-
-							return PartialView("_DadosFiscaisNovo", listDadoEmissao);
+							var listDados = JsonConvert.DeserializeObject<List<ListaDadosEmissaoNotaViewModels>>(dadosCont);
 						}
 					}
 				}
 			}
-			return PartialView("_ListDadosFiscaisNovo", dadosEmissaoNotaViewModels);
+			RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "Cadastro", new { @pessoa = (int)ViewData["pessoa"] });
+			return redirectResult;
+		}
+		public async Task<ActionResult> DadosDas(string CodigoContribuite, string CPF, string CodigoPessoa)
+		{
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
+				var resposta = await client.GetAsync("api/Pessoa/" + CodigoPessoa.ToString());
+				string dados = await resposta.Content.ReadAsStringAsync();
+				var _pessoa = JsonConvert.DeserializeObject<Pessoa>(dados);
+
+				var dadosDeDAS = new DadosDeDAS();
+				dadosDeDAS.CPF = CPF;
+				dadosDeDAS.CodigoContribuite = CodigoContribuite;
+				dadosDeDAS.CodigoPessoa = Convert.ToInt32(CodigoPessoa);
+				dadosDeDAS.CNPJ = _pessoa.Documento;
+				dadosDeDAS.mesApuracao = DateTime.Now.Month.ToString();
+				dadosDeDAS.anoApuracao = DateTime.Now.Year.ToString();
+
+				using (var clienteDas = new HttpClient())
+				{
+					clienteDas.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosDeDAS");
+					var respostaDas = await client.PostAsJsonAsync("", dadosDeDAS);
+					string dadosDas = await respostaDas.Content.ReadAsStringAsync();
+
+					using (var clinteDasRet = new HttpClient())
+					{
+						clinteDasRet.BaseAddress = new System.Uri("");
+						var respostaRet = await clinteDasRet.GetAsync("");
+					}
+				}
+			}
+
+			RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "Cadastro", new { @pessoa = (int)ViewData["pessoa"] });
+			return redirectResult;
 		}
 		public async Task<ActionResult> cadastrarDadosFiscais(DadosEmissaoNotaViewModels dadosEmissaoNotaViewModels)
 		{
@@ -186,13 +233,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 							string dadosCont = await respostaCont.Content.ReadAsStringAsync();
 
 							var listDadoEmissao = JsonConvert.DeserializeObject<List<ListaDadosEmissaoNotaViewModels>>(dadosCont);
-
-							return PartialView("_DadosFiscaisNovo", listDadoEmissao);
+							
 						}
 					}
 				}
 			}
-			return PartialView("_ListDadosFiscaisNovo", dadosEmissaoNotaViewModels);
+			RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "Cadastro", new { @pessoa = dadosEmissaoNotaViewModels.CodigoPessoa.ToString() });
+			return redirectResult;
 		}
 		private async Task<List<ListaDadosEmissaoNotaViewModels>> listaDadosEmissaoNota(int codigoPessoa)
 		{

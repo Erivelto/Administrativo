@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using GerenciadorFC.Administrativo.Web.Helps.Validacao;
+using GerenciadorFC.Administrativo.Web.Utilitario;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 {
@@ -27,12 +29,9 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		[DisplayName("Passaporte")]		
 		public string Passaporte { get; set; }
 		[DisplayName("Data Expedição RG")]
-		[Required(ErrorMessage = "Data  é obrigatório.")]
-		[DataType(DataType.Date, ErrorMessage = "Data inválida")]
-		public DateTime DataExpedicaoRG { get; set; }
+		[ModelBinder(BinderType = typeof(PtBrDateTimeBinder))]
+		public DateTime? DataExpedicaoRG { get; set; }
 		[DisplayName("Data Expedição Passaporte")]
-		[Required(ErrorMessage = "Data  é obrigatório.")]
-		[DataType(DataType.Date, ErrorMessage = "Data inválida")]
 		public DateTime DataExpedicaoPassaporte { get; set; }
 		public DateTime DataInclisao { get; set; }
 		public DateTime DataAlteracao { get; set; }

@@ -43,23 +43,6 @@ namespace GerenciadorFC.Administrativo.Web
 
 			services.AddMvc();
 
-			services.AddLocalization(options => options.ResourcesPath = "Resources");
-			services.AddMvc()
-				.AddViewLocalization()
-				.AddDataAnnotationsLocalization();			
-
-			services.Configure<RequestLocalizationOptions>(
-				options =>
-				{
-					var supportedCultures = new List<CultureInfo>
-						{
-							new CultureInfo("pt-BR"),							
-						};
-
-					options.DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR");
-					options.SupportedCultures = supportedCultures;
-					options.SupportedUICultures = supportedCultures;
-				});
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +69,15 @@ namespace GerenciadorFC.Administrativo.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+
+			//Fixar Cultura para pt-BR
+			RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+			{
+				SupportedCultures = new List<CultureInfo> { new CultureInfo("pt-BR") },
+				SupportedUICultures = new List<CultureInfo> { new CultureInfo("pt-BR") },
+				DefaultRequestCulture = new RequestCulture("pt-BR")
+			};
+			app.UseRequestLocalization(localizationOptions);
+		}
     }
 }

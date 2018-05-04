@@ -32,10 +32,10 @@
 <script>
 
 
-	function cadastrarDadosFiscais() {
-		var Prefeitura = $("#CodigoEmissaoNota").val();
-		var CodigoPessoa = $("#CodigoPessoa").val();
-		var model = { CodigoEmissaoNota: CodigoEmissaoNota, CodigoPessoa: CodigoPessoa };
+	function PessoaCodigoServico() {
+		var CodigoEmissaoNota = $("#CodigoEmissaoNota").val();
+		var CodigoServico = $("#CodigoServico").val();
+		var model = { Codigo: 0, CodigoEmissaoNota: CodigoEmissaoNota, CodigoServico: CodigoServico, Excluido: false };
 
 			$.ajax({
 			 url: '@Url.Action("PessoaCodigoServico", "Cadastro")',
@@ -47,12 +47,15 @@
 				$('#PartialContainer').html(data);
 			}
 		});
+			var pessoa = '@ViewData["pessoa"]';
+			var url = "/Cadastro/Edite?pessoa=" + pessoa;
+			window.location.href = url;
 			$("#CodigoEmissaoNota").val('');
-			$("#CodigoPessoa").val('');
+			$("#CodigoServico").val('');
 	}
 
 	$(document).ready(function () {
-		setInterval(cadastrarContato, 20000);
+		setInterval(PessoaCodigoServico, 20000);
 	});
 
 
