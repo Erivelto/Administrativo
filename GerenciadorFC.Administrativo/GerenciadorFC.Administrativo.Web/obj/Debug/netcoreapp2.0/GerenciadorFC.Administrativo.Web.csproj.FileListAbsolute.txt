@@ -26,9 +26,9 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Deployment.xml
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\System.Web.WebPages.Razor.xml
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.csproj.CoreCompileInputs.cache
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.AssemblyInfoInputs.cache
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.AssemblyInfo.cs
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.dll
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.pdb
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.csprojResolveAssemblyReference.cache
-C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

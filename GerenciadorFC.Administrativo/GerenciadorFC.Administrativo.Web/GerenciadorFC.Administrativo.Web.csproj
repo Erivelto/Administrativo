@@ -223,4 +223,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\DadosDAS\" />
+  </ItemGroup>
+
 </Project>

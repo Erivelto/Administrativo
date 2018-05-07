@@ -165,50 +165,43 @@
 	<br />
 	@if (Model.CodigoPessoa != 0)
 	{
-		<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="accordion" id="accordionFisc" role="tablist" aria-multiselectable="true">
 			<div class="panel">
 				<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					<h4 class="panel-title">Emissão de notas</h4>
+					<h4 class="panel-title">Dados do Robô</h4>
 				</a>
 				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 					<div class="panel-body">
+						<h4>Emissão da nota</h4>
 						<div class="row">
 							<div class="col-md-12">
 								@Html.Partial("_DadosFiscaisNovo", Model.pessoaEmissaoNFeViewModels)
 							</div>
 						</div>
 						@if (Model.listapessoaEmissaoNFeViewModels != null)
-						{ 
+						{
 							<div class="row">
 								<div class="col-md-12" id="PartialContainer">
 									@Html.Partial("_ListDadosFiscaisNovo", Model.listapessoaEmissaoNFeViewModels)
 								</div>
 							</div>
 						}
-						
+
 					</div>
-				</div>
-			</div>
-		</div>
-	}
-	@if (Model.CodigoPessoa != 0)
-	{
-		<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-			<div class="panel">
-				<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					<h4 class="panel-title">Geração de impostos</h4>
-				</a>
-				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 					<div class="panel-body">
+						<h4>Gerar DAS</h4>
 						<div class="row">
 							<div class="col-md-12">
-							@*	@Html.Partial("_DadosDeImpostos", Model.pessoaEmissaoNFeViewModels)*@
+								@Html.Partial("_DadosDAS", Model.dadosDeDAS)
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12" id="PartialContainer">
-							@*	@Html.Partial("_ListDadosDeImpostos", Model.listapessoaEmissaoNFeViewModels)*@
-							</div>
+							@if (ViewData["DadosDeDASViewModels"] != null)
+							{
+								<div class="col-sm-12">
+									@Html.Partial("_ListaDadosDAS", (object)ViewData["DadosDeDASViewModels"])
+								</div>
+							}
 						</div>
 					</div>
 				</div>

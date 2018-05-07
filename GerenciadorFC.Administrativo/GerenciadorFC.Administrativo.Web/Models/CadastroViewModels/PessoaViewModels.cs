@@ -1,5 +1,7 @@
 ﻿using GerenciadorFC.Administrativo.Web.Helps.Validacao;
 using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
 using System;
 using System.Collections.Generic;
@@ -9,8 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 {
     public class PessoaViewModels
-    {
-		
+    {		
 		[DisplayName("Nome Fantasia")]
 		[Required(ErrorMessage ="Nome Fantansia é obrigatório.")]
 		public string Nome { get; set; }
@@ -72,6 +73,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		public bool ExcluidoEndereco { get; set; }
 		public DadosEmissaoNotaViewModels pessoaEmissaoNFeViewModels { get; set; }
 		public List<ListaDadosEmissaoNotaViewModels> listapessoaEmissaoNFeViewModels { get; set; }
-
+		public DadosDeDASViewModels dadosDeDAS { get; set; }
+		public List<DadosDeDASViewModels> listaDadosDeDAS { get; set; }
 	}
 }

@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
+using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -114,7 +115,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 								using (var codigo = new HttpClient())
 								{
-									codigo.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/PessoaCodigoServico");
+									codigo.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/PessoaCodigoServico/" + pessoa.ToString());
 									var respostaCodigo = await codigo.GetAsync("");
 									string dadosCodigo = await respostaCodigo.Content.ReadAsStringAsync();
 									if (dadosCodigo != "")
@@ -123,12 +124,27 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 										ViewData["ListaCodigo"] = listCodigo;
 									}
 								}
+								using (var clinteDasRet = new HttpClient())
+								{
+									clinteDasRet.BaseAddress = new System.Uri("http://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosDeDAS/" + pessoa.ToString());
+									var respostaRet = await clinteDasRet.GetAsync("");
+									string respostdadosRet = await respostaRet.Content.ReadAsStringAsync();
+									if (respostdadosRet != "")
+									{
+										var DadosCodigo = JsonConvert.DeserializeObject<DadosDeDASViewModels>(respostdadosRet);
+										var ListDadosCodigo = new List<DadosDeDASViewModels>();
+										ListDadosCodigo.Add(DadosCodigo);
+										ViewData["DadosDeDASViewModels"] = ListDadosCodigo;
+									}
+								}
 							}
 						}
 					}
 				}
 			}
-			var pessoaEmissao = new DadosEmissaoNotaViewModels();			
+			var pessoaEmissao = new DadosEmissaoNotaViewModels();
+			var dadosDAS = new DadosDeDASViewModels();
+			pessoaVieModels.dadosDeDAS = dadosDAS;
 			pessoaVieModels.pessoaEmissaoNFeViewModels = pessoaEmissao;
 			return View("Edite",pessoaVieModels);
 		}
@@ -195,18 +211,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				dadosDeDAS.CNPJ = _pessoa.Documento;
 				dadosDeDAS.mesApuracao = DateTime.Now.Month.ToString();
 				dadosDeDAS.anoApuracao = DateTime.Now.Year.ToString();
+				dadosDeDAS.ValorTributado = "";
 
 				using (var clienteDas = new HttpClient())
 				{
 					clienteDas.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/DadosDeDAS");
-					var respostaDas = await client.PostAsJsonAsync("", dadosDeDAS);
+					var respostaDas = await clienteDas.PostAsJsonAsync("", dadosDeDAS);
 					string dadosDas = await respostaDas.Content.ReadAsStringAsync();
-
-					using (var clinteDasRet = new HttpClient())
-					{
-						clinteDasRet.BaseAddress = new System.Uri("");
-						var respostaRet = await clinteDasRet.GetAsync("");
-					}
 				}
 			}
 

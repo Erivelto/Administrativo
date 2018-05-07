@@ -78,7 +78,7 @@
 		
 	}
 
-		<script>
+	<script>
 
 
    function cadastrarContato() {
@@ -104,13 +104,8 @@
 				$('#PartialContainer').html(data);
 			}
 		});
-			$("#CodigoRepLegal").val('');
-			$("#email").val('');
-			$("#Site").val('');
-			$("#DDD").val('');
-			$("#Telefone").val('');
-			$("#DDDC").val('');
-			$("#Celular").val('');
+		var url = "/CadastroRepLegal/Edite?rep=" + CodigoRepLegal;
+		window.location.href = url;
 	}
 
 	$(document).ready(function () {
@@ -120,4 +115,4 @@
 
 
 
-</script>
+	</script>

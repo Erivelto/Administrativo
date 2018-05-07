@@ -24,9 +24,12 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Edite.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Lista.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Novo.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosDAS.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosDeImpostos.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosFiscaisNovo.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_ListaDadosDAS.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_ListaDadosDeImpostos.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_ListaPessoaCodigoServico.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_ListDadosFiscaisNovo.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_PessoaCodigoServico.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cobranca\Cobranca.cshtml

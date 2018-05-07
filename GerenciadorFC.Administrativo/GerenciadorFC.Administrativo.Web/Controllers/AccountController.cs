@@ -300,7 +300,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
 			}
 			TempData["pessoaVieModels"] = pessoaVieModels;
-			return RedirectToAction("Cobranca", "Cobranca");
+			return RedirectToAction("Index", "Home");
+			///return RedirectToAction("Cobranca", "Cobranca");
 		}
 		public async Task<bool> VerificaTermo(int codigoPessoa)
 		{
