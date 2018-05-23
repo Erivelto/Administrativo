@@ -1,0 +1,60 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.NotaFiscalViewModels
+@{
+    ViewData["Title"] = "Informativo";
+}
+
+<h4>Informativo</h4>
+
+<form asp-action="IncluirDadosNfe">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-2">
+						@Html.HiddenFor(m => m.CodigoPessoa)
+						<label class="control-label">@Html.DisplayNameFor(m => m.DataEmissao)</label>
+						<div class="form-group">
+							<div class='input-group myDatepicker'>
+								<input type='text' asp-for="DataEmissao" class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label asp-for="ValorTotal" class="control-label">@Html.DisplayNameFor(m => m.ValorTotal)</label>
+						@Html.TextBoxFor(m => m.ValorTotal, new { @class = "form-control" })
+						<span asp-validation-for="ValorTotal" class="text-danger control-label"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label asp-for="NumeroNFE" class="control-label">@Html.DisplayNameFor(m => m.NumeroNFE)</label>
+						@Html.TextBoxFor(m => m.NumeroNFE, new { @class = "form-control" })
+						<span asp-validation-for="NumeroNFE" class="text-danger control-label"></span>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="rodape-form">
+							<a class="btn btn-info" href="@Url.Action("Index","Home")" title="">Voltar</a>
+							<input type="submit" name="submit" class="btn btn-success" value="Salvar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
