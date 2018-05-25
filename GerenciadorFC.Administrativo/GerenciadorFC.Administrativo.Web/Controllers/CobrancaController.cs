@@ -18,11 +18,6 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var pessoaVieModels = (PessoaViewModels)TempData["pessoaVieModels"];
 			return View("Cobranca", pessoaViewModels);
 		}
-		public IActionResult plano6990()
-		{
-
-			return View();
-		}
 
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -26,13 +27,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				{
 					using (var clientContPost = new HttpClient())
 					{
+						notaFiscalViewModels.DataEnvio = DateTime.Now;
 						clientContPost.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/NotaFiscal");
 						var repostaPost = await clientContPost.PostAsJsonAsync("", notaFiscalViewModels);
 						var retornoPost = await repostaPost.Content.ReadAsStringAsync();
 					}
 				}
 			}
-
 			return View("DadosNotaFiscal");
 		}
 

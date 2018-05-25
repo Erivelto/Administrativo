@@ -229,7 +229,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LockoutEnd = model.dataExp };
-				var result = await _userManager.CreateAsync(user, "Q1w2e3r4@");
+				var result = await _userManager.CreateAsync(user, model.Password);
 				if (result.Succeeded)
 				{
 					_logger.LogInformation("User created a new account with password.");
@@ -275,8 +275,11 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		{
 			return View(contato);
 		}
+		[AllowAnonymous]
 		public async Task<IActionResult> AceiteTermoUso(ContatoViewModels contato)
 		{
+			await _signInManager.SignOutAsync();
+			_logger.LogInformation("User logged out.");
 			var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
 			var pessoaVieModels = new PessoaViewModels();
 			pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;
@@ -298,10 +301,16 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 				var pessoa = JsonConvert.DeserializeObject<Pessoa>(dadosTermoP);
 				pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
+				if (pessoaVieModels != null)
+					return View("Cobranca", pessoaVieModels);
+				else
+					return View();
 			}
-			TempData["pessoaVieModels"] = pessoaVieModels;
-			return RedirectToAction("Index", "Home");
-			///return RedirectToAction("Cobranca", "Cobranca");
+		}
+		public async Task<IActionResult> Cobranca(PessoaViewModels pessoaViewModels)
+		{
+			await _signInManager.SignOutAsync();
+			return View("Cobranca", pessoaViewModels);
 		}
 		public async Task<bool> VerificaTermo(int codigoPessoa)
 		{

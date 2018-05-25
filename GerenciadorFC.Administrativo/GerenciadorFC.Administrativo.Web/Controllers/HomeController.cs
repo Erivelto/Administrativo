@@ -31,8 +31,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
         {
             return View();
         }
+		public IActionResult PosPagIndex(string transaction_id)
+		{
 
-        public IActionResult About()
+			return View("Index");
+		}
+
+		public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 
