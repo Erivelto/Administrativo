@@ -230,6 +230,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			{
 				var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LockoutEnd = model.dataExp };
 				var result = await _userManager.CreateAsync(user, model.Password);
+				TempData["email"] = model.Email;
 				if (result.Succeeded)
 				{
 					_logger.LogInformation("User created a new account with password.");
@@ -278,8 +279,6 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> AceiteTermoUso(ContatoViewModels contato)
 		{
-			await _signInManager.SignOutAsync();
-			_logger.LogInformation("User logged out.");
 			var pessoaTermoDeUsoViewModels = new PessoaTermoDeUsoViewModels();
 			var pessoaVieModels = new PessoaViewModels();
 			pessoaTermoDeUsoViewModels.DataTermo = DateTime.Now;

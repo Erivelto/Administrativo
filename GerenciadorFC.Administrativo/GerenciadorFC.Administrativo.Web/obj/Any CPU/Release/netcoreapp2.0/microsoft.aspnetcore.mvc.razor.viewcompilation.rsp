@@ -3,6 +3,7 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 --application-name=GerenciadorFC.Administrativo.Web
 --content-root=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Account\AccessDenied.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Account\Cobranca.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Account\ConfirmEmail.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Account\ExternalLogin.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Account\ForgotPassword.cshtml
@@ -36,6 +37,8 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\EditeNovo.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\Lista.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\_Prefeitura.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\DadosNotaFiscal.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\Index.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\About.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\Contact.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\Index.cshtml

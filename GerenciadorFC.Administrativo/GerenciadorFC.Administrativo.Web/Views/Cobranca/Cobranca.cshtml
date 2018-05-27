@@ -6,6 +6,7 @@
 <h2>Mensalidade</h2>
 @if (Model.TipoPessoa == 0)
 {
+	
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel" style="height:600px;">
@@ -26,7 +27,6 @@
 								</li>
 							</ul>
 						</li>
-
 					</ul>
 					<div class="clearfix"></div>
 				</div>
@@ -52,12 +52,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											@*<a href="javascript:void(0);" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>*@
-											<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
-												<input type="hidden" name="code" value="02107C0CF4F4C211144C3FB197D2B351" />
-												<input type="hidden" name="iot" value="button" />
-												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="120" height="53" />
-											</form>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 69.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -82,12 +77,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-
-											<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
-												<input type="hidden" name="code" value="1A47D68C1F1F97CAA4C59FBB16ECE6AE" />
-												<input type="hidden" name="iot" value="button" />
-												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="120" height="53" />
-											</form>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 203.90 , documento = Model.Documento, periodo = 3, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -112,11 +102,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
-												<input type="hidden" name="code" value="19CC4CBF0202FAC334EEFF8562032E3C" />
-												<input type="hidden" name="iot" value="button" />
-												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="120" height="53" />
-											</form>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 403.90 , documento = Model.Documento,  periodo =  6, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -141,11 +127,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
-												<input type="hidden" name="code" value="3602E17CF6F6FE6224C89F900357493E" />
-												<input type="hidden" name="iot" value="button" />
-												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="120" height="53" />
-											</form>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 799.90 , documento = Model.Documento, periodo = 12, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -206,7 +188,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="javascript:void(0);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 99.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -231,7 +213,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="javascript:void(2);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 290.90 , documento = Model.Documento,  periodo = 3, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -256,7 +238,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 580.90 , documento = Model.Documento, periodo = 6 , nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -281,7 +263,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="javascript:void(3);" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Cobranca", new { valor = 1160.90, documento = Model.Documento, periodo = 12, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -295,6 +277,27 @@ else
 	</div>
 }
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<h4>Text in a modal</h4>
+				<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+				<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 @*<br />
 	<br />

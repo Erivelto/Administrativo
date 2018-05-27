@@ -5045,6 +5045,16 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "Uol.PagSeguro/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Uol.PagSeguro.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Uol.PagSeguro.dll": {}
+        }
       }
     }
   },
@@ -13157,6 +13167,11 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "Uol.PagSeguro/1.0.0": {
+      "type": "project",
+      "path": "../Uol.PagSeguro/Uol.PagSeguro.csproj",
+      "msbuildProject": "../Uol.PagSeguro/Uol.PagSeguro.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13170,6 +13185,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
       "Newtonsoft.Json >= 11.0.1",
       "RestSharp >= 106.2.1",
+      "Uol.PagSeguro >= 1.0.0",
       "system.net.http.formatting.extension >= 5.2.3"
     ]
   },
@@ -13205,7 +13221,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\projeto\\Site\\Admin\\Administrativo\\GerenciadorFC.Administrativo\\Uol.PagSeguro\\Uol.PagSeguro.csproj": {
+              "projectPath": "C:\\projeto\\Site\\Admin\\Administrativo\\GerenciadorFC.Administrativo\\Uol.PagSeguro\\Uol.PagSeguro.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

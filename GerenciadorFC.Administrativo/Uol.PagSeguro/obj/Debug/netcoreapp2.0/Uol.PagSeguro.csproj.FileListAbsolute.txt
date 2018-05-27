@@ -1,0 +1,9 @@
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\bin\Debug\netcoreapp2.0\Uol.PagSeguro.deps.json
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\bin\Debug\netcoreapp2.0\Uol.PagSeguro.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\bin\Debug\netcoreapp2.0\Uol.PagSeguro.pdb
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.csprojResolveAssemblyReference.cache
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.csproj.CoreCompileInputs.cache
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.AssemblyInfoInputs.cache
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.AssemblyInfo.cs
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\Uol.PagSeguro\obj\Debug\netcoreapp2.0\Uol.PagSeguro.pdb

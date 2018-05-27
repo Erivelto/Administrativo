@@ -32,3 +32,5 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.dll
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.pdb
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\obj\Debug\netcoreapp2.0\GerenciadorFC.Administrativo.Web.csprojResolveAssemblyReference.cache
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\Uol.PagSeguro.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Debug\netcoreapp2.0\Uol.PagSeguro.pdb

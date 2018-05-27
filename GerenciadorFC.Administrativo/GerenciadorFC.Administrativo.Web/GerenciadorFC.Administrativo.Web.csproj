@@ -227,4 +227,8 @@
     <Folder Include="Views\DadosDAS\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Uol.PagSeguro\Uol.PagSeguro.csproj" />
+  </ItemGroup>
+
 </Project>
