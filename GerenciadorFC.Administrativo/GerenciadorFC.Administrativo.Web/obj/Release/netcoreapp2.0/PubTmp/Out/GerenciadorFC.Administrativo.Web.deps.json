@@ -30,6 +30,7 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Newtonsoft.Json": "11.0.1",
           "RestSharp": "106.2.1",
+          "Uol.PagSeguro": "1.0.0",
           "System.Net.Http.Formatting.Extension": "5.2.3",
           "System.Web.Helpers": "3.0.0.0",
           "System.Web.Mvc": "5.0.0.0",
@@ -3819,6 +3820,14 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "Uol.PagSeguro/1.0.0": {
+        "runtime": {
+          "Uol.PagSeguro.dll": {}
+        },
+        "compile": {
+          "Uol.PagSeguro.dll": {}
+        }
+      },
       "System.Web.Helpers/3.0.0.0": {
         "runtime": {
           "System.Web.Helpers.dll": {}
@@ -6223,6 +6232,11 @@
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512",
       "runtimeStoreManifestName": "aspnetcore-store-2.0.0-linux-x64.xml;aspnetcore-store-2.0.0-osx-x64.xml;aspnetcore-store-2.0.0-win7-x64.xml;aspnetcore-store-2.0.0-win7-x86.xml"
+    },
+    "Uol.PagSeguro/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "System.Web.Helpers/3.0.0.0": {
       "type": "reference",

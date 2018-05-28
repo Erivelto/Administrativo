@@ -20,3 +20,5 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Any CPU\Release\netcoreapp2.0\System.Web.WebPages.xml
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Any CPU\Release\netcoreapp2.0\System.Web.WebPages.Deployment.xml
 C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Any CPU\Release\netcoreapp2.0\System.Web.WebPages.Razor.xml
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Any CPU\Release\netcoreapp2.0\Uol.PagSeguro.dll
+C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\bin\Any CPU\Release\netcoreapp2.0\Uol.PagSeguro.pdb

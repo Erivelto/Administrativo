@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GerenciadorFC.Administrativo.Web.Models.Cadastro;
+using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
 using Microsoft.AspNetCore.Mvc;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Constants.PreApproval;
@@ -23,7 +25,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var pessoaVieModels = (PessoaViewModels)TempData["pessoaVieModels"];
 			return View("Cobranca", pessoaViewModels);
 		}
-		public IActionResult CallPagSeguro(string documento,decimal valor, int periodo,string nome)
+		public async Task<IActionResult> CallPagSeguro(string documento,decimal valor, int periodo,string nome)
 		{
 			bool isSandbox = false;
 			EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -83,12 +85,24 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 			SenderDocument senderCPF = new SenderDocument(Documents.GetDocumentByType("CPF"), "27952666878");
 			preApproval.Sender.Documents.Add(senderCPF);
-
 			try
 			{
 				AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
 				Uri preApprovalRedirectUri = preApproval.Register(credentials);
-				return RedirectToPage(preApprovalRedirectUri.ToString());
+				var pessoaContabil = new PessoaContabil();
+				pessoaContabil.DataPagamento = DateTime.Now;
+				pessoaContabil.DataTransacao = DateTime.Now;
+				pessoaContabil.Transacao = "";
+				pessoaContabil.Status = "Novo";
+				pessoaContabil.Reference = documento;
+				string[] prepoval = preApprovalRedirectUri.ToString().Split("=");
+				pessoaContabil.CodePrepoval = prepoval[1].ToString();
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaCobranca");
+					var respostaTermo = await clientCont.PostAsJsonAsync("", pessoaContabil);
+				}
+				return Redirect(preApprovalRedirectUri.ToString());
 			}
 			catch (PagSeguroServiceException exception)
 			{

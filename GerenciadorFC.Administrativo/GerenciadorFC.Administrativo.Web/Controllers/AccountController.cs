@@ -301,7 +301,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				var pessoa = JsonConvert.DeserializeObject<Pessoa>(dadosTermoP);
 				pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
 				if (pessoaVieModels != null)
-					return View("Cobranca", pessoaVieModels);
+					return RedirectToAction("Cobranca","Cobranca", pessoaVieModels);
 				else
 					return View();
 			}
