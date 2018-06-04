@@ -18,7 +18,7 @@ using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	public class CadastroController : Controller
     {
 		public async Task<ActionResult> Lista()
@@ -55,6 +55,11 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 						string retorno = await resposta_p.Content.ReadAsStringAsync();
 						_pessoa = JsonConvert.DeserializeObject<Pessoa>(retorno);
 
+						if (resposta_p.StatusCode.ToString() == "OK")
+							pessoaVieModels.Incluido = true;
+						else
+							pessoaVieModels.NaoIncluido = true;
+
 						if (_pessoa.Codigo != 0)
 						{
 							using (var clientEnd = new HttpClient())
@@ -65,6 +70,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 								string retorno_e = await reposta_e.Content.ReadAsStringAsync();
 								_endereco = JsonConvert.DeserializeObject<Endereco>(retorno_e);
 
+								if (reposta_e.StatusCode.ToString() == "OK")
+									pessoaVieModels.Incluido = true;
+								else
+									pessoaVieModels.NaoIncluido = true;
 							}
 						}
 					}
@@ -73,6 +82,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			else
 			{
+				pessoaVieModels.NaoIncluido = true;
 				return View("Edite",pessoaVieModels);
 			}			
 		}
@@ -299,6 +309,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					}
 				}
 				return RedirectToAction("Lista");
+			}
+			else
+			{
+				pessoaVieModels.NaoIncluido = true;
 			}
 			return View("Novo",pessoaVieModels);
 		}

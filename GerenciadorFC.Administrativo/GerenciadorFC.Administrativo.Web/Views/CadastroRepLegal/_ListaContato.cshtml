@@ -74,12 +74,12 @@
 				data: { email: email, codigo: codigo, tipo: tipo, data: data },
 				type: "POST",
 				success: function (data, textStatus, XMLHttpRequest) {
-					$('#PartialContainer').html(data);
-					$("Acesso enviado").alert();
+					
 			}
 		});
+		alert("Email enviado!");		
 	}
 	$(document).ready(function () {
-		setInterval(cadastrarContato, 20000);
+		setInterval(EnviarEmailContato, 20000);
 	});
 </script>

@@ -10,7 +10,24 @@
 <form asp-action="Cadastrar">
 	<div class="row">
 		<div class="col-md-12">
-			@*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+			@if (Model.Incluido == true)
+			{
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Tudo certo!</strong> Dados incluidos com sucesso.
+				</div>
+			}
+					@if (Model.NaoIncluido == true)
+			{
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Ocorreu erro!</strong> Os dados não foram incluidos.
+				</div>
+			}
 			<div class="row">
 				<div class="form-group">
 					<div class="col-sm-6">
@@ -43,13 +60,13 @@
 						<label class="control-label">@Html.DisplayNameFor(m => m.DataAbertura)</label>
 						<input type='text' asp-for="DataAbertura" class="form-control" />
 						@*<div class="form-group">
-			<div class='input-group date'>
-				<input type='text' asp-for="DataAbertura" class="form-control" />
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</span>
-			</div>
-		</div>*@
+						<div class='input-group date'>
+							<input type='text' asp-for="DataAbertura" class="form-control" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>*@
 					</div>
 				</div>
 			</div>
@@ -122,13 +139,13 @@
 						<select id="TipoPessoa" asp-for="TipoPessoa" class="form-control">
 							<option value="0">Serviço</option>
 							@if (Model.TipoPessoa == 1)
-							{
-								<option selected="selected" value="1">Comércio</option>
-							}
-							else
-							{
-								<option value="1">Comércio</option>
-							}
+					{
+						<option selected="selected" value="1">Comércio</option>
+			}
+			else
+			{
+				<option value="1">Comércio</option>
+	}
 						</select>
 						<span asp-validation-for="TipoPessoa" class="text-danger"></span>
 					</div>

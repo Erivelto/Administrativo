@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using GerenciadorFC.Administrativo.Web.Helps.Validacao;
@@ -12,6 +13,11 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 {
     public class RepresentanteLegalViewModels
     {
+		public RepresentanteLegalViewModels()
+		{
+			Incluido = false;
+			NaoIncluido = false;
+		}
 		public int CodigoRepLegal { get; set; }
 		public int CodigoPessoa { get; set; }
 		[DisplayName("Nome")]
@@ -62,5 +68,9 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public string CEP { get; set; }
 		public ContatoViewModels contatoViewModels { get; set; }
 		public List<ListaContatoViewModels> listaContato { get; set; }
+		[NotMapped]
+		public bool Incluido { get; set; }
+		[NotMapped]
+		public bool NaoIncluido { get; set; }
 	}
 }

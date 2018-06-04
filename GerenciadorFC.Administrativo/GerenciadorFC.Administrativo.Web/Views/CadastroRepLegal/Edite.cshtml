@@ -8,7 +8,24 @@
 <form asp-action="Alterar">
 	<div class="row">
 		<div class="col-md-12">
-			@*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+			@if (Model.Incluido == true)
+			{
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Tudo certo!</strong> Dados incluidos com sucesso.
+				</div>
+			}
+			@if (Model.NaoIncluido == true)
+			{
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Ocorreu erro!</strong> Os dados não foram incluidos.
+				</div>
+			}
 			<div class="row">
 				<div class="form-group">
 					<div class="col-sm-6">
@@ -178,7 +195,7 @@
 		<div class="col-md-12">
 			<div class="form-group">
 				<div class="rodape-form">
-					<a class="btn btn-info" href="@Url.Action("Lista","CadastroRepLegal")" title="">Voltar</a>
+					<a class="btn btn-info" href="@Url.Action("Edite","Cadastro",new { pessoa = Model.CodigoPessoa})" title="">Voltar</a>
 					<input type="submit" name="submit" class="btn btn-success" value="Cadastrar" />					
 				</div>
 			</div>

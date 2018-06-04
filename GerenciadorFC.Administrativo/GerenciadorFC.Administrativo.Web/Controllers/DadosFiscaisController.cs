@@ -4,13 +4,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-    [Route("api/DadosFiscais")]
+	[Authorize]
+	[Route("api/DadosFiscais")]
     public class DadosFiscaisController : Controller
     {
 		public async Task<ActionResult> Lista()

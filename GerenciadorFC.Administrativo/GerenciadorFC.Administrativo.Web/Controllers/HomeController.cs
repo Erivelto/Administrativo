@@ -29,7 +29,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		[Authorize]
 		public IActionResult Index()
         {
-            return View();
+			return View();
         }
 		public IActionResult PosPagIndex(string transaction_id)
 		{

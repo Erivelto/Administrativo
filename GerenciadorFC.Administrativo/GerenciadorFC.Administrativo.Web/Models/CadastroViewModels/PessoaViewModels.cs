@@ -7,11 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 {
     public class PessoaViewModels
-    {		
+    {
+		public PessoaViewModels()
+		{
+			Incluido = false;
+			NaoIncluido = false;
+		}
 		[DisplayName("Nome Fantasia")]
 		[Required(ErrorMessage ="Nome Fantansia é obrigatório.")]
 		public string Nome { get; set; }
@@ -75,5 +81,9 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		public List<ListaDadosEmissaoNotaViewModels> listapessoaEmissaoNFeViewModels { get; set; }
 		public DadosDeDASViewModels dadosDeDAS { get; set; }
 		public List<DadosDeDASViewModels> listaDadosDeDAS { get; set; }
+		[NotMapped]
+		public bool Incluido { get; set; }
+		[NotMapped]
+		public bool NaoIncluido { get; set; }
 	}
 }

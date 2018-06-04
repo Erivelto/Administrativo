@@ -1,25 +1,45 @@
 ﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.NotaFiscalViewModels
 @{
-    ViewData["Title"] = "Informativo";
+    ViewData["Title"] = "Faturamento";
 }
 
-<h4>Informativo</h4>
+<h4>Faturamento</h4>
 
 <form asp-action="IncluirDadosNfe">
 	<div class="row">
 		<div class="col-md-12">
+			@if (Model.Incluido == true)
+			{
+				<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Tudo certo!</strong> Dados incluidos com sucesso.
+				</div>
+			}
+			@if (Model.NaoIncluido == true)
+			{
+				<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<strong>Ocorreu erro!</strong> Os dados não foram incluidos.
+				</div>
+			}
 			<div class="row">
 				<div class="form-group">
 					<div class="col-sm-2">
 						@Html.HiddenFor(m => m.CodigoPessoa)
 						<label class="control-label">@Html.DisplayNameFor(m => m.DataEmissao)</label>
 						<div class="form-group">
-							<div class='input-group myDatepicker'>
-								<input type='text' asp-for="DataEmissao" class="form-control" />
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
+							<a data-toggle="tooltip" data-placement="Right" title="Digite a data do faturamento ou da nota fiscal.">
+								<div class='input-group myDatepicker'>
+									<input type='text' asp-for="DataEmissao" class="form-control" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -28,7 +48,9 @@
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label asp-for="ValorTotal" class="control-label">@Html.DisplayNameFor(m => m.ValorTotal)</label>
-						@Html.TextBoxFor(m => m.ValorTotal, new { @class = "form-control" })
+						<a data-toggle="tooltip" data-placement="Right" title="Neste campo coloque o valor de faturamento no mês ou soma das notas fiscais emitidas.">
+							@Html.TextBoxFor(m => m.ValorTotal, new { @class = "form-control" })
+						</a>
 						<span asp-validation-for="ValorTotal" class="text-danger control-label"></span>
 					</div>
 				</div>
@@ -37,7 +59,9 @@
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label asp-for="NumeroNFE" class="control-label">@Html.DisplayNameFor(m => m.NumeroNFE)</label>
-						@Html.TextBoxFor(m => m.NumeroNFE, new { @class = "form-control" })
+						<a data-toggle="tooltip" data-placement="Right" title="Caso seja uma única nota fiscal, informa aqui seu número.">
+							@Html.TextBoxFor(m => m.NumeroNFE, new { @class = "form-control" })
+						</a>
 						<span asp-validation-for="NumeroNFE" class="text-danger control-label"></span>
 					</div>
 				</div>

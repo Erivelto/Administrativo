@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GerenciadorFC.Administrativo.Web.Models.Cadastro;
 using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Uol.PagSeguro.Constants;
 using Uol.PagSeguro.Constants.PreApproval;
@@ -14,7 +15,8 @@ using Uol.PagSeguro.Resources;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
-    public class CobrancaController : Controller
+	[Authorize]
+	public class CobrancaController : Controller
     {
         public IActionResult Index()
         {
@@ -102,6 +104,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaCobranca");
 					var respostaTermo = await clientCont.PostAsJsonAsync("", pessoaContabil);
 				}
+				TempData["user"] = "comum".ToString();
 				return Redirect(preApprovalRedirectUri.ToString());
 			}
 			catch (PagSeguroServiceException exception)

@@ -1013,7 +1013,8 @@ footer {
 }
 
 .tooltip {
-	display: block !important
+	display: block !important;
+	background: #0277bd;
 }
 
 .tiles {

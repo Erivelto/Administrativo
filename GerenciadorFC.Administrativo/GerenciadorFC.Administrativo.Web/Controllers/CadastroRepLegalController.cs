@@ -3,6 +3,7 @@ using GerenciadorFC.Administrativo.Web.Models;
 using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
 using GerenciadorFC.Administrativo.Web.Models.EnderecoDados;
 using GerenciadorFC.Administrativo.Web.Models.RepresentanteLegal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
+	[Authorize]
 	public class CadastroRepLegalController : Controller
     {
 		private readonly UserManager<ApplicationUser> _userManager;
@@ -99,6 +101,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			else
 			{
+				representanteLegalViewModels.NaoIncluido = true;
 				return View("Edite", representanteLegalViewModels);
 			}
 		}
@@ -142,6 +145,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var repLegalViewModel = new RepresentanteLegalViewModels() { CodigoPessoa = pessoa };
 			return View(repLegalViewModel);
         }
+		public IActionResult Altera(RepresentanteLegalViewModels representante)
+		{
+			return View("Edite", representante);
+		}
 		public IActionResult _NovoContato(int rep)
 		{
 			var contatoViewModels = new ContatoViewModels();
@@ -203,7 +210,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		}
 		public async Task<ActionResult> CadastraContato(ContatoViewModels contatoViewModels)
 		{
-			var validaemail = await _userManager.FindByNameAsync(contatoViewModels.email);
+			string validaemail = null;///await _userManager.FindByNameAsync(contatoViewModels.email);
 			if (validaemail == null)
 			{
 				var model = new ContatoViewModels();
@@ -242,7 +249,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			repLegalVieModels.CEP = Regex.Replace(repLegalVieModels.CEP, @"[^\d]", "");
 			if (ModelState.IsValid)
 			{
-				if (repLegalVieModels.CodigoPessoa > 0 )
+				if (repLegalVieModels.CodigoPessoa > 0)
 				{
 					repLegalVieModels.DataExpedicaoRG = Convert.ToDateTime(DataExpedicaoRG);
 					repLegalVieModels.DataExpedicaoPassaporte = Convert.ToDateTime(DataExpedicaoPassaporte);
@@ -256,6 +263,16 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 						var resposta_p = await client.PostAsJsonAsync("", _rep);
 						string retorno = await resposta_p.Content.ReadAsStringAsync();
 						_rep = JsonConvert.DeserializeObject<RepresentanteLegal>(retorno);
+						if (resposta_p.StatusCode.ToString() == "OK")
+						{
+							repLegalVieModels.CodigoRepLegal = _rep.Codigo;
+							repLegalVieModels.Incluido = true;
+						}
+						else
+						{
+							repLegalVieModels.NaoIncluido = true;
+						}
+							
 
 						if (_rep.Codigo != 0)
 						{
@@ -267,18 +284,28 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 								var reposta_e = await clientEnd.PostAsJsonAsync("", _endereco);
 								string retorno_e = await reposta_e.Content.ReadAsStringAsync();
 								_endereco = JsonConvert.DeserializeObject<Endereco>(retorno_e);
+
+								if (reposta_e.StatusCode.ToString() == "OK")
+									repLegalVieModels.Incluido = true;
+								else
+									repLegalVieModels.NaoIncluido = true;
 							}
-							return RedirectToAction("Lista");
+							return RedirectToAction("Altera", repLegalVieModels);
 						}
 						else
 						{
-							return View("Novo", repLegalVieModels);
+							repLegalVieModels.NaoIncluido = true;
+							return View("Altera", repLegalVieModels);
 						}
 					}
 				}
-				return RedirectToAction("Lista");
+				return RedirectToAction("Novo", repLegalVieModels);
 			}
-			return View("Novo", repLegalVieModels);
+			else
+			{
+				repLegalVieModels.NaoIncluido = true;
+				return View("Novo", repLegalVieModels);
+			}			
 		}
 	}
 }
