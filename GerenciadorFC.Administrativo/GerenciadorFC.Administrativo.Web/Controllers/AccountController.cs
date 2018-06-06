@@ -66,8 +66,6 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
@@ -342,9 +340,24 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		public async Task<IActionResult> Cobranca(PessoaViewModels pessoaViewModels)
 		{
 			var pessoaVieModels = (PessoaViewModels)TempData["pessoaVieModels"];
+			var pessoaContabil = new PessoaContabil();
+			pessoaContabil.Reference = pessoaViewModels.Documento;
+			pessoaContabil.DataPagamento = DateTime.Now;
+			pessoaContabil.DataTransacao = DateTime.Now;
+			pessoaContabil.Transacao = "";
+			pessoaContabil.Status = "Novo";
+			pessoaContabil.CodePrepoval = "";
+			using (var clientCont = new HttpClient())
+			{
+				clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaCobranca");
+				var respostaTermo = await clientCont.PostAsJsonAsync("",pessoaContabil );
+				string dadosCont = await respostaTermo.Content.ReadAsStringAsync();
+				var pessoacont = JsonConvert.DeserializeObject<PessoaContabil>(dadosCont);
+				pessoaViewModels.CodigoCobranca = pessoaContabil.Codigo;
+			}			
 			return View("Cobranca", pessoaViewModels);
 		}
-		public async Task<IActionResult> CallPagSeguro(string documento, decimal valor, int periodo, string nome)
+		public async Task<IActionResult> CallPagSeguro(string documento, decimal valor, int periodo, string nome,int codigo = 0)
 		{
 			bool isSandbox = false;
 			EnvironmentConfiguration.ChangeEnvironment(isSandbox);
@@ -412,16 +425,16 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				pessoaContabil.DataPagamento = DateTime.Now;
 				pessoaContabil.DataTransacao = DateTime.Now;
 				pessoaContabil.Transacao = "";
-				pessoaContabil.Status = "Novo";
+				pessoaContabil.Status = "Enviado";
 				pessoaContabil.Reference = documento;
+				pessoaContabil.Codigo = codigo;
 				string[] prepoval = preApprovalRedirectUri.ToString().Split("=");
 				pessoaContabil.CodePrepoval = prepoval[1].ToString();
 				using (var clientCont = new HttpClient())
 				{
 					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaCobranca");
-					var respostaTermo = await clientCont.PostAsJsonAsync("", pessoaContabil);
-				}
-				TempData["user"] = "comum".ToString();
+					var respostaTermo = await clientCont.PutAsJsonAsync("", pessoaContabil);
+				}				
 				return Redirect(preApprovalRedirectUri.ToString());
 			}
 			catch (PagSeguroServiceException exception)

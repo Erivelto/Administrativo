@@ -52,7 +52,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 69.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 69.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -63,7 +63,7 @@
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Trimestral</h2>
-										<h1>R$ 203,90</h1>
+										<h1>R$ 209,70</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -77,7 +77,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 203.90 , documento = Model.Documento, periodo = 3, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 209.70 , documento = Model.Documento, periodo = 3, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -88,7 +88,7 @@
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Semestral</h2>
-										<h1>R$ 403,90</h1>
+										<h1>R$ 419,40</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -102,7 +102,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 403.90 , documento = Model.Documento,  periodo =  6, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 419.40 , documento = Model.Documento,  periodo =  6, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -113,7 +113,7 @@
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Anual</h2>
-										<h1>R$ 799,90</h1>
+										<h1>R$ 838,80</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -127,7 +127,7 @@
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 799.90 , documento = Model.Documento, periodo = 12, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 838.80 , documento = Model.Documento, periodo = 12, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -188,7 +188,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 99.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 99.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -199,7 +199,7 @@ else
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Trimestral</h2>
-										<h1>R$ 290,90</h1>
+										<h1>R$ 299,70</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -213,7 +213,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 290.90 , documento = Model.Documento,  periodo = 3, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 299.70 , documento = Model.Documento,  periodo = 3, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -224,7 +224,7 @@ else
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Semestral</h2>
-										<h1>R$ 580,90</h1>
+										<h1>R$ 599,40</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -238,7 +238,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 580.90 , documento = Model.Documento, periodo = 6 , nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 599.40 , documento = Model.Documento, periodo = 6 , nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>
@@ -249,7 +249,7 @@ else
 								<div class="pricing">
 									<div class="title">
 										<h2>Plano Anual</h2>
-										<h1>R$ 1160,90</h1>
+										<h1>R$ 1198,80</h1>
 									</div>
 									<div class="x_content">
 										<div class="">
@@ -263,7 +263,7 @@ else
 											</div>
 										</div>
 										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 1160.90, documento = Model.Documento, periodo = 12, nome = Model.Nome })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 1198.80, documento = Model.Documento, periodo = 12, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
 										</div>
 									</div>
 								</div>

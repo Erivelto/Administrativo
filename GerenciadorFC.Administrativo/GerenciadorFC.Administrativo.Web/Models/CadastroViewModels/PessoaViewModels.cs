@@ -85,5 +85,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 		public bool Incluido { get; set; }
 		[NotMapped]
 		public bool NaoIncluido { get; set; }
+		[NotMapped]
+		public int CodigoCobranca { get; set; }
 	}
 }
