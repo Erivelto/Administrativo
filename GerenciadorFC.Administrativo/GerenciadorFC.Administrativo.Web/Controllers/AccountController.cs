@@ -620,7 +620,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToAction(nameof(ForgotPasswordConfirmation));
@@ -631,7 +631,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                   $"Click aqui vamos criar uma nova senha: <a href='{callbackUrl}'>Acesse</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 
@@ -641,7 +641,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ForgotPasswordConfirmation()
+        public async  Task<IActionResult> ForgotPasswordConfirmation(ForgotPasswordViewModel forgotPasswordViewModel)
         {
             return View();
         }

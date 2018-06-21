@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace GerenciadorFC.Administrativo.Web.Services
@@ -11,7 +13,31 @@ namespace GerenciadorFC.Administrativo.Web.Services
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Task.CompletedTask;
+			MailMessage mail = new MailMessage();
+
+			mail.From = new MailAddress("contato@contfy.com.br");
+			mail.To.Add(email);
+			mail.Subject =subject;
+			mail.Body = message;
+			mail.IsBodyHtml = true;
+
+			SmtpClient smtp = new SmtpClient();
+			smtp.Host = "smtp.gmail.com";
+			smtp.EnableSsl = true;
+			smtp.Port = 587;
+			smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+			smtp.UseDefaultCredentials = false;
+			smtp.Credentials = new NetworkCredential("contato@contfy.com.br", "erivelto33");
+			try
+			{
+				smtp.Send(mail);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+			return Task.CompletedTask;
         }
     }
 }
