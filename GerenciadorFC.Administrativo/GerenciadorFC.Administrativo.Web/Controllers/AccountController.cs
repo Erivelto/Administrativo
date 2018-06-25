@@ -620,11 +620,11 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null)
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
-                }
+				if (user == null)
+				{
+					ModelState.AddModelError(string.Empty, "Email não cadastrado!");
+					return View();
+				}
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -668,6 +668,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                 return View(model);
             }
             var user = await _userManager.FindByEmailAsync(model.Email);
+			user.LockoutEnabled = false;
             if (user == null)
             {
                 // Don't reveal that the user does not exist
@@ -676,7 +677,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+				LoginViewModel login = new LoginViewModel();
+				login.Email = model.Email;
+                return RedirectToAction("Login",login);
             }
             AddErrors(result);
             return View();
