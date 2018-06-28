@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using AutoMapper;
 using GerenciadorFC.Administrativo.Web.Models;
+using GerenciadorFC.Administrativo.Web.Models.Cadastro;
+using GerenciadorFC.Administrativo.Web.Models.PessoaDados;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -27,8 +32,28 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			_signInManager = signInManager;			
 		}
 		[Authorize]
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
         {
+			var user = await _userManager.GetUserAsync(User);		
+			if (user.Status == "termo")
+			{
+				using (var clientContP = new HttpClient())
+				{
+					clientContP.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
+					var respostaTermoP = await clientContP.GetAsync("api/Pessoa/" + user.CodigoPessoa.ToString());
+					string dadosTermoP = await respostaTermoP.Content.ReadAsStringAsync();
+
+					var pessoa = JsonConvert.DeserializeObject<Pessoa>(dadosTermoP);
+					var pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
+
+					return RedirectToAction("Cobranca", "Account", pessoaVieModels);
+				}
+
+			}
+			if (user.Status == "pagamentoandamento")
+			{
+
+			}
 			return View();
         }
 		public IActionResult PosPagIndex(string transaction_id)

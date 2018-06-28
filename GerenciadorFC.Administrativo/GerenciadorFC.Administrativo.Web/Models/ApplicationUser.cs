@@ -10,5 +10,6 @@ namespace GerenciadorFC.Administrativo.Web.Models
     public class ApplicationUser : IdentityUser
     {
 		public Int32 CodigoPessoa { get; set; }
+		public string Status { get; set; }
     }
 }

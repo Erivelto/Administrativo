@@ -69,7 +69,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+					_logger.LogInformation("User logged in.");				
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -231,12 +231,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LockoutEnd = model.dataExp,PhoneNumber = model.tipo == "Contador" ? "admin":"comum" };
-				var result = await _userManager.CreateAsync(user, model.Password);
+				var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LockoutEnd = model.dataExp,PhoneNumber = model.tipo == "Contador" ? "admin":"comum" ,Status = "login"};
+				var result = await _userManager.CreateAsync(user, model.Password);				
 				
 				TempData["email"] = model.Email;
 				if (result.Succeeded)
 				{
+
 					_logger.LogInformation("User created a new account with password.");
 					var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 					var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
@@ -320,7 +321,20 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				clientContP.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
 				var respostaTermoP = await clientContP.GetAsync("api/Pessoa/" + contato.CodigoPessoa.ToString());
 				string dadosTermoP = await respostaTermoP.Content.ReadAsStringAsync();
-
+				if (TempData["Boleto"] == null)
+				{
+					var user = await _userManager.GetUserAsync(User);
+					user.Status = "termo";
+					user.CodigoPessoa = contato.CodigoPessoa;
+					await _userManager.UpdateAsync(user);
+				}
+				else
+				{
+					var user = await _userManager.GetUserAsync(User);
+					user.Status = "ativo";
+					user.CodigoPessoa = contato.CodigoPessoa;
+					await _userManager.UpdateAsync(user);
+				}
 				var pessoa = JsonConvert.DeserializeObject<Pessoa>(dadosTermoP);
 				pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(pessoa);
 				if (pessoaVieModels != null)
@@ -432,6 +446,9 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				pessoaContabil.CodePrepoval = prepoval[1].ToString();
 				using (var clientCont = new HttpClient())
 				{
+					var user = await _userManager.GetUserAsync(User);
+					user.Status = "pagamentoandamento";
+					await _userManager.UpdateAsync(user);
 					clientCont.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaCobranca");
 					var respostaTermo = await clientCont.PutAsJsonAsync("", pessoaContabil);
 				}				
