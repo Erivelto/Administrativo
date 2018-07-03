@@ -22,11 +22,10 @@ namespace GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Fatura
 		public DateTime DataEmissao { get; set; }
 		[Display(Name = "Valor da nota fiscal")]
 		[Required(ErrorMessage = "É obrigatorio o valor total")]
-		[RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Apenas valor monetário")]
+		//[RegularExpression(@"^[0-9]{1,2}([,.][0-9]{1,2})?$", ErrorMessage = "Apenas valor monetário")]
 		public decimal ValorTotal { get; set; }
 		[Display(Name = "Número da nota fiscal")]
-		[Required(ErrorMessage = "É obrigatorio o numero da nota")]
-		
+		[Required(ErrorMessage = "É obrigatorio o numero da nota")]		
 		public int NumeroNFE { get; set; }
 		public string CodigoVerificacao { get; set; }
 		public string UrlNfe { get; set; }
