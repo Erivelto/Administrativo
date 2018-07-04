@@ -56,10 +56,14 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View();
         }
-		public IActionResult PosPagIndex(string transaction_id)
+		public async Task<IActionResult> PosPagIndex(string email, string status)
 		{
 
-			return View("Index");
+			var user =  await _userManager.FindByEmailAsync(email);
+			user.Status = status;
+			await _userManager.UpdateAsync(user);
+
+			return RedirectToAction("Index");
 		}
 
 		public IActionResult About()

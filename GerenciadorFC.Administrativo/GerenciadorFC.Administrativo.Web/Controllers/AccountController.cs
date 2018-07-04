@@ -426,7 +426,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			preApproval.PreApproval.MaxTotalAmount = 1200.00m;
 
 			// Sets the url used by PagSeguro for redirect user after ends checkout process
-			preApproval.RedirectUri = new Uri("https://gerenciadorfcadministrativoweb20180319080544.azurewebsites.net/Home/PosPagIndex?transaction_id=E884542-81B3-4419-9A75-BCC6FB495EF1");
+			preApproval.RedirectUri = new Uri("https://gerenciadorfcadministrativoweb20180319080544.azurewebsites.net/Home/PosPagIndex?email="+ email + "&status=ativo");
 
 			// Sets the url used for user review the signature or read the rules
 			//preApproval.ReviewUri = new Uri("http://www.lojamodelo.com.br/revisao");

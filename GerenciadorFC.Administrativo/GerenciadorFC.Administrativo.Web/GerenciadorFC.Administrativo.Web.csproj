@@ -203,6 +203,7 @@
     <None Include="wwwroot\admin\vendors\parsleyjs\bower_components\uwidget\LICENSE" />
     <None Include="wwwroot\admin\vendors\parsleyjs\bower_components\uwidget\uwidget.js" />
     <None Include="wwwroot\admin\vendors\parsleyjs\bower_components\uwidget\uwidget.less" />
+    <None Include="wwwroot\Configuration\PagSeguroConfig.xml" />
   </ItemGroup>
 
   <ItemGroup>
