@@ -15,12 +15,15 @@ using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturament
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
+using Microsoft.AspNetCore.Identity;
+using GerenciadorFC.Administrativo.Web.Models;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
 	[Authorize]
 	public class CadastroController : Controller
     {
+		private readonly UserManager<ApplicationUser> _userManager;
 		public async Task<ActionResult> Lista()
 		{
 			var listaViewsModels = new List<ListaPessoaViewModels>();
@@ -267,6 +270,20 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var listDadoEmissao = new List<ListaDadosEmissaoNotaViewModels>();
 			
 			return listDadoEmissao;
+		}
+		public async Task<ActionResult> Ativar(int codigo)
+		{
+			if (codigo != 0)
+			{
+				using (var clientCont = new HttpClient())
+				{
+					HttpContent cont;
+					clientCont.BaseAddress = new System.Uri("https://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato/Status/" + codigo.ToString());
+					var reposta = await clientCont.GetAsync("");
+					var retorno = await reposta.Content.ReadAsStringAsync();
+				}
+			}
+			return RedirectToAction("Lista");
 		}
 		public async Task<ActionResult> Cadastrar(PessoaViewModels pessoaVieModels, int checkboxTC)
 		{

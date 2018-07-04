@@ -20,35 +20,39 @@
 						<th class="column-title">Data Contfy </th>
 						<th class="column-title"></th>
 						<th class="column-title"></th>
+						<th class="column-title"></th>
 					</tr>
 				</thead>
 
 				<tbody>
 					@foreach (var list in Model)
 					{
-						<tr class="even pointer">
-							<td>
-								<span>@list.Codigo</span>
-							</td>
-							<td>
-								<span>@list.Documento</span>
-							</td>
-							<td>
-								<span>@list.Nome</span>
-							</td>
-							<td>
-								<span>@list.Razao</span>
-							</td>
-							<td>
-								<span>@list.DataInclusao</span>
-							</td>
-							<td>
-								<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})"><i class="fa fa-edit"></i></a>
-							</td>
-							<td>
-								<a href="@Url.Action("Lista","Cadastro")"><i class="fa fa-remove"></i></a>
-							</td>
-						</tr>
+					<tr class="even pointer">
+						<td>
+							<span>@list.Codigo</span>
+						</td>
+						<td>
+							<span>@list.Documento</span>
+						</td>
+						<td>
+							<span>@list.Nome</span>
+						</td>
+						<td>
+							<span>@list.Razao</span>
+						</td>
+						<td>
+							<span>@list.DataInclusao</span>
+						</td>
+						<td>
+							<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})"><i class="fa fa-edit"></i></a>
+						</td>
+						<td>
+							<a href="@Url.Action("Lista","Cadastro")"><i class="fa fa-remove"></i></a>
+						</td>
+						<td>
+							<a href="@Url.Action("Ativar","Cadastro",new { codigo = list.Codigo})"><i class="fa fa-check"></i></a>
+						</td>
+					</tr>
 					}
 
 				</tbody>

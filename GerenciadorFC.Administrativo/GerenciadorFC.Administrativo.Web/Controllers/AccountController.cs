@@ -385,11 +385,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			// Sets a reference code for this preApproval request, it is useful to identify this payment in future notifications.
 			preApproval.Reference = documento;
 
+			var email = _userManager.GetUserName(User);
+
 			// Sets your customer information.
 			preApproval.Sender = new Sender(
 				nome,
-				TempData["email"].ToString(),
-				new Phone("", "")
+				email.ToString(),
+				new Phone("00", "00000000")
 			);
 
 			// Sets the preApproval informations
