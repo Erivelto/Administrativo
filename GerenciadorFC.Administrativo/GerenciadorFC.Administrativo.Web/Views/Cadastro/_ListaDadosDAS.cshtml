@@ -9,6 +9,7 @@
 						<th class="column-title">ID </th>
 						<th class="column-title">Codigo contribuinte</th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 
@@ -26,6 +27,9 @@
 							<td>
 								<a title="Excluir" onclick="Excluir(@list.Codigo)"><i class="fa fa-remove"></i></a>
 							</td>
+							<td>
+								<a title="Anexo" onclick="Anexo(@list.Codigo)" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-edit"></i></a>
+							</td>
 						</tr>
 					}
 				</tbody>
@@ -33,3 +37,40 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Anexo</h4>
+			</div>
+			<div class="modal-body" id="bodymodal">
+				
+			</div>			
+
+		</div>
+	</div>
+</div>
+<script>
+	function Anexo(codigo) {
+		$.ajax({
+			url: '@Url.Action("_DadosAnexo", "Cadastro" )',
+			data: { codigo: codigo },
+			type: "GET",
+			cache: false
+		}).done(function (result) {
+			$("#bodymodal").html(result);
+		});
+		$.ajax({
+			url: '@Url.Action("_DadosAnexoLista", "Cadastro" )',
+			data: { codigo: codigo },
+			type: "GET",
+			cache: false
+		}).done(function (result) {
+			$("#bodymodal").html(result);
+		});
+	}
+</script>

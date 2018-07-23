@@ -1,0 +1,65 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS.AnexoContribuinteViewModels
+
+@{
+	ViewData["Title"] = "Anexo imposto";
+}
+
+<h2>Anexo</h2>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="form-group">
+				<div class="col-sm-12">
+					@Html.Hidden("CodigoPessoa", (object)ViewData["pessoa"])
+					@Html.HiddenFor(a => a.CodigoDadosDeDAS)
+					<label asp-for="Anexo" class="control-label">Anexo</label>
+					@Html.TextBoxFor(m => m.Anexo, new { @class = "form-control" })
+					<span asp-validation-for="Anexo" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<div class="rodape-form">
+				<input type="button" id="btnatualiza" class="btn btn-success" value="Cadastrar" onclick="DadosDas();" />
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<script>
+
+
+	function DadosDas() {
+		var CodigoDadosDeDAS = $("#CodigoDadosDeDAS").val();
+		var Anexo = $("#Anexo").val();
+		$.ajax({
+			 url: '@Url.Action("DadosAnexo", "Cadastro")',
+			 data: { CodigoDadosDeDAS: CodigoDadosDeDAS, Anexo: Anexo },
+			cache: false,
+			type: "POST",
+			dataType: "html",
+			success: function (data, textStatus, XMLHttpRequest) {
+				$('#PartialContainer').html(data);
+			}
+		});
+			var pessoa = '@ViewData["pessoa"]';
+			var url = "/Cadastro/Edite?pessoa=" + pessoa;
+			window.location.href = url;
+	}
+
+	$(document).ready(function () {
+		setInterval(PessoaCodigoServico, 20000);
+	});
+
+
+
+
+</script>

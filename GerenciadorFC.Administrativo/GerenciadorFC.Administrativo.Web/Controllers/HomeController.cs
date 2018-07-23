@@ -65,7 +65,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 
 			return RedirectToAction("Index");
 		}
-
+		public IActionResult Painel()
+		{
+			return View("Painel");
+		}
 		public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

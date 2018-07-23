@@ -110,7 +110,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					var _endereco = JsonConvert.DeserializeObject<Endereco>(dadosEnd);
 
 					pessoaVieModels = Mapper.Map<Pessoa, PessoaViewModels>(_pessoa);
-					pessoaVieModels = Mapper.Map<Endereco, PessoaViewModels>(_endereco,pessoaVieModels);
+					if(_endereco != null)
+						pessoaVieModels = Mapper.Map<Endereco, PessoaViewModels>(_endereco,pessoaVieModels);
 
 					if (pessoaVieModels.CodigoPessoa != 0)
 					{
@@ -157,6 +158,8 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			var pessoaEmissao = new DadosEmissaoNotaViewModels();
 			var dadosDAS = new DadosDeDASViewModels();
+			var anexo = new AnexoContribuinteViewModels();
+			ViewData["AnexoContribuinteViewModels"] = anexo;
 			pessoaVieModels.dadosDeDAS = dadosDAS;
 			pessoaVieModels.pessoaEmissaoNFeViewModels = pessoaEmissao;
 			return View("Edite",pessoaVieModels);
@@ -204,6 +207,40 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 						}
 					}
 				}
+			}
+			RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "Cadastro", new { @pessoa = (int)ViewData["pessoa"] });
+			return redirectResult;
+		}
+		public ActionResult _DadosAnexo(int codigo)
+		{
+			var anexo = new AnexoContribuinteViewModels();
+			anexo.CodigoDadosDeDAS = codigo;
+			return PartialView("_DadosAnexo",anexo);
+		}
+		public async Task<ActionResult> _DadosAnexoLista(int codigo)
+		{
+			using (var clientContList = new HttpClient())
+			{
+				clientContList.BaseAddress = new System.Uri("http://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/AnexoContribuinte/ListaPorCodigoDAS/" + codigo.ToString());
+				var respostaCont = await clientContList.GetAsync("");
+				string dadosCont = await respostaCont.Content.ReadAsStringAsync();
+
+				var listDados = JsonConvert.DeserializeObject<List<AnexoContribuinteViewModels>>(dadosCont);
+
+				return PartialView("_DadosAnexoLista", listDados);
+			}			
+		}
+		public async Task<ActionResult> DadosAnexo(string CodigoDadosDeDAS, string Anexo)
+		{
+			using (var clienteDas = new HttpClient())
+			{
+				var anexo = new AnexoContribuinte();
+				anexo.CodigoDadosDeDAS = Convert.ToInt16(CodigoDadosDeDAS);
+				anexo.Anexo = Anexo;
+				anexo.Excluido = false;
+				clienteDas.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/AnexoContribuinte");
+				var respostaDas = await clienteDas.PostAsJsonAsync("", anexo);
+				string dadosDas = await respostaDas.Content.ReadAsStringAsync();
 			}
 			RedirectToActionResult redirectResult = new RedirectToActionResult("Edite", "Cadastro", new { @pessoa = (int)ViewData["pessoa"] });
 			return redirectResult;

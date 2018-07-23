@@ -1,0 +1,36 @@
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS.DadosDeDASViewModels>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table id="datatable" class="table table-striped jambo_table bulk_action">
+				<thead>
+					<tr class="headings">
+						<th class="column-title">Codigo </th>
+						<th class="column-title">Anexo</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					@foreach (var list in Model)
+					{
+						<tr class="even pointer">
+							<td>
+								<span>@list.Codigo</span>
+							</td>
+							<td>
+								<span>@list.Anexo</span>
+							</td>
+							<td>
+								<a title="Excluir" onclick="Excluir(@list.Codigo)"><i class="fa fa-remove"></i></a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
