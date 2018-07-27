@@ -1,6 +1,4 @@
 ﻿using GerenciadorFC.Administrativo.Web.Helps.Validacao;
-using GerenciadorFC.Administrativo.Web.Models.CadastroViewModels;
-using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento;
 using System;
@@ -11,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciadorFC.Administrativo.Web.Models.Cadastro
 {
-    public class PessoaViewModels
+	public class PessoaViewModels
     {
 		public PessoaViewModels()
 		{

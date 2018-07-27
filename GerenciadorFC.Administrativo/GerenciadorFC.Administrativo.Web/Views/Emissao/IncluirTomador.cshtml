@@ -1,0 +1,19 @@
+﻿@model GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.TomadorEmissaoNotaViewModels
+@{
+	ViewData["Title"] = "Tomador";
+}
+
+<h4>Dados do tomador</h4>
+<div class="row">
+	<div class="col-md-12">
+		@if (Model.Incluido == true)
+		{
+			<div class="alert alert-success alert-dismissible fade in" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				<strong>Tudo certo!</strong> Dados incluidos com sucesso.
+			</div>
+		}
+	</div>
+</div>
