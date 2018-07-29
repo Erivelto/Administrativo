@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento;
+using System.Collections.Generic;
+using GerenciadorFC.Administrativo.Web.Models.Cadastro;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -22,19 +24,90 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			this._userManager = userManager;
 		}
 		public IActionResult Index()
-        {
-            return View();
+        {			
+			return View();
         }
 		public IActionResult DadosNotaFiscal()
 		{
 			var notaFiscalViewModels = new NotaFiscalViewModels();
 			return View(notaFiscalViewModels);
 		}
+		public async Task<IActionResult> AgendamentoNotaFiscal()
+		{
+			var pessoaCodigo = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+			var notafiscal = new NotaFiscalViewModels();
+			using (var clientTomador = new HttpClient())
+			{
+				clientTomador.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/TomadorEmissaoNota/" + pessoaCodigo.ToString());
+				var respostaTomador = await clientTomador.GetAsync("");
+				var retornoTomador = await respostaTomador.Content.ReadAsStringAsync();
+				if (retornoTomador != "[]")
+					notafiscal.TomadorEmissaoNotaViewModelsList = JsonConvert.DeserializeObject<List<TomadorEmissaoNotaViewModels>>(retornoTomador);
+			}
+			return View(notafiscal);
+		}
+		public async Task<IActionResult> IncluirTomador()
+		{
+			var pessoaCodigo = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+			var tomadorEmissaoNotaViewModels = new TomadorEmissaoNotaViewModels();
+			using (var clientTomador = new HttpClient())
+			{
+				clientTomador.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/TomadorEmissaoNota/" + pessoaCodigo);
+				var respostaTomador = await clientTomador.GetAsync("");
+				var retornoTomador = await respostaTomador.Content.ReadAsStringAsync();
+				if (retornoTomador != "[]")
+					tomadorEmissaoNotaViewModels.TomadorEmissaoNotaViewModelsList = JsonConvert.DeserializeObject<List<TomadorEmissaoNotaViewModels>>(retornoTomador);
+			}
+			return View(tomadorEmissaoNotaViewModels);
+		}
+		public async Task<IActionResult> ExcluirTomador(Int32 codigo)
+		{
+			if (codigo != 0)
+			{
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/TomadorEmissaoNota?codigo=" + codigo.ToString());
+					var reposta = await clientCont.DeleteAsync("");
+					var retorno = await reposta.Content.ReadAsStringAsync();
+				}
+			}			
+			return RedirectToAction("IncluirTomador");
+		}
+		public async Task<IActionResult> SalvarTomador(TomadorEmissaoNotaViewModels tomadorEmissaoNotaViewModels)
+		{
+			var userId = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+			tomadorEmissaoNotaViewModels.CodigoEmissaoNota =Convert.ToInt32(userId);
+			var tomadorEmissaoNota = Mapper.Map<TomadorEmissaoNotaViewModels, TomadorEmissaoNota>(tomadorEmissaoNotaViewModels);
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/TomadorEmissaoNota");
+				var resposta_p = await client.PostAsJsonAsync("", tomadorEmissaoNota);
+				string retorno = await resposta_p.Content.ReadAsStringAsync();
+				if (resposta_p.StatusCode.ToString() == "OK")
+				{
+					tomadorEmissaoNotaViewModels.Incluido = true;
+				}
+				else
+				{
+					tomadorEmissaoNotaViewModels.NaoIncluido = true;
+				}
+				using (var clientTomador = new HttpClient())
+				{
+					clientTomador.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/TomadorEmissaoNota/" + userId);
+					var respostaTomador = await clientTomador.GetAsync("");
+					var retornoTomador = await respostaTomador.Content.ReadAsStringAsync();
+					if (retornoTomador != "[]")
+						tomadorEmissaoNotaViewModels.TomadorEmissaoNotaViewModelsList = JsonConvert.DeserializeObject<List<TomadorEmissaoNotaViewModels>>(retornoTomador);
+				}
+
+			}
+			return View("IncluirTomador", tomadorEmissaoNotaViewModels);
+		}
 		public async Task<IActionResult> IncluirDadosNfe(NotaFiscalViewModels notaFiscalViewModels)
 		{
 			if (ModelState.IsValid)
 			{
-				using (var clientCont = new HttpClient())
+				using (var clientCont = new HttpClient())	
 				{
 					var userId = _userManager.GetUserId(User);
 					var contato = new ContatoViewModels();

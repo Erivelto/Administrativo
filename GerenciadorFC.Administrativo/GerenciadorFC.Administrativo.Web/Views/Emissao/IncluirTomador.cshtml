@@ -9,11 +9,124 @@
 		@if (Model.Incluido == true)
 		{
 			<div class="alert alert-success alert-dismissible fade in" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
 				<strong>Tudo certo!</strong> Dados incluidos com sucesso.
+			</div>
+		}
+		@if (Model.NaoIncluido == true)
+		{
+			<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<strong>Ocorreu erro!</strong> Os dados não foram incluidos.
 			</div>
 		}
 	</div>
 </div>
+<form asp-action="SalvarTomador">
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-4">
+				@Html.HiddenFor(m => m.CodigoEmissaoNota)
+				<label asp-for="Fantasia" class="control-label">@Html.DisplayNameFor(m => m.Fantasia)</label>
+				@Html.TextBoxFor(m => m.Fantasia, new { @class = "form-control" })
+				<span asp-validation-for="Fantasia" class="text-danger control-label"></span>
+			</div>
+			<div class="col-sm-4">
+				<label asp-for="Razao" class="control-label">@Html.DisplayNameFor(m => m.Razao)</label>
+				@Html.TextBoxFor(m => m.Razao, new { @class = "form-control" })
+				<span asp-validation-for="Razao" class="text-danger"></span>
+			</div>
+			<div class="col-sm-2">
+				<label asp-for="Documento" class="control-label">@Html.DisplayNameFor(m => m.Documento)</label>
+				@Html.TextBoxFor(m => m.Documento, new { @class = "form-control" })
+				<span asp-validation-for="Documento" class="text-danger"></span>
+			</div>
+			<div class="col-sm-2">
+				<label asp-for="IncrMunicipal" class="control-label">@Html.DisplayNameFor(m => m.IncrMunicipal)</label>
+				@Html.TextBoxFor(m => m.IncrMunicipal, new { @class = "form-control" })
+				<span asp-validation-for="IncrMunicipal" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-10">
+				<label asp-for="Logradouro" class="control-label">@Html.DisplayNameFor(m => m.Logradouro)</label>
+				@Html.TextBoxFor(m => m.Logradouro, new { @class = "form-control" })
+				<span asp-validation-for="Logradouro" class="text-danger"></span>
+			</div>
+			<div class="col-sm-2">
+				<label asp-for="NumeroLogradouro" class="control-label">@Html.DisplayNameFor(m => m.NumeroLogradouro)</label>
+				@Html.TextBoxFor(m => m.NumeroLogradouro, new { @class = "form-control" })
+				<span asp-validation-for="NumeroLogradouro" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-4">
+				<label asp-for="Complemento" class="control-label">@Html.DisplayNameFor(m => m.Complemento)</label>
+				@Html.TextBoxFor(m => m.Complemento, new { @class = "form-control" })
+				<span asp-validation-for="Complemento" class="text-danger"></span>
+			</div>
+			<div class="col-sm-4">
+				<label asp-for="Bairro" class="control-label">@Html.DisplayNameFor(m => m.Bairro)</label>
+				@Html.TextBoxFor(m => m.Bairro, new { @class = "form-control" })
+				<span asp-validation-for="Bairro" class="text-danger"></span>
+			</div>
+			<div class="col-sm-4">
+				<label asp-for="Cidade" class="control-label">@Html.DisplayNameFor(m => m.Cidade)</label>
+				@Html.TextBoxFor(m => m.Cidade, new { @class = "form-control" })
+				<span asp-validation-for="Cidade" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-1">
+				<label asp-for="UF" class="control-label">@Html.DisplayNameFor(m => m.UF)</label>
+				@Html.TextBoxFor(m => m.UF, new { @class = "form-control" })
+				<span asp-validation-for="UF" class="text-danger"></span>
+			</div>
+			<div class="col-sm-3">
+				<label asp-for="CEP" class="control-label">@Html.DisplayNameFor(m => m.CEP)</label>
+				@Html.TextBoxFor(m => m.CEP, new { @class = "form-control" })
+				<span asp-validation-for="CEP" class="text-danger"></span>
+			</div>
+			<div class="col-sm-4">
+				<label class="control-label"></label>
+			</div>
+			<div class="col-sm-4">
+				<label class="control-label"></label>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<div class="rodape-form">
+					<a href="@Url.Action("AgendamentoNotaFiscal","Emissao")" class="btn btn-round btn-info">Voltar</a>
+					<input type="submit" name="submit" class="btn btn-round btn-primary" value="Salvar" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="row">
+	@if (Model.TomadorEmissaoNotaViewModelsList != null)
+	{
+		<div class="col-md-12">
+			@Html.Partial("_ListaTomador", Model.TomadorEmissaoNotaViewModelsList)
+		</div>
+	}
+</div>
+
+
+

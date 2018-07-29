@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using GerenciadorFC.Administrativo.Web.Helps.Validacao;
@@ -53,5 +54,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Fatura
 		public bool Incluido { get; set; }
 		[NotMapped]
 		public bool NaoIncluido { get; set; }
+
+		public virtual List<TomadorEmissaoNotaViewModels> TomadorEmissaoNotaViewModelsList { get; set; }
 	}
 }

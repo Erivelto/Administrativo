@@ -1,0 +1,39 @@
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Faturamento.TomadorEmissaoNotaViewModels>
+
+<div class="table-responsive">
+	<table id="datatable" class="table table-striped jambo_table bulk_action">
+		<thead>
+			<tr class="headings">
+				<th class="column-title">Codigo </th>
+				<th class="column-title">CNPJ </th>
+				<th class="column-title">Nome Fantasia </th>
+				<th class="column-title">Razão Social</th>
+				<th class="column-title"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var list in Model)
+			{
+				<tr class="even pointer">
+					<td>
+						<span>@list.Codigo</span>
+					</td>
+					<td>
+						<span>@list.Documento</span>
+					</td>
+					<td>
+						<span>@list.Fantasia</span>
+					</td>
+					<td>
+						<span>@list.Razao</span>
+					</td>
+					<td>
+						<a href="@Url.Action("ExcluirTomador","Emissao", new { codigo = list.Codigo})"><i class="fa fa-remove"></i></a>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+</div>

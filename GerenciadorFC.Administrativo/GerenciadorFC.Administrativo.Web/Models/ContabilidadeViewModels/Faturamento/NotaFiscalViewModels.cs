@@ -34,5 +34,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Fatura
 		public bool Incluido { get; set; }
 		[NotMapped]
 		public bool NaoIncluido { get; set; }
+
+		public virtual List<TomadorEmissaoNotaViewModels> TomadorEmissaoNotaViewModelsList { get; set; }
 	}
 }
