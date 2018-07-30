@@ -36,5 +36,7 @@ namespace GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.Fatura
 		public bool NaoIncluido { get; set; }
 
 		public virtual List<TomadorEmissaoNotaViewModels> TomadorEmissaoNotaViewModelsList { get; set; }
+
+		public virtual CorpoEmissaoNotaViewsModels CorpoEmissaoNotaViewsModels { get; set; }
 	}
 }

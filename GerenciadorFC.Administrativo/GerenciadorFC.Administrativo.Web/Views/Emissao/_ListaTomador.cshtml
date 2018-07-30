@@ -29,7 +29,7 @@
 						<span>@list.Razao</span>
 					</td>
 					<td>
-						<a href="@Url.Action("ExcluirTomador","Emissao", new { codigo = list.Codigo})"><i class="fa fa-remove"></i></a>
+						<a href="@Url.Action("ExcluirTomador","Emissao", new { codigo = list.Codigo})" class="btn btn-round btn-danger"><i class="fa fa-trash-o"></i> Excluir </a>
 					</td>
 				</tr>
 			}

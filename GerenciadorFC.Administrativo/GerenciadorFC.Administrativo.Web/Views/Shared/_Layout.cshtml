@@ -35,6 +35,7 @@
 	<link href="../admin/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 	<!-- Custom Theme Style -->
 	<link href="../admin/build/css/custom.min.css" rel="stylesheet">
+	<link href="../admin/vendors/nprogress/nprogress.css" rel="stylesheet">
 
 	<link href="../admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 	<link href="../admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -44,6 +45,7 @@
 	<link href="../admin/vendors/nprogress/nprogress.css" rel="stylesheet">
 	<link href="../admin/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
 	<link href="../admin/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+	<link href="../admin/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
 </head>
 <body class="nav-md">
 	<div class="container body">
@@ -371,7 +373,9 @@
 	@RenderSection("Scripts", required: false)
 
 
-
+	<script src="../admin/vendors/fastclick/lib/fastclick.js"></script>
+	<script src="../admin/vendors/nprogress/nprogress.js"></script>
+	<script src="../admin/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 
 	<script src="../admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 	<script src="../admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -388,6 +392,7 @@
 	<script src="../admin/vendors/jszip/dist/jszip.min.js"></script>
 	<script src="../admin/vendors/pdfmake/build/pdfmake.min.js"></script>
 	<script src="../admin/vendors/pdfmake/build/vfs_fonts.js"></script>
+	<script src="../admin/vendors/switchery/dist/switchery.min.js"></script>
 	<!-- bootstrap-datetimepicker -->
 	<script src="../admin/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 	<script>
@@ -455,6 +460,26 @@
 				'placeholder': ''
 			});
 		});
+		$(document).ready(function () {
+			$("#btnProximo").addClass("buttonDisabled");
+			$("#btnAnterio").addClass("buttonDisabled");
+			$("#btnSalvar").addClass("buttonDisabled");
+			$('input[type="radio"]').click(function () {
+				if ($(this).is(':checked')) {
+					$("#btnProximo").removeClass("buttonDisabled");
+					$("#btnAnterio").removeClass("buttonDisabled");
+				}
+			});
+			$("#btnProximo").click(function () {
+				$this.goForward();
+				return false;
+			});
+			$("#btnAnterio").click(function() {
+				$this.goBackward();
+				return false;
+			});
+		});
+			
 	</script>
 
 	@*<environment names="Development">

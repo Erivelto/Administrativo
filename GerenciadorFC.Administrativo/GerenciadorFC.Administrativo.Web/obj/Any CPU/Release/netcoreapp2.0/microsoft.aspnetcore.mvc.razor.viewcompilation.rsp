@@ -25,6 +25,8 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Edite.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Lista.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\Novo.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosAnexo.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosAnexoLista.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosDAS.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosDeImpostos.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Cadastro\_DadosFiscaisNovo.cshtml
@@ -37,11 +39,15 @@ C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\EditeNovo.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\Lista.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\DadosFiscais\_Prefeitura.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\AgendamentoNotaFiscal.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\DadosNotaFiscal.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\IncluirTomador.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\Index.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Emissao\_ListaTomador.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\About.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\Contact.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\Index.cshtml
+--file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Home\Painel.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Manage\ChangePassword.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Manage\Disable2fa.cshtml
 --file=C:\projeto\Site\Admin\Administrativo\GerenciadorFC.Administrativo\GerenciadorFC.Administrativo.Web\Views\Manage\EnableAuthenticator.cshtml
