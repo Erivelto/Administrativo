@@ -217,7 +217,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			anexo.CodigoDadosDeDAS = codigo;
 			return PartialView("_DadosAnexo",anexo);
 		}
-		public async Task<ActionResult> _DadosAnexoLista(int codigo)
+		public async Task<PartialViewResult> _DadosAnexoLista(int codigo)
 		{
 			using (var clientContList = new HttpClient())
 			{

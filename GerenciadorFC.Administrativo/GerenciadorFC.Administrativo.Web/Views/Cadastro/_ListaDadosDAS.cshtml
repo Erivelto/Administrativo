@@ -48,7 +48,12 @@
 				<h4 class="modal-title" id="myModalLabel">Anexo</h4>
 			</div>
 			<div class="modal-body" id="bodymodal">
-				
+				<div id="formAnexo">
+
+				</div>
+				<div id="listaAnexo">
+
+				</div>
 			</div>			
 
 		</div>
@@ -56,21 +61,22 @@
 </div>
 <script>
 	function Anexo(codigo) {
+		debugger;
+		@*$.ajax({
+			url: '@Url.Action("_DadosAnexoLista", "Cadastro" )',
+			data: { codigo: codigo },
+			type: "GET",
+			cache: false
+		}).done(function (result) {
+			$("#listaAnexo").html(result);
+		});*@
 		$.ajax({
 			url: '@Url.Action("_DadosAnexo", "Cadastro" )',
 			data: { codigo: codigo },
 			type: "GET",
 			cache: false
 		}).done(function (result) {
-			$("#bodymodal").html(result);
-		});
-		$.ajax({
-			url: '@Url.Action("_DadosAnexoLista", "Cadastro" )',
-			data: { codigo: codigo },
-			type: "GET",
-			cache: false
-		}).done(function (result) {
-			$("#bodymodal").html(result);
+			$("#formAnexo").html(result);
 		});
 	}
 </script>
