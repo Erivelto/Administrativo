@@ -7,5 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVv7ssjlG0key7xxBNC/p4wAAAAACAAAAAAAQZgAAAAEAACAAAABaRgcwf8/98FP13Hdoq5xIdjlzZ66868KdYYKLvpbLDAAAAAAOgAAAAAIAACAAAAA4U2tV5gmw3R0AZHwF8rjeCeGligOF4BcEYo8UMzEfBIAAAABm46jJkhnwqa4/6S3H/THnVlpJRdTlpMlmmUzlVGT8cNdkh9+qGutKnB68jjZq3RTMOcbE21wH4+BbXejIwqgD1/c2RqufoUmyNS2Dkno8gi/nTsS/NfnFdGg8XdYC/4FMOPyGIujBqGw4IZV0zu7/dqkKq0LobUn84Wx3keDfy0AAAAAduiPO+aHy09ZCsTbDLKjo/NUO/Eknhj/PhlfdO35dy5ISL1v0rc6B4kBw066DMO8RUjDlgn2J5vcoTkVoXhec</EncryptedPassword>
+    <_PublishTargetUrl>C:\Intel</_PublishTargetUrl>
   </PropertyGroup>
 </Project>
