@@ -17,6 +17,7 @@ using GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.DAS;
 using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 using Microsoft.AspNetCore.Identity;
 using GerenciadorFC.Administrativo.Web.Models;
+using System.Linq;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -27,6 +28,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 		public async Task<ActionResult> Lista()
 		{
 			var listaViewsModels = new List<ListaPessoaViewModels>();
+			var listaViewsModelsStatus = new List<ListaPessoaViewModels>();
 			using (var client = new HttpClient())
 			{
 				client.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Pessoa");
@@ -34,9 +36,32 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				string dados = await resposta.Content.ReadAsStringAsync();
 
 				listaViewsModels = JsonConvert.DeserializeObject<List<ListaPessoaViewModels>>(dados);
-
 			}
-			return View(listaViewsModels);
+			using (var clientStatus = new HttpClient())
+			{				
+				clientStatus.BaseAddress = new System.Uri("https://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Pessoa/Status");
+				var respostaStatus = await clientStatus.GetAsync("");
+				string dadosStatus = await respostaStatus.Content.ReadAsStringAsync();
+
+				listaViewsModelsStatus = JsonConvert.DeserializeObject<List<ListaPessoaViewModels>>(dadosStatus);
+			}
+			return View(getPessoa(listaViewsModels, listaViewsModelsStatus));
+		}
+		private List<ListaPessoaViewModels> getPessoa(List<ListaPessoaViewModels> listGeral, List<ListaPessoaViewModels> listStatus)
+		{
+			var result = new List<ListaPessoaViewModels>();
+			foreach (var item in listGeral)
+			{
+				if (listStatus.Where(m => m.Codigo == item.Codigo).FirstOrDefault().Codigo == item.Codigo)
+				{
+					result.Add(listStatus.Where(m => m.Codigo == item.Codigo).FirstOrDefault());
+				}
+				else
+				{
+					result.Add(item);
+				}
+			}
+			return result;
 		}
 		public async Task<ActionResult> Alterar(PessoaViewModels pessoaVieModels)
 		{

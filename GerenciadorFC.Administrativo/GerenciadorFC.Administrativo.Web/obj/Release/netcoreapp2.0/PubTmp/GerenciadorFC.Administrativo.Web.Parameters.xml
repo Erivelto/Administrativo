@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="GerenciadorFCAdministrativoWeb20180809121129" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="GerenciadorFCAdministrativoWeb20180319080544" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\projeto\\Site\\Admin\\Administrativo\\GerenciadorFC\.Administrativo\\GerenciadorFC\.Administrativo\.Web\\obj\\Release\\netcoreapp2\.0\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>

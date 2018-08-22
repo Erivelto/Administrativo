@@ -448,6 +448,7 @@
 				}
 			});
 		});
+		$("#DataEmissao").val("");
 		$(document).ready(function () {
 			$("#ValorTotal").inputmask('decimal', {
 				'alias': 'numeric',
@@ -460,17 +461,16 @@
 				'placeholder': ''
 			});
 		});
-		$(document).ready(function () {
-			$("#btnProximo").addClass("buttonDisabled");
-			$("#btnAnterio").addClass("buttonDisabled");
-			$("#btnSalvar").addClass("buttonDisabled");
-			$('input[type="radio"]').click(function () {
-				if ($(this).is(':checked')) {
-					$("#btnProximo").removeClass("buttonDisabled");
-					$("#btnAnterio").removeClass("buttonDisabled");
-				}
-			});
-		});
+		//$(document).ready(function () {
+		//	$("#btnProximo").addClass("buttonDisabled");
+		//	$("#btnAnterio").addClass("buttonDisabled");
+		//	$("#btnSalvar").addClass("buttonDisabled");
+		//	$('input[type="radio"]').click(function () {
+		//		if ($(this).is(':checked')) {
+		//			$("#btnProximo").removeClass("buttonDisabled");
+		//		}
+		//	});
+		//});
 			
 	</script>
 

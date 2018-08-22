@@ -22,5 +22,6 @@ namespace GerenciadorFC.Administrativo.Web.Models.CadastroViewModels
 		public bool Excluido { get; set; }
 		public PessoaEmissaoNFeViewModels pessoaEmissaoNFeViewModels { get; set; }
 		public List<PessoaEmissaoNFeViewModels> listapessoaEmissaoNFeViewModels { get; set; }
+		public string UserStatus { get; set; }
 	}
 }

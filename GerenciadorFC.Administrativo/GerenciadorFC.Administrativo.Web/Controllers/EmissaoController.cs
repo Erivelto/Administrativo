@@ -60,6 +60,13 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(tomadorEmissaoNotaViewModels);
 		}
+		//public async Task<IActionResult> IncluirAgendamento(NotaFiscalViewModels notaFiscalViewModels)
+		//{
+		//	using (var client = new HttpClient())
+		//	{
+
+		//	}
+		//}
 		public async Task<IActionResult> ExcluirTomador(Int32 codigo)
 		{
 			if (codigo != 0)

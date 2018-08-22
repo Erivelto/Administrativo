@@ -20,15 +20,20 @@ function SmartWizard(target, options) {
 	this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
 	this.elmStepContainer = $('<div></div>').addClass("stepContainer");
 	this.loader = $('<div>Loading</div>').addClass("loader");
+	this.textarea = $('#descricao');
+	this.text = $('#valor');
+	this.textData = $("#DataEmissao");
 	this.buttons = {
 		finish: $('<a>' + options.labelFinish + '</a>').attr("href", "#").addClass("buttonFinish"),
 		next: $('<a>' + options.labelNext + '</a>').attr("href", "#").addClass("buttonNext"),
-		previous: $('<a>' + options.labelPrevious + '</a>').attr("href", "#").addClass("buttonPrevious")		
+		previous: $('<a>' + options.labelPrevious + '</a>').attr("href", "#").addClass("buttonPrevious"),
+		radio: $('input[type="radio"]')
 	};
 
     /*
      * Private functions
      */
+
 
 	var _init = function ($this) {
 		var elmActionBar = $('<div></div>').addClass("actionBar");
@@ -278,6 +283,7 @@ function SmartWizard(target, options) {
 				}
 			} else {
 				$($this.buttons.next).removeClass("buttonDisabled");
+				///$($this.buttons.next).addClass("buttonDisabled");
 				if ($this.options.hideButtonsOnDisabled) {
 					$($this.buttons.next).show();
 				}
@@ -295,7 +301,37 @@ function SmartWizard(target, options) {
 				$($this.buttons.finish).hide();
 			}
 		}
+
+		$($this.buttons.radio).each(function () {
+			if (this.checked == true) {
+				$($this.buttons.next).removeClass("buttonDisabled");
+			}
+			else {
+				if ($this.steps.length)
+				$($this.buttons.next).addClass("buttonDisabled");
+			}
+		});
+		$($this.buttons.radio).click(function () {
+			if ($(this).is(':checked')) {
+				$($this.buttons.next).removeClass("buttonDisabled");
+			}
+		});
+		$($this.text).keyup(function () {
+			var text_area = $(this.textarea).val();
+			if (text_area != "") {
+				$($this.buttons.next).removeClass("buttonDisabled");
+			}
+		});
+		$($this.textData).keyup(function () {
+			$($this.buttons.next).removeClass("buttonDisabled");
+		});
 	};
+
+
+
+	//$('input[type="radio"]').click(function () {
+	//	$($this.buttons.next).removeClass("buttonDisabled");
+	//});
 
     /*
      * Public methods
@@ -391,6 +427,7 @@ function SmartWizard(target, options) {
 		this.elmStepContainer.height(height + 20);
 	}
 
+
 	_init(this);
 };
 
@@ -446,4 +483,5 @@ function SmartWizard(target, options) {
 		onFinish: null  // triggers when Finish button is clicked
 	};
 
+	
 })(jQuery);
