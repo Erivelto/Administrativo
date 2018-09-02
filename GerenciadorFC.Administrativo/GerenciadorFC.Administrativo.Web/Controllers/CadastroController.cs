@@ -18,6 +18,8 @@ using GerenciadorFC.Administrativo.Web.Models.ContabilidadeViewModels.DAS;
 using Microsoft.AspNetCore.Identity;
 using GerenciadorFC.Administrativo.Web.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -47,12 +49,22 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(getPessoa(listaViewsModels, listaViewsModelsStatus));
 		}
+		[HttpPost]
+		public async Task<IActionResult> Upload(IFormFile file)
+		{
+			var data = new MemoryStream();
+			file.CopyTo(data);
+			byte[] imageBytes = data.ToArray();
+			var aquivo = Convert.ToBase64String(imageBytes);
+
+			return RedirectToAction("Lista");
+		}
 		private List<ListaPessoaViewModels> getPessoa(List<ListaPessoaViewModels> listGeral, List<ListaPessoaViewModels> listStatus)
 		{
 			var result = new List<ListaPessoaViewModels>();
 			foreach (var item in listGeral)
 			{
-				if (listStatus.Where(m => m.Codigo == item.Codigo).FirstOrDefault().Codigo == item.Codigo)
+				if (listStatus.Where(m => m.Codigo == item.Codigo).FirstOrDefault() != null)
 				{
 					result.Add(listStatus.Where(m => m.Codigo == item.Codigo).FirstOrDefault());
 				}

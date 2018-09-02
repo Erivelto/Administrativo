@@ -46,6 +46,8 @@
 	<link href="../admin/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
 	<link href="../admin/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
 	<link href="../admin/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+
+	<link href="../admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 </head>
 <body class="nav-md">
 	<div class="container body">
@@ -395,6 +397,9 @@
 	<script src="../admin/vendors/switchery/dist/switchery.min.js"></script>
 	<!-- bootstrap-datetimepicker -->
 	<script src="../admin/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+	<script src="../admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+
 	<script>
 		$('#datatable').dataTable({
 			"processing": true,
@@ -438,6 +443,10 @@
 			format: 'DD/MM/YYYY',
 			date: new Date
 		});
+		$(".empresa").click(function () {
+			var empresa = $(".empresa").val();
+			$("#CodigoPessoa").val(empresa);
+		});
 		$(".plano6990").click(function () {
 			$.ajax({
 				url: "/Cobranca/Checkout",
@@ -450,28 +459,42 @@
 		});
 		$("#DataEmissao").val("");
 		$(document).ready(function () {
-			$("#ValorTotal").inputmask('decimal', {
-				'alias': 'numeric',
-				'autoGroup': true,
-				'digits': 2,
-				'radixPoint': ".",
-				'digitsOptional': false,
-				'allowMinus': false,
-				'prefix': '',
-				'placeholder': ''
+			//$("#ValorTotal,#valor").inputmask('decimal', {
+			//	'alias': 'numeric',
+			//	'autoGroup': true,
+			//	'digits': 2,
+			//	'radixPoint': ".",
+			//	'digitsOptional': false,
+			//	'allowMinus': false,
+			//	'prefix': '',
+			//	'placeholder': ''
+			//});
+			$('#ValorTotal,#valor').inputmask('decimal', {
+				radixPoint: ",",
+				groupSeparator: ".",
+				autoGroup: true,
+				digits: 2,
+				digitsOptional: false,
+				placeholder: '0',
+				rightAlign: false,
+				onBeforeMask: function (value, opts) {
+					return value;
+				}
 			});
+			$("#DataEmissao").inputmask('99/99/9999', { placeholder: "__/__/__" });
 		});
-		//$(document).ready(function () {
-		//	$("#btnProximo").addClass("buttonDisabled");
-		//	$("#btnAnterio").addClass("buttonDisabled");
-		//	$("#btnSalvar").addClass("buttonDisabled");
-		//	$('input[type="radio"]').click(function () {
-		//		if ($(this).is(':checked')) {
-		//			$("#btnProximo").removeClass("buttonDisabled");
-		//		}
-		//	});
-		//});
-			
+
+					//$(document).ready(function () {
+					//	$("#btnProximo").addClass("buttonDisabled");
+					//	$("#btnAnterio").addClass("buttonDisabled");
+					//	$("#btnSalvar").addClass("buttonDisabled");
+					//	$('input[type="radio"]').click(function () {
+					//		if ($(this).is(':checked')) {
+					//			$("#btnProximo").removeClass("buttonDisabled");
+					//		}
+					//	});
+					//});
+
 	</script>
 
 	@*<environment names="Development">

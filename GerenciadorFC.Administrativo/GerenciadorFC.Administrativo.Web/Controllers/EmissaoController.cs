@@ -46,6 +46,36 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(notafiscal);
 		}
+		public async Task<IActionResult> ListaAgendamentoNotaFiscal()
+		{
+			var pessoaCodigo = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+			var notafiscal = new List<CorpoEmissaoNota>();
+			using (var clientTomador = new HttpClient())
+			{
+				clientTomador.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/CorpoEmissaoNota/Agendamento/" + pessoaCodigo.ToString());
+				var respostaTomador = await clientTomador.GetAsync("");
+				var retornoTomador = await respostaTomador.Content.ReadAsStringAsync();
+				if (retornoTomador != "[]")
+				{
+					notafiscal = JsonConvert.DeserializeObject<List<CorpoEmissaoNota>>(retornoTomador);
+					return View("ListaAgendamentoNotaFiscal", notafiscal);
+				}
+				else
+				{
+					return RedirectToAction("AgendamentoNotaFiscal");
+				}
+				
+			}			
+		}
+		public async Task<IActionResult> ExcluirAgendamentoNotaFiscal(int codigo)
+		{			
+			using (var clientTomador = new HttpClient())
+			{
+				clientTomador.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/CorpoEmissaoNota/" + codigo.ToString());
+				var respostaTomador = await clientTomador.DeleteAsync("");
+			}
+			return RedirectToAction("ListaAgendamentoNotaFiscal");
+		}
 		public async Task<IActionResult> IncluirTomador()
 		{
 			var pessoaCodigo = _userManager.GetUserAsync(User).Result.CodigoPessoa;
@@ -60,13 +90,26 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(tomadorEmissaoNotaViewModels);
 		}
-		//public async Task<IActionResult> IncluirAgendamento(NotaFiscalViewModels notaFiscalViewModels)
-		//{
-		//	using (var client = new HttpClient())
-		//	{
-
-		//	}
-		//}
+		public async Task<IActionResult> IncluirAgendamento(string tomador,string descricao,string valor,string DataEmissao, string repetir)
+		{
+			var corpoEmissaoNota = new CorpoEmissaoNota();
+			corpoEmissaoNota.CodigoEmissaoNota = 0;
+			corpoEmissaoNota.CodigoPessoa = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+			corpoEmissaoNota.CodigoServico = "";
+			corpoEmissaoNota.CodigoTomador = Convert.ToInt32(tomador);
+			corpoEmissaoNota.DataPrimeiraEmissao = Convert.ToDateTime(DataEmissao);
+			corpoEmissaoNota.Descricao = descricao;
+			corpoEmissaoNota.Valor = valor;
+			if (repetir == "1")
+				corpoEmissaoNota.repetir = true;
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/CorpoEmissaoNota");
+				var resposta = await client.PostAsJsonAsync("", corpoEmissaoNota);
+				string retorno = await resposta.Content.ReadAsStringAsync();
+			}
+			return RedirectToAction("ListaAgendamentoNotaFiscal");
+		}
 		public async Task<IActionResult> ExcluirTomador(Int32 codigo)
 		{
 			if (codigo != 0)
@@ -116,18 +159,10 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			{
 				using (var clientCont = new HttpClient())	
 				{
-					var userId = _userManager.GetUserId(User);
-					var contato = new ContatoViewModels();
-					using (var clientContato = new HttpClient())
+					var pessoaCodigo = _userManager.GetUserAsync(User).Result.CodigoPessoa;
+					if (pessoaCodigo != 0)
 					{
-						clientContato.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/Contato/UserId/" + userId);
-						var repostaContato = await clientContato.GetAsync("");
-						var retornoContato = await repostaContato.Content.ReadAsStringAsync();
-						contato = JsonConvert.DeserializeObject<ContatoViewModels>(retornoContato);
-					}
-					if (contato != null)
-					{
-						notaFiscalViewModels.CodigoPessoa = contato.CodigoPessoa;
+						notaFiscalViewModels.CodigoPessoa = pessoaCodigo;
 						notaFiscalViewModels.CodigoVerificacao = "";
 						notaFiscalViewModels.UrlNfe = "";
 						if (notaFiscalViewModels.NumeroNFE > 0)

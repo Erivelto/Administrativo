@@ -14,6 +14,8 @@ using GerenciadorFC.Administrativo.Web.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace GerenciadorFC.Administrativo.Web
 {
@@ -29,7 +31,11 @@ namespace GerenciadorFC.Administrativo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+			services.AddSingleton<IFileProvider>(
+				new PhysicalFileProvider(
+				Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+			services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

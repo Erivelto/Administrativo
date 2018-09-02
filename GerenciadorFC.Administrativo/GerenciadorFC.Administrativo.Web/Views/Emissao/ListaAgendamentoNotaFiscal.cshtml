@@ -1,0 +1,64 @@
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.ContabilidadeDados.Faturamento.CorpoEmissaoNota>
+
+@{
+	ViewData["Title"] = "Agendamento";
+}
+
+<h4>Agendamento</h4>
+<br />
+<br />
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-round btn-info" href="@Url.Action("AgendamentoNotaFiscal","Emissao")" title="">Adicionar</a>
+	</div>
+</div>
+<div class="table-responsive">
+	<table id="datatable" class="table table-striped jambo_table bulk_action">
+		<thead>
+			<tr class="headings">
+				<th class="column-title">Codigo </th>
+				<th class="column-title">Descricao </th>
+				<th class="column-title">Data </th>
+				<th class="column-title">Valor</th>
+				<th class="column-title">Geração mensal</th>
+				<th class="column-title"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var list in Model)
+			{
+			<tr class="even pointer">
+				<td>
+					<span>@list.Codigo</span>
+				</td>
+				<td>
+					<span>@list.Descricao</span>
+				</td>
+				<td>
+					<span>@list.DataPrimeiraEmissao</span>
+				</td>
+				<td>
+					<span>@list.Valor</span>
+				</td>
+				<td>
+					@if (list.repetir == true)
+					{
+						<span>Sim</span>
+					}
+					else
+					{
+						<span>Não</span>
+					}
+				</td>
+				<td>
+					<a href="@Url.Action("ExcluirAgendamentoNotaFiscal","Emissao", new { codigo = list.Codigo})" class="btn btn-round btn-danger"><i class="fa fa-trash-o"></i> Excluir </a>
+				</td>
+			</tr>
+			}
+
+		</tbody>
+	</table>
+</div>
+
+

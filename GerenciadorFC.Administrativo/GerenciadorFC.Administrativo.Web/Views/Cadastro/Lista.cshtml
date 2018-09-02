@@ -71,10 +71,10 @@
 									
 								</td>
 								<td>
-									<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})" class="btn btn-round btn-info"><i class="fa fa-edit"></i> Editar </a>
+									<button type="button" class="btn btn-round btn-primary empresa" data-toggle="modal" data-target=".bd-example-modal-lg" value="@list.Codigo">Upload</button>
 								</td>
 								<td>
-									<a href="@Url.Action("Lista","Cadastro")" class="btn btn-round btn-danger"><i class="fa fa-trash-o"></i> Excluir </a>
+									<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})" class="btn btn-round btn-info"><i class="fa fa-edit"></i> Editar </a>
 								</td>
 								<td>
 									@if (list.UserStatus == "ativo")
@@ -104,3 +104,50 @@
 			</div>
 		</div>
 	</div>
+
+	<form method="post" enctype="multipart/form-data" asp-controller="Cadastro" asp-action="Upload">
+		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Gravação de Arquivos</h4>
+					</div>
+					<div class="modal-body">
+						@Html.Hidden("CodigoPessoa")
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<label class="control-label">Tipo</label>
+									<select id="tipo" class="form-control">
+										<option value="Nota Fiscal">Nota Fiscal</option>
+										<option value="Impostos">Impostos</option>
+										<option value="Contrato Social">Contrato Social</option>
+										<option value="Prolabore">Prolabore</option>
+										<option value="IRRF">IRRF</option>
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label class="control-label">Arquivo</label>
+									<input type="file" name="file" class="form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</form>
+		
+
+
+
+

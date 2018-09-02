@@ -3,200 +3,205 @@
 	ViewData["Title"] = "Agendamento";
 }
 
-
-<div class="x_panel">
-	<div class="x_title">
-		<h2>Agendar faturamento</h2>
-		<ul class="nav navbar-right panel_toolbox">
-			<li>
-				<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-				<ul class="dropdown-menu" role="menu">
-					<li>
-						<a href="#">Settings 1</a>
-					</li>
-					<li>
-						<a href="#">Settings 2</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a class="close-link"><i class="fa fa-close"></i></a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</div>
-	<div class="x_content">
-
-
-		<!-- Smart Wizard -->
-		
-		<div id="wizard" class="form_wizard wizard_horizontal">
-			<ul class="wizard_steps anchor">
+<form asp-action="IncluirAgendamento" >
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>Agendar faturamento</h2>
+			<ul class="nav navbar-right panel_toolbox">
 				<li>
-					<a href="#step-1" class="done" isdone="1" rel="1">
-						<span class="step_no">1</span>
-						<span class="step_descr">
-							Incluir o tomador
-						</span>
-					</a>
+					<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">Settings 1</a>
+						</li>
+						<li>
+							<a href="#">Settings 2</a>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<a href="#step-2" class="done" isdone="1" rel="2">
-						<span class="step_no">2</span>
-						<span class="step_descr">
-							Descrição e serviços
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href="#step-3" class="done" isdone="1" rel="3">
-						<span class="step_no">3</span>
-						<span class="step_descr">
-							Data e período
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href="#step-4" class="selected" isdone="1" rel="4">
-						<span class="step_no">4</span>
-						<span class="step_descr">
-							Verificar e concluir
-						</span>
-					</a>
+					<a class="close-link"><i class="fa fa-close"></i></a>
 				</li>
 			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+
+
+			<!-- Smart Wizard -->
+
+			<div id="wizard" class="form_wizard wizard_horizontal">
+				<ul class="wizard_steps anchor">
+					<li>
+						<a href="#step-1" class="done" isdone="1" rel="1">
+							<span class="step_no">1</span>
+							<span class="step_descr">
+								Incluir o tomador
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="#step-2" class="done" isdone="1" rel="2">
+							<span class="step_no">2</span>
+							<span class="step_descr">
+								Descrição e serviços
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="#step-3" class="done" isdone="1" rel="3">
+							<span class="step_no">3</span>
+							<span class="step_descr">
+								Data e período
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="#step-4" class="selected" isdone="1" rel="4">
+							<span class="step_no">4</span>
+							<span class="step_descr">
+								Verificar e concluir
+							</span>
+						</a>
+					</li>
+				</ul>
 
 
 
 
 
-			<div class="stepContainer" style="height: 183px;">
-				<div id="step-1" class="content" style="display: none;">
-					<form class="form-horizontal form-label-left">
-						<div class="row">
-							<div class="col-md-12">
-								<a href="@Url.Action("IncluirTomador","Emissao")" class="btn btn-round btn-info">Incluir Tomador</a>
-							</div>
-						</div>
-						<div class="row">
-							@if (Model.TomadorEmissaoNotaViewModelsList != null)
-				{
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="x_panel">
-							<div class="x_title">
-								<h2>Selecione um tomador</h2>
-								<ul class="nav navbar-right panel_toolbox">
-									<li>
-										<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-									</li>
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a href="#">Settings 1</a>
-											</li>
-											<li>
-												<a href="#">Settings 2</a>
-											</li>
-										</ul>
-									</li>
-
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-							<div class="x_content">
-
-								<div class="">
-									<ul class="to_do">
-										@foreach (var list in Model.TomadorEmissaoNotaViewModelsList)
-							{
-								<li>
-									<div class="radio">
-										<label>
-											<input type="radio" value="@list.Codigo" id="@list.Documento" name="@list.Documento"> @list.Razao  -  @list.Fantasia
-										</label>
-									</div>
-								</li>
-				}
-									</ul>
+				<div class="stepContainer" style="height: 183px;">
+					<div id="step-1" class="content" style="display: none;">
+						<form class="form-horizontal form-label-left">
+							<div class="row">
+								<div class="col-md-12">
+									<a href="@Url.Action("IncluirTomador","Emissao")" class="btn btn-round btn-info">Incluir Tomador</a>
 								</div>
 							</div>
-						</div>
-					</div>
-	}
+							<div class="row">
+								@if (Model.TomadorEmissaoNotaViewModelsList != null)
+								{
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<div class="x_panel">
+											<div class="x_title">
+												<h2>Selecione um tomador</h2>
+												<ul class="nav navbar-right panel_toolbox">
+													<li>
+														<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+													</li>
+													<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+														<ul class="dropdown-menu" role="menu">
+															<li>
+																<a href="#">Settings 1</a>
+															</li>
+															<li>
+																<a href="#">Settings 2</a>
+															</li>
+														</ul>
+													</li>
 
-						</div>
+												</ul>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
 
-
-					</form>
-
-				</div>
-				<div id="step-2" class="content" style="display: none;">
-					<h2 class="StepTitle">Descrição</h2>
-					<div class="row">
-						<div class="col-md-12">
-							<textarea id="descricao" asp-for="CorpoEmissaoNotaViewsModels.Descricao" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="1000" data-parsley-minlength-message="Digite os seus serviços ou produto..." data-parsley-validation-threshold="10"></textarea>
-						</div>
-					</div>
-					<h2 class="StepTitle">Valor</h2>
-					<div class="row">
-						<div class="col-md-3">
-							<input type="text"  id="valor" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div id="step-3" class="content" style="display: none;">
-					<h2 class="StepTitle">Data Emissão</h2>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<a data-toggle="tooltip" data-placement="Right" title="Digite a data do faturamento ou da nota fiscal.">
-									<div class='input-group myDatepicker'>
-										<input type='text' asp-for="DataEmissao" class="form-control" />
-										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
-										</span>
+												<div class="">
+													@Html.Hidden("tomador")
+													<ul class="to_do">
+														@foreach (var list in Model.TomadorEmissaoNotaViewModelsList)
+														{
+															<li>
+																<div class="radio">
+																	<label>
+																		<input type="radio"  value="@list.Codigo"  id="@list.Codigo" name="@list.Codigo"> @list.Razao  -  @list.Fantasia
+																	</label>
+																</div>
+															</li>
+														}
+													</ul>
+												</div>
+											</div>
+										</div>
 									</div>
-								</a>
+								}
+
+							</div>
+
+
+						</form>
+
+					</div>
+					<div id="step-2" class="content" style="display: none;">
+						<h2 class="StepTitle">Descrição</h2>
+						<div class="row">
+							<div class="col-md-12">
+								<textarea id="descricao" name="descricao" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="1000" data-parsley-minlength-message="Digite os seus serviços ou produto..." data-parsley-validation-threshold="10"></textarea>
+
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="">
-								<label>
-									<input type="checkbox" class="js-switch" checked data-switchery="true" style="display: none;">    Repetir no próximo mês
-								</label>
+						<h2 class="StepTitle">Valor</h2>
+						<div class="row">
+							<div class="col-md-3">
+								<input type="text" id="valor" name="valor" class="form-control">
 							</div>
 						</div>
-						<br />
-						<br />
-						<br />
+					</div>
+					<div id="step-3" class="content" style="display: none;">
+						<h2 class="StepTitle">Data Emissão</h2>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									@*<a data-toggle="tooltip" data-placement="" title="Digite a data do faturamento ou da nota fiscal.">*@
+										<div class='input-group myDatepicker'>
+											<input type='text' name="DataEmissao" id="DataEmissao" class="form-control" />
+
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="">
+									<label>
+										<input type="checkbox" class="js-switch" checked data-switchery="true" style="display: none;" value="1" id="repetir" name="repetir">    Repetir no próximo mês
+									</label>
+								</div>
+							</div>
+							<br />
+							<br />
+							<br />
+						</div>
+					</div>
+					<div id="step-4" class="content" style="display: block;">
+						<h2 class="StepTitle">Processo concluido!</h2>
+						<p>
+							Apenas clique no botão salvar, seu agendamento está concluido.
+						</p>
 					</div>
 				</div>
-				<div id="step-4" class="content" style="display: block;">
-					<h2 class="StepTitle">Processo concluido!</h2>
-					<p>
-						Apenas clique no botão salvar, seu agendamento está concluido.
-					</p>
-				</div>
+				@*<div class="actionBar">
+					<div class="msgBox">
+						<div class="content"></div><a href="#" class="close">X</a></div>
+						<div class="loader">Loading</div>
+							<a href="#" class="buttonFinish btn btn-default">Salvar</a>
+							<a href="#" class="buttonNext btn btn-success buttonDisabled">Proximo</a>
+							<a href="#" class="buttonPrevious btn btn-primary">Anterior</a>
+						</div>*@
 			</div>
-			@*<div class="actionBar">
-			<div class="msgBox">
-				<div class="content"></div><a href="#" class="close">X</a></div>
-				<div class="loader">Loading</div>
-					<a href="#" class="buttonFinish btn btn-default">Salvar</a>
-					<a href="#" class="buttonNext btn btn-success buttonDisabled">Proximo</a>
-					<a href="#" class="buttonPrevious btn btn-primary">Anterior</a>
-				</div>*@
+			<!-- End SmartWizard Content -->
+
+
+
 		</div>
-		<!-- End SmartWizard Content -->
-
-
-
 	</div>
-</div>
+</form>
+
 
 
 @*<div class="row">
