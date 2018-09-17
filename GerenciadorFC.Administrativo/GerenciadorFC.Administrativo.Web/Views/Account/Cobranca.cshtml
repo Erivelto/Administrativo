@@ -2,337 +2,367 @@
 @{
 	ViewData["Title"] = "Cobranca";
 }
+<form asp-action="CallPagSeguro">
+	<h2>Mensalidade</h2>
+	@Html.HiddenFor(m => m.numeroFuncionario)
+	@Html.HiddenFor(m => m.Nome)
+	@Html.HiddenFor(m => m.Documento)
+	@Html.HiddenFor(m => m.CodigoCobranca)
 
-<h2>Mensalidade</h2>
-@if (Model.TipoPessoa == 0)
-{
 
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="x_panel" style="height:600px;">
-				<div class="x_title">
-					<h2>Planos disponiveis para serviços</h2>
-					<ul class="nav navbar-right panel_toolbox">
-						<li>
-							<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">Settings 1</a>
-								</li>
-								<li>
-									<a href="#">Settings 2</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<div class="clearfix"></div>
+	<div class="modal fade bd-example-modal-lg Cobranca" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+				<div class="modal-header">
+
+					<h4 class="modal-title" id="myModalLabel">Fucionários</h4>
 				</div>
-				<div class="x_content">
+				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-12">
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano mensal</h2>
-										<h1>R$ 69,90</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
-											</div>
+						<div class="form-group">
+							<div class="col-sm-6">
+								<label class="control-label">Quantos funcionários?</label>
+								<div class="form-group">
+									<a data-toggle="tooltip" data-placement="Right" title="Digite a quantidade de funcionários, caso não tenha deixe o campo 0.">
+										<div class='input-group'>
+
+											<input type="number" class="form-control" id="qtdeFuncionario" />
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 69.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="saveFuncionario" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@if (Model.TipoPessoa == 0)
+	{
+
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel" style="height:600px;">
+					<div class="x_title">
+						<h2>Plano para empresa de serviços</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a href="#">Settings 1</a>
+									</li>
+									<li>
+										<a href="#">Settings 2</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- price element -->
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="pricing">
+										<div class="title">
+											<h2>Plano mensal</h2>
+											<h1>R$ 69,90</h1>
+										</div>
+										<div class="x_content">
+											<div class="">
+												<div class="pricing_features">
+													<ul class="list-unstyled text-left">
+														<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+														<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+														<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+														<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+													</ul>
+												</div>
+											</div>
+											<div class="pricing_footer">
+												@*<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 69.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>*@
+												<button class="btn btn-info btn-block" style="background:#0277BD;" role="button" name="Contratar" id="Contratar" type="submit" value="servico">Contratar</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Trimestral</h2>
-										<h1>R$ 209,70</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
-											</div>
+								<div class="col-md-6 col-sm-6 col-xs-12" id="pnlvlrFunc">
+									<div class="pricing">
+										<div class="title">
+
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 209.70 , documento = Model.Documento, periodo = 3, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+										<div class="x_content">
+											<div class="">
+												<div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="tile-stats">
+														<div class="icon"><i class="fa fa-check-square-o"></i></div>
+														<div class="count">R$ <label id="valorTotalFunc"></label></div>
+														<h3>Valor dos funcionários</h3>
+														<p>Isto será somado ao plano que for escolhido.</p>
+													</div>
+												</div>
+											</div>
+											<div class="pricing_footer">
+
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Semestral</h2>
-										<h1>R$ 419,40</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Trimestral</h2>
+												<h1>R$ 203,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 203.90 , documento = Model.Documento, periodo = 3, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
 											</div>
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 419.40 , documento = Model.Documento,  periodo =  6, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Anual</h2>
-										<h1>R$ 838,80</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
+									</div>*@
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Semestral</h2>
+												<h1>R$ 403,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 403.90 , documento = Model.Documento,  periodo =  6, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
 											</div>
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 838.80 , documento = Model.Documento, periodo = 12, nome = Model.Nome ,codigo = Model.CodigoCobranca })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+									</div>*@
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Anual</h2>
+												<h1>R$ 799,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 799.90 , documento = Model.Documento, periodo = 12, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" id="#plano6990" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+									</div>*@
+								<!-- price element -->
 							</div>
-							<!-- price element -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-}
-else
-{
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="x_panel" style="height:600px;">
-				<div class="x_title">
-					<h2>Planos disponiveis para comércio</h2>
-					<ul class="nav navbar-right panel_toolbox">
-						<li>
-							<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">Settings 1</a>
-								</li>
-								<li>
-									<a href="#">Settings 2</a>
-								</li>
-							</ul>
-						</li>
 
-					</ul>
-					<div class="clearfix"></div>
-				</div>
-				<div class="x_content">
-					<div class="row">
-						<div class="col-md-12">
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano mensal</h2>
-										<h1>R$ 99,90</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
-											</div>
+	}
+	else
+	{
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel" style="height:600px;">
+					<div class="x_title">
+						<h2>Plano para comércio</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a href="#">Settings 1</a>
+									</li>
+									<li>
+										<a href="#">Settings 2</a>
+									</li>
+								</ul>
+							</li>
+
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- price element -->
+								<div class="col-md-3 col-sm-6 col-xs-12">
+									<div class="pricing">
+										<div class="title">
+											<h2>Plano mensal</h2>
+											<h1>R$ 99,90</h1>
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 99.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										<div class="x_content">
+											<div class="">
+												<div class="pricing_features">
+													<ul class="list-unstyled text-left">
+														<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+														<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+														<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+														<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+													</ul>
+												</div>
+											</div>
+											<div class="pricing_footer">
+												@*<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 99.90 , documento = Model.Documento,  periodo = 1, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>*@
+												<button class="btn btn-info btn-block" style="background:#0277BD;" role="button" name="Contratar" id="Contratar" type="submit" value="comercio">Contratar</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Trimestral</h2>
-										<h1>R$ 299,70</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
-											</div>
+								<div class="col-md-6 col-sm-6 col-xs-12" id="pnlvlrFunc">
+									<div class="pricing">
+										<div class="title">
+
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 299.70 , documento = Model.Documento,  periodo = 3, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+										<div class="x_content">
+											<div class="">
+												<div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="tile-stats">
+														<div class="icon"><i class="fa fa-check-square-o"></i></div>
+														<div class="count">R$ <label id="valorTotalFunc"></label></div>
+														<h3>Valor dos funcionários</h3>
+														<p>Isto será somado ao plano que for escolhido.</p>
+													</div>
+												</div>
+											</div>
+											<div class="pricing_footer">
+
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Semestral</h2>
-										<h1>R$ 599,40</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Trimestral</h2>
+												<h1>R$ 290,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 290.90 , documento = Model.Documento,  periodo = 3, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
 											</div>
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 599.40 , documento = Model.Documento, periodo = 6 , nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- price element -->
-							<!-- price element -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
-								<div class="pricing">
-									<div class="title">
-										<h2>Plano Anual</h2>
-										<h1>R$ 1198,80</h1>
-									</div>
-									<div class="x_content">
-										<div class="">
-											<div class="pricing_features">
-												<ul class="list-unstyled text-left">
-													<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
-													<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
-													<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
-													<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
-												</ul>
+									</div>*@
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Semestral</h2>
+												<h1>R$ 580,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro","Cobranca", new { valor = 580.90 , documento = Model.Documento, periodo = 6 , nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
 											</div>
 										</div>
-										<div class="pricing_footer">
-											<a href="@Url.Action("CallPagSeguro", "Account", new { valor = 1198.80, documento = Model.Documento, periodo = 12, nome = Model.Nome  ,codigo = Model.CodigoCobranca})" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+									</div>*@
+								<!-- price element -->
+								<!-- price element -->
+								@*<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="pricing">
+											<div class="title">
+												<h2>Plano Anual</h2>
+												<h1>R$ 1160,90</h1>
+											</div>
+											<div class="x_content">
+												<div class="">
+													<div class="pricing_features">
+														<ul class="list-unstyled text-left">
+															<li><i class="fa fa-check text-success"></i> Emissão de nota fiscal</li>
+															<li><i class="fa fa-check text-success"></i> Visualizãção de relatórios</li>
+															<li><i class="fa fa-check text-success"></i> Geração da contabilidade</li>
+															<li><i class="fa fa-check text-success"></i> Obrigações fiscais</li>
+														</ul>
+													</div>
+												</div>
+												<div class="pricing_footer">
+													<a href="@Url.Action("CallPagSeguro", "Cobranca", new { valor = 1160.90, documento = Model.Documento, periodo = 12, nome = Model.Nome, numeroFuncionario = Model.numeroFuncionario })" class="btn btn-info btn-block" style="background:#0277BD;" role="button">Contratar</a>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+									</div>*@
+								<!-- price element -->
 							</div>
-							<!-- price element -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-}
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">×</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				<h4>Text in a modal</h4>
-				<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-				<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
+	}
+</form>
 
-@*<br />
-	<br />
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-3">
-			<h1>Plano básico para empresa</h1>
-			<br />
-			<ul>
-				<li>A CONTFY tem o plano básico</li>
-				<li>para prestadores de serviços</li>
-			</ul>
-			<br />
-			<br />
-			<h1>Sua mensalidade será:</h1>
-			<h1>R$ 69,90<span>/mês</span></h1>
-		</div>
-
-		<div class="col-md-3">
-
-		</div>
-	</div>
-	<br />*@
-@*<br />*@
-@*<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-3">
-			<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
-				<input type="hidden" name="code" value="7331418ED6D61FB664B63F85D9E120AB" />
-				<input type="hidden" name="iot" value="button" />
-				<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-contratar-azul.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="200" height="80" />
-			</form>
-		</div>
-
-		<div class="col-md-3">
-
-		</div>
-	</div>*@

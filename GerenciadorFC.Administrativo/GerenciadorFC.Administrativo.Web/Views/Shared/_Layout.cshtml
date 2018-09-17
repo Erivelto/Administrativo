@@ -16,7 +16,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	<link rel="shortcut icon" type="image/icon" href="~/images/iconSite.ico" />
 	<title>@ViewData["Title"] - ContFY </title>
 	<!-- Bootstrap -->
 	<link href="../admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -87,11 +87,11 @@
 										<li>
 											<a><i class="fa fa-edit"></i>Arquivos<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li><a href="form.html">Nota Fiscal</a></li>
-												<li><a href="form_advanced.html">Impostos</a></li>
-												<li><a href="form_validation.html">Contrato Social</a></li>
-												<li><a href="form_wizards.html">Prolabore</a></li>
-												<li><a href="form_upload.html">IRRF</a></li>
+												<li><a href="@Url.Action("ListaNotaFiscal","Arquivos")">Nota Fiscal</a></li>
+												<li><a href="@Url.Action("ListaImposto","Arquivos")">Impostos</a></li>
+												<li><a href="@Url.Action("ListaContatoSocial","Arquivos")">Contrato Social</a></li>
+												<li><a href="@Url.Action("ListaProlabore","Arquivos")">Prolabore</a></li>
+												<li><a href="@Url.Action("ListaIRRF","Arquivos")">Impostos</a></li>
 											</ul>
 										</li>
 										<li>
@@ -444,8 +444,13 @@
 			date: new Date
 		});
 		$(".empresa").click(function () {
-			var empresa = $(".empresa").val();
+			var empresa = $(this).val();
 			$("#CodigoPessoa").val(empresa);
+			$("#CodigoPessoaFat").val(empresa);
+		});
+		$(".empresa2").click(function () {
+			var empresa = $(this).val();
+			$("#CodigoPessoaFat").val(empresa);
 		});
 		$(".plano6990").click(function () {
 			$.ajax({
@@ -456,6 +461,19 @@
 					window.location = data;
 				}
 			});
+		});
+		$("#saveFuncionario").click(function () {
+			var qtdeFuncionario = $("#qtdeFuncionario").val();
+			if (qtdeFuncionario > 0) {
+				$("#pnlvlrFunc").show();
+				var valor = 40 * qtdeFuncionario;
+				var result = valor.toString() + ",00";
+				$("#valorTotalFunc").text(result);				
+				$("#numeroFuncionario").val(qtdeFuncionario);
+			}
+			else { 
+				$("#pnlvlrFunc").hide();
+			}
 		});
 		$("#DataEmissao").val("");
 		$(document).ready(function () {
@@ -469,6 +487,7 @@
 			//	'prefix': '',
 			//	'placeholder': ''
 			//});
+
 			$('#ValorTotal,#valor').inputmask('decimal', {
 				radixPoint: ",",
 				groupSeparator: ".",
@@ -482,7 +501,34 @@
 				}
 			});
 			$("#DataEmissao").inputmask('99/99/9999', { placeholder: "__/__/__" });
+
+			$('#nomeArquivo').on('click', function () {
+
+				var data = new FormData();
+				var codigo = $(this).val();
+				var pasta = $("#CodigoPessoa").val();
+
+				var files = $('#file')[0].files[0];;
+
+				// Add the uploaded image content to the form data collection
+				if (files.length > 0) {
+					data.append("UploadedImage", files[0]);
+				}
+
+				// Make Ajax request with the contentType = false, and procesDate = false
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:8157/ArmazenamentoDeObjeto/UploadArquivo/" + codigo + "/" + pasta,
+					contentType: false,
+					processData: false,
+					data: data
+				});
+			});
+
 		});
+		$("#pnlvlrFunc").hide();
+		$('.Cobranca').modal('show');
+		$('#qtdeFuncionario').val(0);
 
 					//$(document).ready(function () {
 					//	$("#btnProximo").addClass("buttonDisabled");
@@ -494,6 +540,8 @@
 					//		}
 					//	});
 					//});
+
+
 
 	</script>
 

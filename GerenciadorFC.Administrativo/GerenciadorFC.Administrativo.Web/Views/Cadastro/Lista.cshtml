@@ -27,6 +27,7 @@
 							<th class="column-title"></th>
 							<th class="column-title"></th>
 							<th class="column-title"></th>
+							<th class="column-title"></th>
 						</tr>
 					</thead>
 
@@ -71,7 +72,10 @@
 									
 								</td>
 								<td>
-									<button type="button" class="btn btn-round btn-primary empresa" data-toggle="modal" data-target=".bd-example-modal-lg" value="@list.Codigo">Upload</button>
+									<button type="button" class="btn btn-round btn-round empresa2" data-toggle="modal" data-target=".faturamento"  value="@list.Codigo">Faturamento</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-round btn-primary empresa" data-toggle="modal" data-target=".arquivos" value="@list.Codigo">Upload</button>
 								</td>
 								<td>
 									<a href="@Url.Action("Edite","Cadastro", new { pessoa = list.Codigo})" class="btn btn-round btn-info"><i class="fa fa-edit"></i> Editar </a>
@@ -106,7 +110,7 @@
 	</div>
 
 	<form method="post" enctype="multipart/form-data" asp-controller="Cadastro" asp-action="Upload">
-		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal fade bd-example-modal-lg arquivos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 
@@ -122,7 +126,7 @@
 							<div class="form-group">
 								<div class="col-sm-6">
 									<label class="control-label">Tipo</label>
-									<select id="tipo" class="form-control">
+									<select id="tipo"  name ="tipo" class="form-control">
 										<option value="Nota Fiscal">Nota Fiscal</option>
 										<option value="Impostos">Impostos</option>
 										<option value="Contrato Social">Contrato Social</option>
@@ -142,6 +146,66 @@
 						<button type="submit" class="btn btn-primary">Salvar</button>
 					</div>
 
+				</div>
+			</div>
+		</div>
+	</form>
+	<form method="post"  asp-controller="Cadastro" asp-action="Faturamento">
+		<div class="modal fade bd-example-modal-lg faturamento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Gravação de Arquivos</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<label class="control-label">Data emissão</label>
+									<div class="form-group">
+										@Html.Hidden("CodigoPessoaFat")
+										<a data-toggle="tooltip" data-placement="Right" title="Digite a data do faturamento ou da nota fiscal.">
+											<div class='input-group myDatepicker'>
+												<input type='text' id="DataEmissao" name="DataEmissao" class="form-control" />
+												<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<label class="control-label">Valor</label>
+									<a data-toggle="tooltip" data-placement="Right" title="Neste campo coloque o valor de faturamento no mês ou soma das notas fiscais emitidas.">
+										<input type='text' id="ValorTotal" name="ValorTotal" class="form-control" />
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<label class="control-label">Numero da nota</label>
+									<a data-toggle="tooltip" data-placement="Right" title="Caso seja uma única nota fiscal, informa aqui seu número.">
+										<input type='text' id="NumeroNFE" name="NumeroNFE" class="form-control" />
+									</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
 				</div>
 			</div>
 		</div>

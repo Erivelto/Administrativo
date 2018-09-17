@@ -27,8 +27,22 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			var pessoaVieModels = (PessoaViewModels)TempData["pessoaVieModels"];
 			return View("Cobranca", pessoaViewModels);
 		}
-		public async Task<IActionResult> CallPagSeguro(string documento,decimal valor, int periodo,string nome)
+		public async Task<IActionResult> CallPagSeguro(PessoaViewModels pessoaViewModels, string Contratar, int numeroFuncionario)
 		{
+			decimal valor = 0;
+			if (Contratar == "servico")
+			{
+				valor = 69.90M;
+			}
+			else
+			{
+				valor = 99.90M;
+			}
+			if (numeroFuncionario > 0)
+			{
+				numeroFuncionario = 40 * numeroFuncionario;
+				valor = valor + numeroFuncionario;
+			}
 			bool isSandbox = false;
 			EnvironmentConfiguration.ChangeEnvironment(isSandbox);
 
@@ -39,11 +53,11 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			preApproval.Currency = Currency.Brl;
 
 			// Sets a reference code for this preApproval request, it is useful to identify this payment in future notifications.
-			preApproval.Reference = documento;
+			preApproval.Reference = pessoaViewModels.Documento;
 
 			// Sets your customer information.
 			preApproval.Sender = new Sender(
-				nome,
+				pessoaViewModels.Nome,
 				TempData["email"].ToString(),
 				new Phone("", "")
 			);
@@ -57,23 +71,24 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			preApproval.PreApproval.MaxAmountPerPeriod = valor;
 			preApproval.PreApproval.MaxPaymentsPerPeriod = 5;
 			preApproval.PreApproval.Details = string.Format("Todo dia {0} será cobrado o valor de {1} referente a CONTABILIDADE ONLINE.", now.Day, preApproval.PreApproval.AmountPerPayment.ToString("C2"));
-			switch (periodo)
-			{
-				case 1:
-					preApproval.PreApproval.Period = Period.Monthly;
-					break;
-				case 3:
-					preApproval.PreApproval.Period = Period.Trimonthly;
-					break;
-				case 6:
-					preApproval.PreApproval.Period = Period.SemiAnnually;
-					break;
-				case 12:
-					preApproval.PreApproval.Period = Period.Yearly;
-					break;
-				default:
-					break;
-			}
+			//switch (periodo)
+			//{
+			//	case 1:
+
+			//		break;
+			//	case 3:
+			//		preApproval.PreApproval.Period = Period.Trimonthly;
+			//		break;
+			//	case 6:
+			//		preApproval.PreApproval.Period = Period.SemiAnnually;
+			//		break;
+			//	case 12:
+			//		preApproval.PreApproval.Period = Period.Yearly;
+			//		break;
+			//	default:
+			//		break;
+			//}
+			preApproval.PreApproval.Period = Period.Monthly;
 			preApproval.PreApproval.DayOfMonth = now.Day;
 			preApproval.PreApproval.InitialDate = now;
 			preApproval.PreApproval.FinalDate = now.AddMonths(6);
@@ -96,7 +111,7 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 				pessoaContabil.DataTransacao = DateTime.Now;
 				pessoaContabil.Transacao = "";
 				pessoaContabil.Status = "Novo";
-				pessoaContabil.Reference = documento;
+				pessoaContabil.Reference = pessoaViewModels.Documento;
 				string[] prepoval = preApprovalRedirectUri.ToString().Split("=");
 				pessoaContabil.CodePrepoval = prepoval[1].ToString();
 				using (var clientCont = new HttpClient())

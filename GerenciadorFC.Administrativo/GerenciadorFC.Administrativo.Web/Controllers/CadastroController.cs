@@ -20,6 +20,8 @@ using GerenciadorFC.Administrativo.Web.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using RestSharp;
+using System.Net.Mail;
 
 namespace GerenciadorFC.Administrativo.Web.Controllers
 {
@@ -49,14 +51,41 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View(getPessoa(listaViewsModels, listaViewsModelsStatus));
 		}
+		
 		[HttpPost]
-		public async Task<IActionResult> Upload(IFormFile file)
+		public async Task<IActionResult> Upload(IFormFile file,string tipo,string CodigoPessoa)
 		{
 			var data = new MemoryStream();
 			file.CopyTo(data);
 			byte[] imageBytes = data.ToArray();
-			var aquivo = Convert.ToBase64String(imageBytes);
+			var arquivo = Convert.ToBase64String(imageBytes);
+			string arquivoRetorno = Guid.NewGuid().ToString();
 
+			string apiUrl = "http://armazemantodearquivocontfy.azurewebsites.net/Armazenamento";
+			var client = new HttpClient();
+			var values = new Dictionary<string, string>()
+			{
+				{"codigo", arquivoRetorno},
+				{"pasta", CodigoPessoa},
+				{"image", arquivo}
+			};
+			var content = new FormUrlEncodedContent(values);
+			var response = await client.PostAsync(apiUrl, content);
+
+			if (response.IsSuccessStatusCode == true)
+			{
+				var pessoaUpload = new PessoaUpload();
+				pessoaUpload.CodigoPessoa = Convert.ToInt16(CodigoPessoa);
+				pessoaUpload.DataCriacao = DateTime.Now;
+				pessoaUpload.Arquivo = Guid.Parse(arquivoRetorno);
+				pessoaUpload.Tipo = tipo;
+				using (var clientCont = new HttpClient())
+				{
+					clientCont.BaseAddress = new System.Uri("https://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/api/PessoaUpload");
+					var reposta = await clientCont.PostAsJsonAsync("", pessoaUpload);
+					var retorno = await reposta.Content.ReadAsStringAsync();
+				}
+			}
 			return RedirectToAction("Lista");
 		}
 		private List<ListaPessoaViewModels> getPessoa(List<ListaPessoaViewModels> listGeral, List<ListaPessoaViewModels> listStatus)
@@ -407,5 +436,68 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 			}
 			return View("Novo",pessoaVieModels);
 		}
+		public async Task<IActionResult> Faturamento(int CodigoPessoaFat,string DataEmissao,string ValorTotal, string NumeroNFE)
+		{
+			var notaFiscalViewModels = new NotaFiscalViewModels();
+			using (var clientCont = new HttpClient())
+			{
+				var pessoaCodigo = CodigoPessoaFat;
+				if (pessoaCodigo != 0)
+				{
+					notaFiscalViewModels.CodigoPessoa = pessoaCodigo;
+					notaFiscalViewModels.CodigoVerificacao = "";
+					notaFiscalViewModels.UrlNfe = "";
+					notaFiscalViewModels.DataEmissao = Convert.ToDateTime(DataEmissao);
+					notaFiscalViewModels.ValorTotal = Convert.ToDecimal(ValorTotal);
+					notaFiscalViewModels.NumeroNFE = Convert.ToInt32(NumeroNFE);
+					if (notaFiscalViewModels.NumeroNFE > 0)
+					{
+						clientCont.BaseAddress = new System.Uri("http://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/NotaFiscal/" + notaFiscalViewModels.NumeroNFE.ToString());
+						var reposta = await clientCont.GetAsync("");
+						notaFiscalViewModels.DataEnvio = DateTime.Now;
+						var notaFiscal = Mapper.Map<NotaFiscalViewModels, NotaFiscal>(notaFiscalViewModels);
+						if (reposta.StatusCode.ToString() != "OK")
+						{
+							using (var clientContPost = new HttpClient())
+							{
+								clientContPost.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/NotaFiscal");
+								var repostaPost = await clientContPost.PostAsJsonAsync("", notaFiscal);
+								var retornoPost = await repostaPost.Content.ReadAsStringAsync();
+
+								if (repostaPost.StatusCode.ToString() == "OK")
+									notaFiscalViewModels.Incluido = true;
+								else
+									notaFiscalViewModels.NaoIncluido = true;
+							}
+						}
+						else
+						{
+							notaFiscalViewModels.Incluido = true;
+						}
+					}
+					else
+					{
+						var notaFiscal = Mapper.Map<NotaFiscalViewModels, NotaFiscal>(notaFiscalViewModels);
+						using (var clientContPost = new HttpClient())
+						{
+							clientContPost.BaseAddress = new System.Uri("https://gerenciadorfccontabilidadeservico20180428013121.azurewebsites.net/api/NotaFiscal");
+							var repostaPost = await clientContPost.PostAsJsonAsync("", notaFiscal);
+							var retornoPost = await repostaPost.Content.ReadAsStringAsync();
+
+							if (repostaPost.StatusCode.ToString() == "OK")
+								notaFiscalViewModels.Incluido = true;
+							else
+								notaFiscalViewModels.NaoIncluido = true;
+						}
+					}
+				}
+				else
+				{
+					notaFiscalViewModels.NaoIncluido = true;
+				}
+			}
+			return RedirectToAction("Lista", notaFiscalViewModels);
+		}
+
 	}
 }

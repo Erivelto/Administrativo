@@ -1,0 +1,49 @@
+﻿@model List<GerenciadorFC.Administrativo.Web.Models.CadastroViewModels.PessoaUploadViewModels>
+
+@{
+	ViewData["Title"] = "Arquivos";
+}
+
+<h4>Impostos</h4>
+
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table id="datatable" class="table table-striped jambo_table bulk_action">
+				<thead>
+					<tr class="headings">
+						<th class="column-title">Codigo </th>
+						<th class="column-title">Descrição</th>
+						<th class="column-title">Data</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					@foreach (var list in Model)
+					{
+						<tr class="even pointer">
+							<td>
+								<span>@list.Codigo</span>
+							</td>
+							<td>
+								<span>@list.Tipo</span>
+							</td>
+							<td>
+								<span>@list.DataCriacao</span>
+							</td>
+							<td>
+								<a title="Abrir" class="btn btn-round btn-primary" href="@list.UrlArquivo" target="_blank">Abrir</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+

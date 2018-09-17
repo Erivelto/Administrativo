@@ -42,12 +42,15 @@ namespace GerenciadorFC.Administrativo.Web.Controllers
 					clientEnd.BaseAddress = new System.Uri("http://gerenciadorfccadastroservicos20180317071207.azurewebsites.net/");
 					var respostaEnd = await clientEnd.GetAsync("api/Endereco/-" + rep.ToString());
 					string dadosEnd = await respostaEnd.Content.ReadAsStringAsync();
-
-					var _endereco = JsonConvert.DeserializeObject<Endereco>(dadosEnd);
-
 					repLegalVieModels = Mapper.Map<RepresentanteLegal, RepresentanteLegalViewModels>(_rep);
-					_endereco.CodigoPessoa = repLegalVieModels.CodigoPessoa;
-					repLegalVieModels = Mapper.Map<Endereco, RepresentanteLegalViewModels>(_endereco, repLegalVieModels);
+
+					if (respostaEnd.StatusCode.ToString() == "OK")
+					{
+						var _endereco = JsonConvert.DeserializeObject<Endereco>(dadosEnd);
+						
+						_endereco.CodigoPessoa = repLegalVieModels.CodigoPessoa;
+						repLegalVieModels = Mapper.Map<Endereco, RepresentanteLegalViewModels>(_endereco, repLegalVieModels);
+					}
 
 				}
 				using (var clientCont = new HttpClient())

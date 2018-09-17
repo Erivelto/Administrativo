@@ -14,6 +14,7 @@ namespace GerenciadorFC.Administrativo.Web.Mappers
 			Pessoa();
 			Endereco();
 			RepresentanteLegal();
+			PessoaUpload();
 		}
         public void Pessoa()
         {
@@ -32,6 +33,16 @@ namespace GerenciadorFC.Administrativo.Web.Mappers
 			CreateMap< RepresentanteLegalViewModels, RepresentanteLegal>()
 				.ForMember(dest => dest.Codigo, opt => opt.MapFrom(scr => scr.CodigoRepLegal))
 				.ForMember(dest => dest.CodigoPessoa, opt => opt.MapFrom(scr => scr.CodigoPessoa));
+		}
+		private void PessoaUpload()
+		{
+			CreateMap<PessoaUploadViewModels, PessoaUpload>()
+				.ForMember(dest => dest.Codigo, opt => opt.MapFrom(scr => scr.Codigo))
+				.ForMember(dest => dest.CodigoPessoa, opt => opt.MapFrom(scr => scr.CodigoPessoa))
+				.ForMember(dest => dest.DataCriacao, opt => opt.MapFrom(scr => scr.DataCriacao))
+				.ForMember(dest => dest.Arquivo, opt => opt.MapFrom(scr => scr.Arquivo))
+				.ForMember(dest => dest.Tipo, opt => opt.MapFrom(scr => scr.Tipo))
+				.ForMember(dest => dest.Excluido, opt => opt.MapFrom(scr => scr.Excluido));
 		}
 	}
 }

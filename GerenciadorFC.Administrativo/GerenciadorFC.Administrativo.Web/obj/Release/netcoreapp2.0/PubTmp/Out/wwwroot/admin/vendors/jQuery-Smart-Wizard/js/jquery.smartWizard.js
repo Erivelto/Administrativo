@@ -24,7 +24,7 @@ function SmartWizard(target, options) {
 	this.text = $('#valor');
 	this.textData = $("#DataEmissao");
 	this.buttons = {
-		finish: $('<a>' + options.labelFinish + '</a>').attr("href", "#").addClass("buttonFinish"),
+		finish: $('<button type="submit" >' + options.labelFinish + '</button>').addClass("buttonFinish"),
 		next: $('<a>' + options.labelNext + '</a>').attr("href", "#").addClass("buttonNext"),
 		previous: $('<a>' + options.labelPrevious + '</a>').attr("href", "#").addClass("buttonPrevious"),
 		radio: $('input[type="radio"]')
@@ -33,8 +33,6 @@ function SmartWizard(target, options) {
     /*
      * Private functions
      */
-
-
 	var _init = function ($this) {
 		var elmActionBar = $('<div></div>').addClass("actionBar");
 		elmActionBar.append($this.msgBox);
@@ -103,11 +101,11 @@ function SmartWizard(target, options) {
 		// Enable keyboard navigation
 		if ($this.options.keyNavigation) {
 			$(document).keyup(function (e) {
-				if (e.which == 39) { // Right Arrow
-					$this.goForward();
-				} else if (e.which == 37) { // Left Arrow
-					$this.goBackward();
-				}
+				//if (e.which == 39) { // Right Arrow
+				//	$this.goForward();
+				//} else if (e.which == 37) { // Left Arrow
+				//	$this.goBackward();
+				//}
 			});
 		}
 		//  Prepare the steps
@@ -305,6 +303,7 @@ function SmartWizard(target, options) {
 		$($this.buttons.radio).each(function () {
 			if (this.checked == true) {
 				$($this.buttons.next).removeClass("buttonDisabled");
+				$("#tomador").val(this.val());
 			}
 			else {
 				if ($this.steps.length)
@@ -313,6 +312,8 @@ function SmartWizard(target, options) {
 		});
 		$($this.buttons.radio).click(function () {
 			if ($(this).is(':checked')) {
+				var valor = $(this).val();
+				$("#tomador").val(valor);
 				$($this.buttons.next).removeClass("buttonDisabled");
 			}
 		});
